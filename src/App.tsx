@@ -19,6 +19,9 @@ import { EscrowPayoutsPage } from './components/pages/EscrowPayoutsPage';
 import { CampusMobilityPage } from './components/pages/CampusMobilityPage';
 import { OpportunityHubPage } from './components/pages/OpportunityHubPage';
 import { SkillScorePage } from './components/pages/SkillScorePage';
+import { BranchRoadmapPage } from './components/pages/BranchRoadmapPage';
+import { AiTemplateStudioPage } from './components/pages/AiTemplateStudioPage';
+import { AiInterviewPage } from './components/pages/AiInterviewPage';
 import { JobsPage } from './components/pages/JobsPage';
 import { DashboardPage } from './components/pages/DashboardPage';
 import { AboutImpactPage } from './components/pages/AboutImpactPage';
@@ -41,19 +44,19 @@ export default function App() {
     } catch (e) {
       console.error('Error loading user profile', e);
     }
-    // Default initial profile for immediate testability
+    // Default initial profile for B.Tech CSE 2nd-Year Student
     return {
-      name: 'Priya Sharma',
+      name: 'Aman Sharma',
       phone: '9839048261',
-      email: 'priya.sharma@gmail.com',
+      email: 'aman.sharma.cse24@ietlucknow.ac.in',
       location: 'Lucknow',
-      targetRole: 'Junior GST & Accounts Executive',
-      education: 'B.Com (Accounts & Taxation) · Lucknow University (2024)',
+      targetRole: 'Junior Software Development Engineer (SDE-1)',
+      education: 'B.Tech in Computer Science & Engineering (3rd Semester) · IET Lucknow (AKTU)',
       experienceYears: 1,
-      skills: ['Tally Prime 4.0', 'Advanced Excel', 'GST Filing', 'E-Way Bills', 'TDS Reconciliation'],
-      bio: 'Goal-oriented commerce graduate with hands-on proficiency in Tally Prime, GSTR-2B reconciliation, and financial analytics. Looking to accelerate local MSME financial growth.',
+      skills: ['Data Structures & Algorithms', 'C++', 'React & TypeScript', 'PostgreSQL', 'Docker', 'Redis', 'RESTful APIs'],
+      bio: '2nd-Year B.Tech CSE student specializing in high-throughput distributed systems and cloud architecture. Placement cell verified with 785/1000 campus skill score.',
       resumeBuilt: true,
-      atsScore: 88,
+      atsScore: 91,
     };
   });
 
@@ -247,6 +250,32 @@ export default function App() {
             <EscrowPayoutsPage
               lang={lang}
               selectedPersonaId={selectedPersonaId}
+              userProfile={userProfile}
+              onNavigate={handleNavigate}
+            />
+          )}
+
+          {/* Advanced Feature 01: AI Engineering Template Studio */}
+          {currentPage === 'templates' && (
+            <AiTemplateStudioPage
+              lang={lang}
+              onNavigate={handleNavigate}
+            />
+          )}
+
+          {/* Advanced Feature 02: B.Tech Engineering Specialization Roadmaps */}
+          {currentPage === 'roadmap' && (
+            <BranchRoadmapPage
+              lang={lang}
+              userProfile={userProfile}
+              onNavigate={handleNavigate}
+            />
+          )}
+
+          {/* Advanced Feature 03: AI SDE Mock Interview & System Design */}
+          {currentPage === 'interview' && (
+            <AiInterviewPage
+              lang={lang}
               userProfile={userProfile}
               onNavigate={handleNavigate}
             />

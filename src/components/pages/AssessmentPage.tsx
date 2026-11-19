@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../../types';
 import { PERSONAS } from '../../data/researchData';
-import { ArrowRight, ArrowLeft, CheckCircle2, ShieldCheck, Zap, HelpCircle, FileText } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle2, ShieldCheck, Zap, HelpCircle, FileText, Code2, Cpu, BrainCircuit } from 'lucide-react';
 
 interface AssessmentPageProps {
   lang: Language;
@@ -20,7 +20,7 @@ export const AssessmentPage: React.FC<AssessmentPageProps> = ({
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
 
-  // Streamlined 3 Practical Scenario Questions per Persona (Removed redundant questions as requested)
+  // 3 Rigorous Engineering Scenario Diagnostic Questions per B.Tech Specialization
   const questionsByPersona: Record<string, Array<{
     qEn: string;
     qHi: string;
@@ -28,108 +28,113 @@ export const AssessmentPage: React.FC<AssessmentPageProps> = ({
     contextHi: string;
     options: Array<{ labelEn: string; labelHi: string; score: number }>;
   }>> = {
+    // 1. Aman Sharma (B.Tech CSE - Software Engineering & SDE-1)
     priya: [
       {
-        qEn: 'When reconciling GST invoices in Tally Prime, how do you handle mismatched E-Way bills with GSTR-2B?',
-        qHi: 'टैली प्राइम में जीएसटी चालान का मिलान करते समय ई-वे बिल और 2B में विसंगति आने पर आप क्या करते हैं?',
-        contextEn: 'Practical GST Compliance Benchmark',
-        contextHi: 'व्यावहारिक जीएसटी मानक',
+        qEn: 'When querying 50,000 student transit records, an O(N²) nested loop takes 8.4 seconds. How do you optimize it to O(N)?',
+        qHi: '५०,००० छात्र ट्रांजिट रिकॉर्ड को सर्च करते समय O(N²) लूप ८.४ सेकंड लेता है। इसे O(N) में ऑप्टिमाइज़ करने के लिए क्या करेंगे?',
+        contextEn: 'Data Structures & Algorithmic Time Complexity',
+        contextHi: 'डेटा स्ट्रक्चर्स व टाइम कॉम्प्लेक्सिटी',
         options: [
-          { labelEn: 'Have only heard of E-Way bills; require step-by-step assistance', labelHi: 'केवल नाम सुना है, कार्य करने में सहायता चाहिए', score: 35 },
-          { labelEn: 'Can generate bills but need senior guidance on GSTR-2B mismatch reconciliation', labelHi: 'बिल बना सकते हैं पर 2B मिलान में सीनियर की मदद चाहिए', score: 65 },
-          { labelEn: 'Can independently reconcile 2B, generate E-Way bills & file returns with 100% accuracy', labelHi: 'स्वतंत्र रूप से 2B मिलान, ई-वे बिल व सटीक फाइलिंग कर सकते हैं', score: 95 },
+          { labelEn: 'Run the same loop on a faster multi-core CPU server', labelHi: 'तेज मल्टी-कोर सीपीयू पर वही लूप चलाना', score: 30 },
+          { labelEn: 'Sort the array with QuickSort O(N log N) and use Binary Search', labelHi: 'क्विक-सॉर्ट O(N log N) करके बाइनरी सर्च लगाना', score: 70 },
+          { labelEn: 'Use an in-memory Hash Map / Set with O(1) amortized lookup', labelHi: 'O(1) लुकअप के लिए हैश मैप / सेट डेटा स्ट्रक्चर का उपयोग', score: 95 },
         ]
       },
       {
-        qEn: 'In Excel, which feature do you use to aggregate 5,000 monthly sales records across distributor regions?',
-        qHi: 'एक्सेल में 5,000 मासिक बिक्री रिकॉर्ड को क्षेत्रवार संक्षेप में देखने के लिए आप किसका उपयोग करते हैं?',
-        contextEn: 'Data Analysis & Financial Modeling',
-        contextHi: 'डेटा विश्लेषण दक्षता',
+        qEn: 'During 8:50 AM morning peak, 2,400 students hit the bus radar API concurrently. How do you prevent DB connection exhaustion?',
+        qHi: 'सुबह ८:५० बजे २,४०० छात्र एक साथ बस रडार एपीआई कॉल करते हैं। डेटाबेस क्रैश रोकने के लिए क्या करेंगे?',
+        contextEn: 'Distributed Systems & High-Throughput Caching',
+        contextHi: 'डिस्ट्रिब्यूटेड सिस्टम्स व हाई-थ्रूपुट कैशिंग',
         options: [
-          { labelEn: 'Manual summation and basic sorting', labelHi: 'साधारण जोड़ और बेसिक सॉर्टिंग', score: 40 },
-          { labelEn: 'SUMIFS formula and standard filters', labelHi: 'SUMIFS फॉर्मूला और साधारण फ़िल्टर', score: 70 },
-          { labelEn: 'Dynamic Pivot Tables with slicers & XLOOKUP models', labelHi: 'पिवट टेबल, स्लाइसर और XLOOKUP फॉर्मूला', score: 95 },
+          { labelEn: 'Restart the backend Node.js process every 5 minutes', labelHi: 'हर ५ मिनट में बैकएंड सर्वर को रीस्टार्ट करना', score: 25 },
+          { labelEn: 'Increase max database connection pool to 5,000 connections', labelHi: 'डेटाबेस कनेक्शन पूल को बढ़ाकर ५,००० कर देना', score: 60 },
+          { labelEn: 'Deploy Redis in-memory cache with 5s TTL + connection pooling & rate limiter', labelHi: '५ सेकंड टीटीएल के साथ रेडिस इन-मेमोरी कैश, कनेक्शन पूलिंग व रेट लिमिटर लगाना', score: 95 },
         ]
       },
       {
-        qEn: 'When a vendor demands immediate payment without a valid Tax Invoice, what is your compliance protocol?',
-        qHi: 'यदि कोई विक्रेता बिना वैध टैक्स इनवॉइस के तत्काल भुगतान की मांग करे, तो सही प्रक्रिया क्या है?',
-        contextEn: 'Statutory Compliance Audit',
-        contextHi: 'कानूनी अनुपालन',
+        qEn: 'How do you guarantee ACID consistency when registering 6-member teams for SIH 2026 across relational tables?',
+        qHi: 'स्मार्ट इंडिया हैकाथॉन टीम रजिस्ट्रेशन के दौरान रिलेशनल टेबल्स में डेटा संगति (ACID) कैसे सुनिश्चित करेंगे?',
+        contextEn: 'Database Transactions & Schema Integrity',
+        contextHi: 'डेटाबेस ट्रांजैक्शन व स्कीमा अखंडता',
         options: [
-          { labelEn: 'Release partial cash payment immediately', labelHi: 'नकद आंशिक भुगतान तुरंत कर देना', score: 25 },
-          { labelEn: 'Ask senior accountant before proceeding', labelHi: 'सीनियर अकाउंटेंट से पूछकर निर्णय लेना', score: 70 },
-          { labelEn: 'Hold payment until GSTIN-validated Tax Invoice is issued', labelHi: 'जीएसटी प्रमाणित इनवॉइस आने तक भुगतान रोकना', score: 95 },
+          { labelEn: 'Insert members one-by-one with asynchronous try-catch blocks', labelHi: 'एसिंक्रोनस ट्राई-कैच के साथ एक-एक करके इंसर्ट करना', score: 40 },
+          { labelEn: 'Wrap insertions in an atomic DB transaction block (BEGIN...COMMIT / ROLLBACK)', labelHi: 'एटॉमिक ट्रांजैक्शन ब्लॉक (BEGIN...COMMIT / ROLLBACK) का उपयोग करना', score: 95 },
+          { labelEn: 'Store registrations as plain unindexed JSON files on server disk', labelHi: 'सर्वर डिस्क पर अनइंडेक्स्ड JSON फाइलों में सेव करना', score: 20 },
         ]
       }
     ],
+
+    // 2. Rhea Verma (B.Tech AI & Data Science - Machine Learning & Computer Vision)
     rahul: [
       {
-        qEn: 'Before installing a 5kW rooftop solar PV inverter, what critical test do you perform first?',
-        qHi: '५ किलोवाट सोलर इन्वर्टर स्थापित करने से पहले कौन सा प्राथमिक परीक्षण अनिवार्य है?',
-        contextEn: 'Electrical Safety Standard',
-        contextHi: 'विद्युत सुरक्षा मानक',
+        qEn: 'Your PyTorch deep neural network scores 99% training accuracy but only 64% on validation gate camera frames. How do you fix this?',
+        qHi: 'आपका पायटॉर्च मॉडल ट्रेनिंग में ९९% लेकिन वैलिडेशन में केवल ६४% एक्यूरेसी दे रहा है। इसे कैसे ठीक करेंगे?',
+        contextEn: 'Deep Learning Overfitting & Regularization',
+        contextHi: 'डीप लर्निंग ओवरफिटिंग व रेगुलराइजेशन',
         options: [
-          { labelEn: 'Directly connect solar panels to the main MCB switch', labelHi: 'सीधे पैनल को मेन एमसीबी से जोड़ना', score: 20 },
-          { labelEn: 'Check multimeter continuity and earth-to-neutral resistance', labelHi: 'मल्टीमीटर से अर्थिंग व न्यूट्रल वोल्टेज जांचना', score: 85 },
-          { labelEn: 'Perform full Voc and Isc string testing under standard irradiance', labelHi: 'पूर्ण Voc और Isc स्ट्रिंग लोड व अर्थिंग परीक्षण करना', score: 95 },
+          { labelEn: 'Train for 200 more epochs on the exact same training set', labelHi: 'समान डेटा पर २०० और एपॉक्स तक ट्रेन करना', score: 25 },
+          { labelEn: 'Apply Dropout (p=0.4), Data Augmentation, L2 weight decay, and Early Stopping', labelHi: 'ड्रॉपआउट (p=0.4), डेटा ऑग्मेंटेशन, L2 वेट डीके और अर्ली स्टॉपिंग लागू करना', score: 95 },
+          { labelEn: 'Increase model parameters by adding 4 more dense hidden layers', labelHi: 'मॉडल में ४ और हिडन लेयर्स जोड़कर पैरामीटर्स बढ़ाना', score: 35 },
         ]
       },
       {
-        qEn: 'If a 3-phase industrial motor makes abnormal humming sounds and overheats within 10 minutes, what is the cause?',
-        qHi: 'यदि थ्री-फेज औद्योगिक मोटर असामान्य आवाज करे और १० मिनट में गर्म हो जाए, तो क्या कारण हो सकता है?',
-        contextEn: 'Industrial Motor Troubleshooting',
-        contextHi: 'मोटर फॉल्ट डायग्नोस्टिक्स',
+        qEn: 'To serve a 7B parameter LLM on college lab GPUs with under 150ms latency, what optimization is essential?',
+        qHi: 'कॉलेज लैब जीपीयू पर १५० मिलीसेकंड से कम लेटेंसी में ७B एलएलएम चलाने के लिए कौन सा ऑप्टिमाइज़ेशन अनिवार्य है?',
+        contextEn: 'MLOps & Inference Model Quantization',
+        contextHi: 'एमएलऑप्स व मॉडल क्वांटाइजेशन',
         options: [
-          { labelEn: 'Just need more grease on the shaft', labelHi: 'केवल ग्रीस की कमी हो सकती है', score: 30 },
-          { labelEn: 'Single-phasing / blown fuse on one phase line', labelHi: 'सिंगल-फेजिंग या एक फेज का फ्यूज उड़ना', score: 85 },
-          { labelEn: 'Stator winding phase imbalance or bearing seizure', labelHi: 'वाइंडिंग असंतुलन या बेयरिंग सीज होना', score: 95 },
+          { labelEn: 'Load model in uncompressed FP32 floating point precision', labelHi: 'अनकंप्रेस्ड FP32 फ्लोटिंग पॉइंट में मॉडल लोड करना', score: 35 },
+          { labelEn: 'Use 4-bit / 8-bit quantization (AWQ/GPTQ) with vLLM PagedAttention', labelHi: 'vLLM पेज्ड-अटेंशन के साथ ४-बिट / ८-बिट क्वांटाइजेशन (AWQ/GPTQ)', score: 95 },
+          { labelEn: 'Send raw audio waveforms directly into text embedding models', labelHi: 'टेक्स्ट मॉडल में सीधे रॉ ऑडियो भेजना', score: 20 },
         ]
       },
       {
-        qEn: 'Which Personal Protective Equipment (PPE) is mandatory before opening a 440V distribution panel?',
-        qHi: '४४० वोल्ट पैनल खोलने से पहले कौन से व्यक्तिगत सुरक्षा उपकरण (PPE) अनिवार्य हैं?',
-        contextEn: 'IS / OSHA Safety Standards',
-        contextHi: 'सुरक्षा मानक',
+        qEn: 'When training an AI model on student commute logs, how do you prevent data leakage?',
+        qHi: 'छात्र आवागमन डेटा पर मॉडल ट्रेन करते समय डेटा लीकेज से कैसे बचा जाए?',
+        contextEn: 'Data Engineering & Pipeline Integrity',
+        contextHi: 'डेटा पाइपलाइन व अखंडता',
         options: [
-          { labelEn: 'Standard cotton gloves and slippers', labelHi: 'साधारण सूती दस्ताने या चप्पल', score: 10 },
-          { labelEn: 'Rubber boots and insulated screwdriver', labelHi: 'रबर बूट और इंसुलेटेड पेचकस', score: 65 },
-          { labelEn: 'Class 0 Dielectric gloves (1000V rated), arc face shield, and safety shoes', labelHi: '१०००V प्रमाणित इंसुलेटेड दस्ताने, फेस शील्ड व सेफ्टी जूते', score: 95 },
+          { labelEn: 'Normalize the whole dataset before splitting into train/test sets', labelHi: 'ट्रेन/टेस्ट स्प्लिट करने से पहले पूरे डेटा को नॉर्मलाइज़ करना', score: 30 },
+          { labelEn: 'Perform time-based / stratified train-test split before computing scaling statistics', labelHi: 'स्केलिंग स्टैटिस्टिक्स निकालने से पहले टाइम-बेस्ड / स्ट्रैटिफाइड स्प्लिट करना', score: 95 },
+          { labelEn: 'Include student target test labels as input training features', labelHi: 'टारगेट टेस्ट लेबल्स को इनपुट फीचर्स में शामिल करना', score: 15 },
         ]
       }
     ],
+
+    // 3. Arjun Patel (B.Tech ECE & Embedded IoT)
     sunita: [
       {
-        qEn: 'To generate an Ayushman Bharat Golden Card for a village resident at a CSC center, what is the critical step?',
-        qHi: 'सीएससी केंद्र पर ग्रामीण का आयुष्मान भारत कार्ड बनाने के लिए मुख्य रूप से क्या आवश्यक है?',
-        contextEn: 'CSC E-Governance Services',
-        contextHi: 'जन सेवा केंद्र सेवाएं',
+        qEn: 'In an ESP32 campus bus telemetry node, GPS reading blocks sensor I2C communication. How do you design the firmware?',
+        qHi: 'ESP32 बस ट्रैकर में जीपीएस रीडिंग सेंसर संचार को ब्लॉक कर रही है। फर्मवेयर कैसे डिज़ाइन करेंगे?',
+        contextEn: 'Real-Time Operating Systems (FreeRTOS Concurrency)',
+        contextHi: 'फ्री-आरटीओएस समवर्ती मल्टीटास्किंग',
         options: [
-          { labelEn: 'Only verbal name and phone number entry', labelHi: 'केवल मौखिक नाम और फोन नंबर', score: 20 },
-          { labelEn: 'Ration card list match and basic Aadhaar verification', labelHi: 'राशन कार्ड पात्रता व आधार सत्यापन', score: 75 },
-          { labelEn: 'Complete biometric KYC + PMJAY beneficiary database sync', labelHi: 'बायोमेट्रिक ई-केवाईसी व लाभार्थी डेटाबेस मिलान', score: 95 },
+          { labelEn: 'Put a 5000ms delay() call inside the main Arduino loop()', labelHi: 'मेन लूप में ५००० मिलीसेकंड का delay() लगा देना', score: 25 },
+          { labelEn: 'Create separate FreeRTOS preemptive tasks with queues & mutex locks for shared buses', labelHi: 'म्यूटेक्स व कतारों के साथ अलग-अलग फ्री-आरटीओएस प्रीएम्प्टिव टास्क्स बनाना', score: 95 },
+          { labelEn: 'Increase CPU clock frequency to maximum without thread separation', labelHi: 'बिना थ्रेड अलग किए केवल सीपीयू क्लॉक बढ़ाना', score: 45 },
         ]
       },
       {
-        qEn: 'What is your typing and numeric entry speed on a standard keyboard in Hindi or English?',
-        qHi: 'कंप्यूटर कीबोर्ड पर आपकी हिंदी या अंग्रेजी में टाइपिंग व संख्या दर्ज करने की गति कितनी है?',
-        contextEn: 'Data Entry & Typing Benchmark',
-        contextHi: 'डेटा एंट्री दक्षता',
+        qEn: 'To allow an outdoor solar-powered gate congestion sensor to run for 6 months on a 18650 cell, what is required?',
+        qHi: 'सौर-संचालित गेट सेंसर को ६ महीने तक सिंगल बैटरी पर चलाने के लिए क्या आवश्यक है?',
+        contextEn: 'Ultra-Low Power Embedded Architecture',
+        contextHi: 'अल्ट्रा-लो पावर एम्बेडेड आर्किटेक्चर',
         options: [
-          { labelEn: 'One-finger typing, slow on numbers (under 12 WPM)', labelHi: 'एक उंगली से धीरे-धीरे (१२ शब्द प्रति मिनट से कम)', score: 35 },
-          { labelEn: 'Average speed (20-28 WPM) with occasional typos', labelHi: 'मध्यम गति (२०-२८ शब्द प्रति मिनट)', score: 75 },
-          { labelEn: 'Certified professional speed (35+ WPM) with 98% accuracy', labelHi: 'पेशेवर गति (३५+ शब्द प्रति मिनट व ९८% शुद्धता)', score: 95 },
+          { labelEn: 'Keep Wi-Fi transmitter active continuously at full 20dBm power', labelHi: 'वाई-फाई को लगातार २०dBm फुल पावर पर चालू रखना', score: 20 },
+          { labelEn: 'Utilize ESP32 Deep Sleep mode with RTC timer wakeups and ULP coprocessor monitoring', labelHi: 'RTC टाइमर व ULP को-प्रोसेसर के साथ डीप स्लीप मोड का उपयोग करना', score: 95 },
+          { labelEn: 'Use an incandescent light bulb as an indicator for sensor status', labelHi: 'सेंसर स्थिति के लिए इनकैंडेसेंट बल्ब लगाना', score: 15 },
         ]
       },
       {
-        qEn: 'If a villager reports a micro-ATM cash withdrawal failure where money was debited but not dispensed, what do you do?',
-        qHi: 'यदि माइक्रो-एटीएम से पैसे कट जाएं पर कैश न निकले, तो सीएससी ऑपरेटर के रूप में आप क्या करेंगे?',
-        contextEn: 'Financial Security & AePS Protocol',
-        contextHi: 'वित्तीय सुरक्षा प्रोटोकॉल',
+        qEn: 'Why is MQTT preferred over HTTP for transmitting live bus GPS coordinates over fluctuating 4G networks?',
+        qHi: 'खराब मोबाइल नेटवर्क पर बस जीपीएस डेटा भेजने के लिए HTTP के मुकाबले MQTT को क्यों प्राथमिकता दी जाती है?',
+        contextEn: 'IoT Network Protocols & Packet Overhead',
+        contextHi: 'आईओटी प्रोटोकॉल व पैकेट ओवरहेड',
         options: [
-          { labelEn: 'Tell the customer to visit their bank branch in the district capital', labelHi: 'ग्राहक को जिला मुख्यालय की बैंक शाखा जाने को कहना', score: 30 },
-          { labelEn: 'Wait 24 hours without logging a formal complaint', labelHi: 'बिना कंप्लेंट दर्ज किए २४ घंटे इंतजार करने को कहना', score: 55 },
-          { labelEn: 'Immediately log RRN dispute ticket on NPCI portal and print receipt with reference ID', labelHi: 'एनपीसीआई पोर्टल पर RRN विवाद दर्ज कर रसीद प्रिंट करके देना', score: 95 },
+          { labelEn: 'HTTP has smaller packet headers than MQTT', labelHi: 'HTTP के पैकेट हेडर MQTT से छोटे होते हैं', score: 30 },
+          { labelEn: 'MQTT uses lightweight 2-byte fixed headers, Keep-Alive pings, and configurable QoS levels', labelHi: 'MQTT में हल्का २-बाइट हेडर, कीप-अलाइव पिंग और कॉन्फ़िगर करने योग्य QoS स्तर होते हैं', score: 95 },
+          { labelEn: 'MQTT does not require any TCP/IP network connection', labelHi: 'MQTT को किसी नेटवर्क कनेक्शन की आवश्यकता नहीं होती', score: 20 },
         ]
       }
     ]
@@ -137,121 +142,108 @@ export const AssessmentPage: React.FC<AssessmentPageProps> = ({
 
   const questions = questionsByPersona[selectedPersonaId] || questionsByPersona.priya;
   const currentQ = questions[currentStep];
-  const totalQuestions = questions.length;
 
   const handleSelectOption = (score: number) => {
     setAnswers({ ...answers, [currentStep]: score });
   };
 
   const handleNext = () => {
-    if (currentStep < totalQuestions - 1) {
+    if (currentStep < questions.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      onAssessmentComplete(answers);
+      // Calculate average score
+      const totalScore = Object.values(answers).reduce((a, b) => a + b, 0);
+      const avgScore = Math.round(totalScore / questions.length);
+      onAssessmentComplete({ [selectedPersonaId]: avgScore });
       onNavigate('gap-report');
     }
   };
 
-  const isCurrentAnswered = answers[currentStep] !== undefined;
+  const handlePrev = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const progressPct = Math.round(((currentStep + 1) / questions.length) * 100);
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6 py-6">
+    <div className="max-w-3xl mx-auto space-y-6 py-4 sm:py-8">
       
-      {/* Top Banner */}
-      <div className="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="inline-flex items-center gap-2 text-xs font-mono-data text-blue-700 font-bold mb-1">
+      {/* Top Banner with Engineering Credential */}
+      <div className="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-2 text-xs font-mono-data text-blue-700 font-bold">
             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-            <span>CORE WORKFLOW STEP 02</span>
+            <span>AICTE ENGINEERING MODEL CURRICULUM</span>
             <span>·</span>
-            <span>3-MINUTE ADAPTIVE DIAGNOSTIC</span>
+            <span>B.TECH SCENARIO DIAGNOSTIC</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-display font-bold text-slate-900">
-            {lang === 'en' ? 'Targeted Trade Scenario Assessment' : 'व्यावहारिक कौशल परिदृश्य परीक्षा'}
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900">
+            {lang === 'en' ? 'B.Tech Practical Engineering Assessment' : 'बी.टेक व्यावहारिक इंजीनियरिंग असेसमेंट'}
           </h1>
-          <p className="text-xs text-slate-600 mt-0.5">
-            {lang === 'en'
-              ? `Derived directly from ${currentPersona.name}'s resume to determine real-world employability.`
-              : `${currentPersona.name} के रेज़्यूमे और औद्योगिक मानकों पर आधारित 3 त्वरित व्यावहारिक प्रश्न।`}
+          <p className="text-xs text-slate-600">
+            Evaluating candidate: <strong className="text-slate-900">{currentPersona.name}</strong> ({currentPersona.role})
           </p>
         </div>
 
-        <button
-          onClick={() => onNavigate('resume')}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold self-start sm:self-auto transition-colors"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>{lang === 'en' ? 'Edit Resume' : 'रेज़्यूमे बदलें'}</span>
-        </button>
-      </div>
-
-      {/* Progress Strip */}
-      <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-2xs flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <HelpCircle className="w-4 h-4 text-blue-600" />
-          <span className="text-xs font-bold text-slate-800">
-            {lang === 'en' ? `Question ${currentStep + 1} of ${totalQuestions}` : `प्रश्न ${currentStep + 1} / ${totalQuestions}`}
+        <div className="hidden sm:flex flex-col items-end shrink-0">
+          <span className="text-[10px] font-mono-data text-slate-400 uppercase">Benchmark Level</span>
+          <span className="text-xs font-bold text-emerald-700 font-mono-data bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+            Tier-1 SDE / Tech Standards
           </span>
-          <span className="text-xs text-slate-400 font-mono-data">· 3-Minute Quick Diagnostic</span>
-        </div>
-        
-        {/* Step dots */}
-        <div className="flex items-center gap-1.5">
-          {questions.map((_, idx) => (
-            <div
-              key={idx}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${
-                idx === currentStep 
-                  ? 'w-6 bg-blue-600' 
-                  : answers[idx] !== undefined 
-                    ? 'bg-emerald-500' 
-                    : 'bg-slate-200'
-              }`}
-            />
-          ))}
         </div>
       </div>
 
-      {/* Question Card */}
-      <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-6 shadow-sm">
-        
-        {/* Context Chip */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold font-mono-data">
-          <Zap className="w-3.5 h-3.5 text-blue-600" />
-          <span>{lang === 'en' ? currentQ.contextEn : currentQ.contextHi}</span>
+      {/* Progress Indicator */}
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between text-xs font-mono-data text-slate-500">
+          <span>Question {currentStep + 1} of {questions.length}</span>
+          <span className="font-bold text-blue-700">{progressPct}% Completed</span>
         </div>
+        <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-blue-600 transition-all duration-300 rounded-full"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+      </div>
 
-        {/* Question Text */}
-        <h2 className="text-lg sm:text-xl font-bold text-slate-900 leading-snug">
-          {lang === 'en' ? currentQ.qEn : currentQ.qHi}
-        </h2>
+      {/* Active Question Card */}
+      <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-6 shadow-xs animate-in fade-in">
+        
+        <div className="space-y-2 pb-4 border-b border-slate-100">
+          <div className="flex items-center gap-2 text-xs font-mono-data text-blue-700 font-semibold">
+            <Code2 className="w-4 h-4 text-blue-600" />
+            <span>{lang === 'en' ? currentQ.contextEn : currentQ.contextHi}</span>
+          </div>
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+            {lang === 'en' ? currentQ.qEn : currentQ.qHi}
+          </h2>
+        </div>
 
         {/* Options */}
-        <div className="space-y-3 pt-2">
+        <div className="space-y-3">
           {currentQ.options.map((opt, idx) => {
             const isSelected = answers[currentStep] === opt.score;
             return (
               <button
                 key={idx}
+                type="button"
                 onClick={() => handleSelectOption(opt.score)}
-                className={`w-full text-left p-4 rounded-xl border transition-all duration-150 flex items-start gap-3.5 cursor-pointer ${
+                className={`w-full p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3.5 ${
                   isSelected
-                    ? 'border-blue-600 bg-blue-50/70 shadow-xs'
-                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50/70'
+                    ? 'bg-blue-50/80 border-blue-600 shadow-xs ring-1 ring-blue-500/20'
+                    : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/50'
                 }`}
               >
-                <div
-                  className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
-                    isSelected ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 bg-white'
-                  }`}
-                >
-                  {isSelected && <span className="w-2 h-2 rounded-full bg-white" />}
+                <div className={`w-5 h-5 rounded-full border flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 ${
+                  isSelected ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 text-slate-500'
+                }`}>
+                  {String.fromCharCode(65 + idx)}
                 </div>
-
-                <div className="flex-1">
-                  <span className={`text-xs sm:text-sm leading-relaxed ${isSelected ? 'font-semibold text-blue-950' : 'text-slate-800'}`}>
-                    {lang === 'en' ? opt.labelEn : opt.labelHi}
-                  </span>
+                <div className="text-xs sm:text-sm font-medium text-slate-800 leading-relaxed">
+                  {lang === 'en' ? opt.labelEn : opt.labelHi}
                 </div>
               </button>
             );
@@ -261,24 +253,22 @@ export const AssessmentPage: React.FC<AssessmentPageProps> = ({
         {/* Navigation Buttons */}
         <div className="flex items-center justify-between pt-4 border-t border-slate-100">
           <button
-            onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
+            type="button"
             disabled={currentStep === 0}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 disabled:opacity-30 transition-colors"
+            onClick={handlePrev}
+            className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 disabled:opacity-40 transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>{lang === 'en' ? 'Previous' : 'पिछला'}</span>
+            <span>Previous</span>
           </button>
 
           <button
+            type="button"
+            disabled={answers[currentStep] === undefined}
             onClick={handleNext}
-            disabled={!isCurrentAnswered}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-40 text-white text-xs font-semibold shadow-sm transition-all cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-xs tracking-tight transition-all shadow-sm shadow-blue-500/25 flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
           >
-            <span>
-              {currentStep < totalQuestions - 1
-                ? (lang === 'en' ? 'Next Question' : 'अगला प्रश्न')
-                : (lang === 'en' ? 'Generate My Skill Gap Report ➔' : 'मेरी कौशल अंतर रिपोर्ट बनाएं ➔')}
-            </span>
+            <span>{currentStep === questions.length - 1 ? 'Complete & View Gap Report' : 'Next Question'}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>

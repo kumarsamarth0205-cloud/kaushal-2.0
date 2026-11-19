@@ -2,78 +2,78 @@ import { Persona, SkillItem, JobListing, CourseRecommendation, ColorToken, Typog
 
 export const PERSONAS: Persona[] = [
   {
-    id: 'priya',
-    name: 'Priya Sharma',
-    age: 22,
-    location: 'Lucknow (Gomti Nagar Extension)',
-    role: 'Fresh B.Com Graduate',
-    roleHi: 'हाल ही में बी.कॉम स्नातक',
-    device: 'Mid-range Android (Redmi Note 11, 4GB RAM)',
-    connectivity: 'Metered 4G (1.5GB/day quota, throttles after 8 PM)',
-    primaryGoal: 'Wants to identify high-paying finance niches and verify if her Excel & GST skills match employer requirements',
-    primaryGoalHi: 'उच्च वेतन वाले वित्त क्षेत्र की पहचान करना और यह जांचना कि क्या उनका टैली व एक्सेल ज्ञान नौकरी के योग्य है',
-    painPoint: 'Overwhelmed by corporate buzzwords on LinkedIn and Naukri; no clear roadmap to turn a general degree into ₹25,000/mo income',
-    painPointHi: 'जॉब पोर्टल्स की भारी अंग्रेजी और जार्गन से परेशान; सामान्य डिग्री को ₹25,000/माह के रोजगार में बदलने का कोई सीधा रास्ता नहीं',
-    designRule: 'Requires high-credibility data visualizations, salary benchmarks, and actionable module-by-module skill delta reporting.',
-    baselineScore: 68,
-    targetRole: 'Junior GST & Financial Analyst'
-  },
-  {
-    id: 'rahul',
-    name: 'Rahul Verma',
+    id: 'priya', // Key retained for complete backward compatibility across existing routes
+    name: 'Aman Sharma',
     age: 20,
-    location: 'Semi-Urban Kanpur Dehat / Unnao',
-    role: 'ITI Electrical Trainee (Final Year)',
-    roleHi: 'आईटीआई इलेक्ट्रीशियन (अंतिम वर्ष)',
-    device: 'Budget Android (Realme C25, cracked screen)',
-    connectivity: 'Spotty 4G / Shared Home Wi-Fi',
-    primaryGoal: 'Needs hands-on solar installation apprenticeship within 25 km of home with a clear stipend',
-    primaryGoalHi: 'घर से 25 किमी के दायरे में तय मानदेय के साथ सोलर इन्वर्टर इंस्टॉलेशन अप्रेंटिसशिप प्राप्त करना',
-    painPoint: 'Portals do not filter by trade certification (NCVT/SCVT) or physical commute distance; text is dense and English-only',
-    painPointHi: 'वेबसाइट्स ट्रेड सर्टिफिकेट या घर से दूरी के आधार पर फ़िल्टर नहीं करतीं; सब कुछ जटिल अंग्रेज़ी में होता है',
-    designRule: 'Demands literal representational icons, prominent bilingual trade badges, direct phone/WhatsApp contact buttons, and 48px tap targets.',
-    baselineScore: 54,
-    targetRole: 'Solar PV Grid Technician & Substation Trainee'
+    location: 'IET Campus, Sitapur Road, Lucknow',
+    role: '2nd-Year B.Tech Computer Science (3rd Sem)',
+    roleHi: 'द्वितीय वर्ष बी.टेक कंप्यूटर साइंस (तृतीय सेमेस्टर)',
+    device: 'Linux / Windows ThinkPad + Android Phone',
+    connectivity: 'Campus Gigabit Wi-Fi + High-Speed 5G',
+    primaryGoal: 'Wants to crack Tier-1 SDE internship and verify if his DSA, React and Docker projects pass recruiter code audits',
+    primaryGoalHi: 'टियर-1 एसडीई इंटर्नशिप पाना और यह जांचना कि क्या उनके डीएसए, रिएक्ट और डॉकर प्रोजेक्ट्स रिक्रूटर्स के मानकों पर खरे उतरते हैं',
+    painPoint: 'Generic job portals mix B.Tech software roles with non-technical support jobs; lacks objective AST verification for his GitHub repos',
+    painPointHi: 'सामान्य जॉब पोर्टल तकनीकी सॉफ्टवेयर रोल्स को गैर-तकनीकी नौकरियों के साथ मिला देते हैं; गिटहब कोड के लिए कोई निष्पक्ष सत्यापन उपलब्ध नहीं है',
+    designRule: 'Requires rigorous code audit visualizations, time-complexity metrics, AICTE semester credit mappings, and Taleo/Workday ATS benchmarking.',
+    baselineScore: 78,
+    targetRole: 'Junior Software Development Engineer (SDE-1) / Cloud Backend'
   },
   {
-    id: 'sunita',
-    name: 'Sunita Devi',
-    age: 19,
-    location: 'Rural Barabanki (Village Fatehpur)',
-    role: 'First-Gen Smartphone User & Intermediate Pass',
-    roleHi: 'परिवार में पहली स्मार्टफोन यूजर (12वीं पास)',
-    device: 'Shared Family Phone (Samsung Galaxy M02)',
-    connectivity: 'Intermittent 3G/4G, data saver mode permanently enabled',
-    primaryGoal: 'Wants simple, dignified local work (Data Entry, CSC Operator, Healthcare Assistant) to support family',
-    primaryGoalHi: 'परिवार की सहायता के लिए सरल व सुरक्षित स्थानीय कार्य (डेटा एंट्री, सीएससी ऑपरेटर, हेल्थकेयर असिस्टेंट)',
-    painPoint: 'Multi-step registration forms with timed OTPs cause anxiety and 80%+ drop-off; cannot parse English UI jargon',
-    painPointHi: 'ओटीपी और लंबे फॉर्म से घबराहट और बीच में ही ऐप छोड़ना; तकनीकी अंग्रेज़ी शब्दों को समझने में असमर्थ',
-    designRule: 'Sets the accessibility floor for the product. Audio prompts, Hindi-first default toggle, zero session-loss on disconnect, and instant visual validation.',
-    baselineScore: 42,
-    targetRole: 'Certified CSC Village Enterprise Assistant'
+    id: 'rahul', // Key retained for backward compatibility
+    name: 'Rhea Verma',
+    age: 20,
+    location: 'KNIT Sultanpur / AKTU Affiliated Hub',
+    role: '2nd-Year B.Tech AI & Data Science (3rd Sem)',
+    roleHi: 'द्वितीय वर्ष बी.टेक आर्टिफिशियल इंटेलिजेंस व डेटा साइंस',
+    device: 'MacBook Air M2 + 5G Mobile Hotspot',
+    connectivity: 'Campus Lab High-Bandwidth LAN',
+    primaryGoal: 'Wants hands-on PyTorch deep learning and computer vision research internships with verified academic credits',
+    primaryGoalHi: 'सत्यापित क्रेडिट्स के साथ पायटॉर्च डीप लर्निंग और कंप्यूटर विज़न रिसर्च इंटर्नशिप प्राप्त करना',
+    painPoint: 'Curriculum delays AI frameworks until 7th semester; needs 2nd-year exposure to MLOps, vector embeddings, and real datasets',
+    painPointHi: 'कॉलेज सिलेबस में आधुनिक एआई देर से आता है; द्वितीय वर्ष में ही एमएलऑप्स, एआई पाइपलाइन और लाइव डेटा पर काम करने की आवश्यकता है',
+    designRule: 'Demands scientific metric displays (F1-score, loss curves, model quantization specs), NPTEL IIT credit transfer tracking, and SIH team incubator.',
+    baselineScore: 82,
+    targetRole: 'Associate Machine Learning & Computer Vision Engineer'
+  },
+  {
+    id: 'sunita', // Key retained for backward compatibility
+    name: 'Arjun Patel',
+    age: 20,
+    location: 'BIET Jhansi / AKTU Technology Corridor',
+    role: '2nd-Year B.Tech ECE & Embedded Systems (3rd Sem)',
+    roleHi: 'द्वितीय वर्ष बी.टेक इलेक्ट्रॉनिक्स व एम्बेडेड सिस्टम्स',
+    device: 'Dual-Boot Ubuntu Laptop + Logic Analyzer',
+    connectivity: 'Hardware Lab Wi-Fi + 4G Mobile',
+    primaryGoal: 'Wants firmware and edge IoT hardware internships in robotics, smart EV telemetry, and RTOS microcontrollers',
+    primaryGoalHi: 'रोबोटिक्स, स्मार्ट ईवी टेलीमेट्री और आरटीओएस माइक्रोकंट्रोलर में फर्मवेयर व हार्डवेयर इंटर्नशिप प्राप्त करना',
+    painPoint: 'Most campus drives focus solely on generic IT; lacks a dedicated platform testing hardware schematics, FreeRTOS, and MQTT sensors',
+    painPointHi: 'अधिकांश कैंपस प्लेसमेंट केवल सामान्य आईटी तक सीमित रहते हैं; हार्डवेयर स्कीमेटिक्स, फ्री-आरटीओएस और आईओटी सेंसर्स के परीक्षण का अभाव',
+    designRule: 'Highlights hardware pinouts, circuit diagram validation, oscilloscope telemetry, and AICTE credit-transferable embedded certifications.',
+    baselineScore: 74,
+    targetRole: 'Embedded Firmware & Edge AI Systems Engineer'
   }
 ];
 
 export const SKILLS_DATA: Record<string, SkillItem[]> = {
   priya: [
-    { id: 's1', name: 'GST Filing & E-Way Bills', nameHi: 'जीएसटी फाइलिंग एवं ई-वे बिल', category: 'Finance', requiredLevel: 85, currentLevel: 45, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 40, wageUplift: '+₹8,500/mo' },
-    { id: 's2', name: 'Advanced Excel & Pivot Tables', nameHi: 'एडवांस्ड एक्सेल एवं विश्लेषण', category: 'Analytics', requiredLevel: 90, currentLevel: 72, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 18, wageUplift: '+₹5,000/mo' },
-    { id: 's3', name: 'Tally Prime 4.0 with Payroll', nameHi: 'टैली प्राइम 4.0 पेरोल सहित', category: 'Software', requiredLevel: 80, currentLevel: 60, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 20, wageUplift: '+₹4,200/mo' },
-    { id: 's4', name: 'Business Communication (Email/Client)', nameHi: 'व्यावसायिक ईमेल वार्तालाप', category: 'Soft Skills', requiredLevel: 75, currentLevel: 58, marketDemand: 'Moderate', marketDemandHi: 'मध्यम', gap: 17, wageUplift: '+₹3,000/mo' },
-    { id: 's5', name: 'TDS & TCS Reconciliation', nameHi: 'टीडीएस व टीसीएस मिलान', category: 'Taxation', requiredLevel: 70, currentLevel: 30, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 40, wageUplift: '+₹6,000/mo' }
+    { id: 's1', name: 'Data Structures & Algorithms (C++/Java)', nameHi: 'डेटा स्ट्रक्चर्स एवं एल्गोरिदम (C++/Java)', category: 'Core CS', requiredLevel: 90, currentLevel: 74, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 16, wageUplift: '+₹18,000/mo' },
+    { id: 's2', name: 'Full-Stack Architecture (React & Node.js)', nameHi: 'फुल-स्टैक आर्किटेक्चर (React व Node.js)', category: 'Software', requiredLevel: 88, currentLevel: 70, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 18, wageUplift: '+₹14,000/mo' },
+    { id: 's3', name: 'PostgreSQL & Database Indexing', nameHi: 'पोस्टग्रेएसक्यूएल व डेटाबेस इंडेक्सिंग', category: 'Databases', requiredLevel: 82, currentLevel: 62, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 20, wageUplift: '+₹10,000/mo' },
+    { id: 's4', name: 'Docker & Containerization', nameHi: 'डॉकर व कंटेनर आर्किटेक्चर', category: 'DevOps', requiredLevel: 80, currentLevel: 45, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 35, wageUplift: '+₹12,500/mo' },
+    { id: 's5', name: 'System Design & Redis Distributed Cache', nameHi: 'सिस्टम डिज़ाइन एवं रेडिस कैशिंग', category: 'Architecture', requiredLevel: 78, currentLevel: 38, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 40, wageUplift: '+₹16,000/mo' }
   ],
   rahul: [
-    { id: 's6', name: 'Solar PV Inverter Diagnostics', nameHi: 'सोलर इन्वर्टर डायग्नोस्टिक्स', category: 'Renewable', requiredLevel: 85, currentLevel: 35, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 50, wageUplift: '+₹9,000/mo' },
-    { id: 's7', name: 'Three-Phase Industrial Wiring', nameHi: 'थ्री-फेज औद्योगिक वायरिंग', category: 'Electrical', requiredLevel: 90, currentLevel: 70, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 20, wageUplift: '+₹4,500/mo' },
-    { id: 's8', name: 'Electrical Safety & PPE (OSHA/IS)', nameHi: 'सुरक्षा उपकरण व मानक (IS/OSHA)', category: 'Safety', requiredLevel: 95, currentLevel: 65, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 30, wageUplift: '+₹3,500/mo' },
-    { id: 's9', name: 'Multimeter & Circuit Troubleshooting', nameHi: 'मल्टीमीटर व फॉल्ट सुधार', category: 'Tools', requiredLevel: 80, currentLevel: 68, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 12, wageUplift: '+₹2,500/mo' },
-    { id: 's10', name: 'Substation Transformer Testing', nameHi: 'सबस्टेशन ट्रांसफार्मर परीक्षण', category: 'Heavy Industrial', requiredLevel: 75, currentLevel: 25, marketDemand: 'Moderate', marketDemandHi: 'मध्यम', gap: 50, wageUplift: '+₹7,000/mo' }
+    { id: 's6', name: 'Deep Learning & PyTorch Framework', nameHi: 'डीप लर्निंग व पायटॉर्च फ्रेमवर्क', category: 'AI & ML', requiredLevel: 90, currentLevel: 68, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 22, wageUplift: '+₹20,000/mo' },
+    { id: 's7', name: 'Computer Vision with OpenCV & YOLO', nameHi: 'कंप्यूटर विज़न (OpenCV व YOLO)', category: 'Vision AI', requiredLevel: 85, currentLevel: 60, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 25, wageUplift: '+₹15,000/mo' },
+    { id: 's8', name: 'Fast-API & MLOps Model Serving', nameHi: 'फास्ट-एपीआई व एमएल मॉडल सर्विंग', category: 'MLOps', requiredLevel: 82, currentLevel: 48, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 34, wageUplift: '+₹14,000/mo' },
+    { id: 's9', name: 'Vector Embeddings & RAG Architectures', nameHi: 'वेक्टर एम्बेडिंग व आरएजी आर्किटेक्चर', category: 'Generative AI', requiredLevel: 85, currentLevel: 40, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 45, wageUplift: '+₹18,000/mo' },
+    { id: 's10', name: 'Applied Mathematics & Linear Algebra', nameHi: 'लीनियर अलजेब्रा व प्रायिकता सिद्धांत', category: 'Math Foundations', requiredLevel: 85, currentLevel: 75, marketDemand: 'Moderate', marketDemandHi: 'मध्यम', gap: 10, wageUplift: '+₹8,000/mo' }
   ],
   sunita: [
-    { id: 's11', name: 'Digital Citizen Services (CSC / e-District)', nameHi: 'ई-डिस्ट्रिक्ट व सरकारी पोर्टल संचालन', category: 'Digital Literacy', requiredLevel: 80, currentLevel: 50, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 30, wageUplift: '+₹6,000/mo' },
-    { id: 's12', name: 'Hindi & English Numeric Data Entry', nameHi: 'हिंदी व अंग्रेज़ी डेटा एंट्री (30 WPM)', category: 'Typing', requiredLevel: 85, currentLevel: 40, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 45, wageUplift: '+₹4,500/mo' },
-    { id: 's13', name: 'Biometric & AePS Cash Operations', nameHi: 'बायोमेट्रिक व माइक्रो-एटीएम संचालन', category: 'Banking', requiredLevel: 90, currentLevel: 45, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 45, wageUplift: '+₹5,500/mo' },
-    { id: 's14', name: 'Basic Smartphone Security & Fraud Defense', nameHi: 'ऑनलाइन सुरक्षा व फ्रॉड से बचाव', category: 'Awareness', requiredLevel: 75, currentLevel: 35, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 40, wageUplift: '+₹2,000/mo' }
+    { id: 's11', name: 'Embedded C & FreeRTOS Concurrency', nameHi: 'एम्बेडेड सी एवं फ्री-आरटीओएस', category: 'Firmware', requiredLevel: 88, currentLevel: 58, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 30, wageUplift: '+₹15,000/mo' },
+    { id: 's12', name: 'STM32 / ESP32 Hardware Interfacing', nameHi: 'STM32 व ESP32 माइक्रोकंट्रोलर', category: 'Hardware', requiredLevel: 85, currentLevel: 62, marketDemand: 'Critical', marketDemandHi: 'अति आवश्यक', gap: 23, wageUplift: '+₹12,000/mo' },
+    { id: 's13', name: 'IoT Protocols (MQTT, CoAP, BLE, CAN)', nameHi: 'आईओटी प्रोटोकॉल्स (MQTT, CAN, BLE)', category: 'Protocols', requiredLevel: 82, currentLevel: 50, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 32, wageUplift: '+₹11,000/mo' },
+    { id: 's14', name: 'Digital Circuit Design & Verilog HDL', nameHi: 'डिजिटल सर्किट डिज़ाइन व वेरिलॉग', category: 'VLSI', requiredLevel: 80, currentLevel: 40, marketDemand: 'High', marketDemandHi: 'उच्च मांग', gap: 40, wageUplift: '+₹14,000/mo' }
   ]
 };
 
@@ -81,140 +81,140 @@ export const JOBS_DATA: Record<string, JobListing[]> = {
   priya: [
     {
       id: 'j1',
-      title: 'Junior GST & Accounts Executive',
-      titleHi: 'जूनियर जीएसटी व अकाउंट्स एग्जीक्यूटिव',
-      employer: 'Kedia Logistics & Cold Chain Pvt Ltd',
-      location: 'Transport Nagar, Lucknow',
-      locationHi: 'ट्रांसपोर्ट नगर, लखनऊ',
-      distanceKm: 8.5,
-      stipend: '₹22,000 – ₹26,000 / mo',
+      title: 'Junior SDE Intern — Cloud Platforms',
+      titleHi: 'जूनियर एसडीई इंटर्न — क्लाउड प्लेटफॉर्म्स',
+      employer: 'TCS Innovation & Research Labs',
+      location: 'Gomti Nagar, Lucknow',
+      locationHi: 'गोमती नगर, लखनऊ',
+      distanceKm: 6.2,
+      stipend: '₹35,000 – ₹42,000 / mo',
       type: 'Direct Job',
-      typeHi: 'सीधी नौकरी',
-      skillsMatched: ['Advanced Excel', 'Tally Prime'],
-      skillsMissing: ['E-Way Bill Portals'],
+      typeHi: 'सीधी नौकरी / इंटर्नशिप',
+      skillsMatched: ['Data Structures & Algorithms', 'React & Node.js'],
+      skillsMissing: ['Redis Distributed Cache', 'Docker'],
       contactMethod: 'WhatsApp',
       verifiedGovt: true,
-      vacancies: 3
+      vacancies: 6
     },
     {
       id: 'j2',
-      title: 'Commercial Audit & Tax Apprentice',
-      titleHi: 'कमर्शियल ऑडिट व टैक्स शिक्षु',
-      employer: 'M.K. Rastogi & Associates (CA Firm)',
-      location: 'Hazratganj, Lucknow',
-      locationHi: 'हज़रतगंज, लखनऊ',
-      distanceKm: 4.2,
-      stipend: '₹14,500 / mo (NATS Stipend)',
+      title: 'Backend Engineering Intern (Distributed Systems)',
+      titleHi: 'बैकएंड इंजीनियरिंग इंटर्न (डिस्ट्रिब्यूटेड सिस्टम्स)',
+      employer: 'Swiggy Engineering Hub',
+      location: 'Lucknow Tech Corridor (Hybrid)',
+      locationHi: 'लखनऊ टेक कॉरिडोर (हाइब्रिड)',
+      distanceKm: 4.8,
+      stipend: '₹32,000 / mo (PPO Guaranteed)',
       type: 'Apprenticeship',
-      typeHi: 'शिक्षुता (Apprenticeship)',
-      skillsMatched: ['Tally Prime', 'Business Communication'],
-      skillsMissing: ['TDS Reconciliation'],
+      typeHi: 'प्री-प्लेसमेंट इंटर्नशिप (PPO)',
+      skillsMatched: ['PostgreSQL', 'Full-Stack Architecture'],
+      skillsMissing: ['System Design'],
       contactMethod: 'Direct Call',
       verifiedGovt: true,
-      vacancies: 5
+      vacancies: 4
     },
     {
       id: 'j3',
-      title: 'Billing Analyst — FMCG Distribution',
-      titleHi: 'बिलिंग एनालिस्ट — एफएमसीजी वितरण',
-      employer: 'Varun Beverages (PepsiCo Franchisee)',
-      location: 'Chinhat Industrial Area, Lucknow',
-      locationHi: 'चिनहट औद्योगिक क्षेत्र, लखनऊ',
+      title: 'Cloud DevOps & Site Reliability Intern',
+      titleHi: 'क्लाउड देवऑप्स व एसआरई इंटर्न',
+      employer: 'Razorpay Infrastructure Labs',
+      location: 'Noida / Lucknow Remote',
+      locationHi: 'नोएडा / लखनऊ रिमोट',
       distanceKm: 12.0,
-      stipend: '₹24,000 / mo + Performance Bonus',
+      stipend: '₹38,000 / mo + Laptop & Cloud Credits',
       type: 'Direct Job',
       typeHi: 'सीधी नौकरी',
-      skillsMatched: ['Advanced Excel'],
-      skillsMissing: ['GST Filing'],
+      skillsMatched: ['Data Structures & Algorithms'],
+      skillsMissing: ['Docker & Containerization'],
       contactMethod: 'WhatsApp',
       verifiedGovt: true,
-      vacancies: 2
+      vacancies: 3
     }
   ],
   rahul: [
     {
       id: 'j4',
-      title: 'Rooftop Solar PV Installation Apprentice',
-      titleHi: 'रूफटॉप सोलर पीवी इंस्टॉलेशन अप्रेंटिस',
-      employer: 'Tata Power Solar EPC Partner',
-      location: 'Panki Industrial Estate, Kanpur',
-      locationHi: 'पनकी औद्योगिक क्षेत्र, कानपुर',
-      distanceKm: 14.0,
-      stipend: '₹12,800 / mo + Safety Gear Provided',
+      title: 'Computer Vision & Deep Learning Intern',
+      titleHi: 'कंप्यूटर विज़न व डीप लर्निंग इंटर्न',
+      employer: 'Tata Elxsi Autonomous AI Hub',
+      location: 'Lucknow R&D Corridor',
+      locationHi: 'लखनऊ आरएंडडी कॉरिडोर',
+      distanceKm: 8.5,
+      stipend: '₹35,000 / mo + Compute Access',
       type: 'Apprenticeship',
-      typeHi: 'शिक्षुता (Apprenticeship)',
-      skillsMatched: ['Three-Phase Industrial Wiring', 'Multimeter'],
-      skillsMissing: ['Solar Inverter Diagnostics'],
+      typeHi: 'रिसर्च इंटर्नशिप',
+      skillsMatched: ['Deep Learning & PyTorch', 'Computer Vision'],
+      skillsMissing: ['Fast-API Model Serving'],
       contactMethod: 'WhatsApp',
       verifiedGovt: true,
-      vacancies: 8
+      vacancies: 5
     },
     {
       id: 'j5',
-      title: 'Substation Maintenance Technician',
-      titleHi: 'सबस्टेशन अनुरक्षण तकनीशियन',
-      employer: 'UP Power Transmission Contractor',
-      location: 'Unnao Bypass Substation',
-      locationHi: 'उन्नाव बाईपास सबस्टेशन',
+      title: 'Generative AI & LLM Systems Trainee',
+      titleHi: 'जेनरेटिव एआई व एलएलएम सिस्टम्स प्रशिक्षु',
+      employer: 'Infosys Springboard AI Innovation Hub',
+      location: 'Kanpur Road Tech Park, Lucknow',
+      locationHi: 'कानपुर रोड टेक पार्क, लखनऊ',
       distanceKm: 9.5,
-      stipend: '₹18,500 / mo',
+      stipend: '₹30,000 / mo',
       type: 'Direct Job',
       typeHi: 'सीधी नौकरी',
-      skillsMatched: ['Three-Phase Industrial Wiring', 'Safety & PPE'],
-      skillsMissing: ['Transformer Testing'],
+      skillsMatched: ['Deep Learning & PyTorch', 'Applied Mathematics'],
+      skillsMissing: ['Vector Embeddings & RAG'],
       contactMethod: 'Direct Call',
       verifiedGovt: true,
       vacancies: 4
     },
     {
       id: 'j6',
-      title: 'Industrial Motor rewinding Assistant',
-      titleHi: 'औद्योगिक मोटर रिवाइंडिंग सहायक',
-      employer: 'Shree Krishna Electric Works',
-      location: 'Fazalganj, Kanpur',
-      locationHi: 'फज़लगंज, कानपुर',
-      distanceKm: 18.0,
-      stipend: '₹15,000 / mo',
+      title: 'Machine Learning Data Pipeline Intern',
+      titleHi: 'एमएल डेटा पाइपलाइन इंटर्न',
+      employer: 'Zomato Machine Learning Center',
+      location: 'Remote / Lucknow Co-Working',
+      locationHi: 'रिमोट / लखनऊ को-वर्किंग',
+      distanceKm: 5.0,
+      stipend: '₹28,000 / mo',
       type: 'Trainee',
       typeHi: 'प्रशिक्षु',
-      skillsMatched: ['Multimeter', 'Safety & PPE'],
-      skillsMissing: ['Three-Phase Wiring Certification'],
+      skillsMatched: ['Applied Mathematics'],
+      skillsMissing: ['Fast-API Model Serving'],
       contactMethod: 'In-Person',
-      verifiedGovt: false,
-      vacancies: 2
+      verifiedGovt: true,
+      vacancies: 3
     }
   ],
   sunita: [
     {
       id: 'j7',
-      title: 'Gram Panchayat Digital Service Operator',
-      titleHi: 'ग्राम पंचायत डिजिटल सेवा ऑपरेटर',
-      employer: 'CSC e-Governance Services India',
-      location: 'Block HQ, Fatehpur (Barabanki)',
-      locationHi: 'ब्लॉक मुख्यालय, फतेहपुर (बाराबंकी)',
-      distanceKm: 3.2,
-      stipend: '₹9,500 / mo + Transaction Incentive',
+      title: 'Embedded Firmware & RTOS Engineer Intern',
+      titleHi: 'एम्बेडेड फर्मवेयर व आरटीओएस इंजीनियर इंटर्न',
+      employer: 'Havells R&D Center (IoT Systems)',
+      location: 'Noida / Greater Noida (Hybrid)',
+      locationHi: 'नोएडा / ग्रेटर नोएडा (हाइब्रिड)',
+      distanceKm: 14.2,
+      stipend: '₹28,000 / mo + Hardware Kit',
       type: 'Trainee',
       typeHi: 'प्रशिक्षु',
-      skillsMatched: ['Digital Citizen Services'],
-      skillsMissing: ['Numeric Data Entry Speed'],
+      skillsMatched: ['Embedded C', 'STM32 / ESP32'],
+      skillsMissing: ['IoT Protocols (MQTT/CAN)'],
       contactMethod: 'In-Person',
       verifiedGovt: true,
-      vacancies: 6
+      vacancies: 4
     },
     {
       id: 'j8',
-      title: 'Rural Banking Point (CSP) Customer Associate',
-      titleHi: 'ग्राहक सेवा केंद्र (सीएसपी) सहायक',
-      employer: 'Bank of Baroda Business Correspondent',
-      location: 'Haidergarh Road, Barabanki',
-      locationHi: 'हैदरगढ़ रोड, बाराबंकी',
-      distanceKm: 7.0,
-      stipend: '₹11,000 / mo',
+      title: 'Robotics & Autonomous Rover Firmware Trainee',
+      titleHi: 'रोबोटिक्स व ऑटोनॉमस रोवर फर्मवेयर प्रशिक्षु',
+      employer: 'Tech Mahindra Defense & Robotics',
+      location: 'Kanpur Industrial Corridor',
+      locationHi: 'कानपुर इंडस्ट्रियल कॉरिडोर',
+      distanceKm: 18.0,
+      stipend: '₹30,000 / mo',
       type: 'Direct Job',
       typeHi: 'सीधी नौकरी',
-      skillsMatched: ['Smartphone Security'],
-      skillsMissing: ['Biometric AePS Operations'],
+      skillsMatched: ['STM32 / ESP32'],
+      skillsMissing: ['Digital Circuit Design & Verilog'],
       contactMethod: 'WhatsApp',
       verifiedGovt: true,
       vacancies: 2
@@ -226,293 +226,138 @@ export const COURSES_DATA: Record<string, CourseRecommendation[]> = {
   priya: [
     {
       id: 'c1',
-      title: 'Practical GST 2026: E-Way Bills & Real GSTR-1/3B Portals',
-      titleHi: 'प्रैक्टिकल जीएसटी 2026: ई-वे बिल व लाइव रिटर्न फाइलिंग',
-      provider: 'MSME Technology Development Centre',
-      durationHours: 24,
-      mode: 'Practical Lab + Mobile',
-      modeHi: 'प्रैक्टिकल लैब + मोबाइल',
-      cost: 'Free (Govt Sponsored)',
-      costHi: 'निःशुल्क (सरकारी अनुदान)',
-      certification: 'Govt. of India MSME Certificate',
-      skillsCovered: ['GST Filing', 'E-Way Bill', 'TDS Reconciliation'],
-      addressesGap: 'Closes 40% deficit in GST Filing; estimated +₹8,500/mo salary impact'
+      title: 'NPTEL: Data Structures & Algorithms Using C++ (IIT Kharagpur)',
+      titleHi: 'एनपीटीईएल: डेटा स्ट्रक्चर्स एवं एल्गोरिदम (आईआईटी खड़गपुर)',
+      provider: 'NPTEL / SWAYAM (AICTE 3 Credits)',
+      durationHours: 60,
+      mode: 'Academic Mooc + Proctored Exam',
+      modeHi: 'अकादमिक मूक + प्राक्टर्ड परीक्षा',
+      cost: 'Free (Credit Transferrable)',
+      costHi: 'निःशुल्क (क्रेडिट ट्रांसफर योग्य)',
+      certification: 'Ministry of Education & IIT Kharagpur Certificate',
+      skillsCovered: ['Data Structures & Algorithms', 'Time Complexity', 'Trees & Graphs', 'Dynamic Programming'],
+      addressesGap: 'Closes 16% gap in DSA; directly transferable as 3 B.Tech semester credits on AKTU marksheet'
     },
     {
       id: 'c2',
-      title: 'Corporate Excel & Dynamic Financial Modelling',
-      titleHi: 'कॉरपोरेट एक्सेल व वित्तीय मॉडलिंग मास्टरक्लास',
-      provider: 'National Skill Development Corporation (NSDC)',
-      durationHours: 16,
-      mode: 'Self-Paced Video',
-      modeHi: 'वीडियो पाठ',
-      cost: 'Free (Govt Sponsored)',
-      costHi: 'निःशुल्क (सरकारी अनुदान)',
-      certification: 'NSDC Skill India Digital Badge',
-      skillsCovered: ['VLOOKUP/XLOOKUP', 'Pivot Dashboards', 'Power Query'],
-      addressesGap: 'Closes 18% deficit in Advanced Excel'
+      title: 'AWS Academy: Cloud Foundations & Container Microservices',
+      titleHi: 'एडब्ल्यूएस एकेडमी: क्लाउड फाउंडेशन व माइक्रोसर्विसेज',
+      provider: 'AWS Academy & Amazon Web Services',
+      durationHours: 40,
+      mode: 'Cloud Sandbox Labs + Projects',
+      modeHi: 'क्लाउड सैंडबॉक्स लैब्स + प्रोजेक्ट्स',
+      cost: '100% Free for College Students',
+      costHi: 'छात्रों के लिए पूर्णतः निःशुल्क',
+      certification: 'AWS Academy Cloud Graduate & Voucher',
+      skillsCovered: ['Docker', 'AWS EC2', 'Microservices', 'System Design'],
+      addressesGap: 'Closes 35% Docker and 40% System Design deficit; +₹16,000/mo package impact'
     }
   ],
   rahul: [
     {
       id: 'c3',
-      title: 'PM Surya Ghar: Solar PV Grid & Inverter Maintenance',
-      titleHi: 'पीएम सूर्य घर: सोलर रूफटॉप इन्वर्टर व ग्रिड अनुरक्षण',
-      provider: 'National Institute of Solar Energy (NISE) & ITI Kanpur',
-      durationHours: 40,
-      mode: 'Weekend ITI',
-      modeHi: 'सप्ताहांत आईटीआई',
-      cost: 'Free (Govt Sponsored)',
-      costHi: 'निःशुल्क (सरकारी अनुदान)',
-      certification: 'Suryamitra Certified Technician Badge',
-      skillsCovered: ['Inverter Diagnostics', 'Earthing & Lightning Arrestors', 'Net Metering'],
-      addressesGap: 'Closes 50% deficit in Solar Diagnostics; unlocks ₹18K+ apprenticeships'
-    },
-    {
-      id: 'c4',
-      title: 'Industrial Safety, High-Voltage PPE & First Aid',
-      titleHi: 'औद्योगिक सुरक्षा व हाई-वोल्टेज उपकरण मानक',
-      provider: 'Directorate of Technical Education UP',
-      durationHours: 12,
-      mode: 'Practical Lab + Mobile',
-      modeHi: 'प्रैक्टिकल लैब + मोबाइल',
-      cost: 'Free (Govt Sponsored)',
-      costHi: 'निःशुल्क (सरकारी अनुदान)',
-      certification: 'State Industrial Safety Council Certificate',
-      skillsCovered: ['Lockout/Tagout (LOTO)', 'Arc Flash Safety', 'IS Standards'],
-      addressesGap: 'Mandatory prerequisite for all Tata Power & State utility roles'
+      title: 'NPTEL: Deep Learning for Computer Vision (IIT Madras)',
+      titleHi: 'एनपीटीईएल: डीप लर्निंग एवं कंप्यूटर विज़न (आईआईटी मद्रास)',
+      provider: 'NPTEL / SWAYAM (AICTE 4 Credits)',
+      durationHours: 60,
+      mode: 'Academic Lab + GPU Notebooks',
+      modeHi: 'अकादमिक लैब + जीपीयू नोटबुक्स',
+      cost: 'Free (College Credit Transfer)',
+      costHi: 'निःशुल्क (कॉलेज क्रेडिट ट्रांसफर)',
+      certification: 'NPTEL Elite Certificate (IIT Madras)',
+      skillsCovered: ['PyTorch', 'Convolutional Networks', 'OpenCV', 'YOLO Object Detection'],
+      addressesGap: 'Closes 22% PyTorch and 25% Vision gap; fulfills 4-credit professional elective requirement'
     }
   ],
   sunita: [
     {
-      id: 'c5',
-      title: 'Village Level Entrepreneur: CSC Services & AePS Cash Point',
-      titleHi: 'ग्राम स्तरीय उद्यमी: सीएससी सेवाएं व आधार भुगतान प्रणाली',
-      provider: 'CSC Academy & NIELIT',
-      durationHours: 18,
-      mode: 'Practical Lab + Mobile',
-      modeHi: 'प्रैक्टिकल लैब + मोबाइल',
-      cost: 'Free (Govt Sponsored)',
-      costHi: 'निःशुल्क (सरकारी अनुदान)',
-      certification: 'NIELIT Digital Village Facilitator',
-      skillsCovered: ['AePS Micro-ATM', 'Kisan Samman Nidhi Portal', 'Ayushman Card Generation'],
-      addressesGap: 'Closes 45% gap in biometric operations with zero hardware investment needed'
+      id: 'c4',
+      title: 'NPTEL: Embedded System Design with ARM & FreeRTOS (IIT Delhi)',
+      titleHi: 'एनपीटीईएल: एम्बेडेड सिस्टम डिज़ाइन (आईआईटी दिल्ली)',
+      provider: 'NPTEL / SWAYAM (AICTE 3 Credits)',
+      durationHours: 45,
+      mode: 'Hardware Simulation + Firmware Lab',
+      modeHi: 'हार्डवेयर सिमुलेशन + फर्मवेयर लैब',
+      cost: 'Free (Credit Transferrable)',
+      costHi: 'निःशुल्क (क्रेडिट ट्रांसफर योग्य)',
+      certification: 'IIT Delhi & AICTE Joint Certification',
+      skillsCovered: ['Embedded C', 'FreeRTOS', 'STM32 Microcontrollers', 'Hardware Interfacing'],
+      addressesGap: 'Closes 30% FreeRTOS concurrency deficit; directly unlocks ₹30,000/mo robotics internships'
     }
   ]
 };
 
 export const COLOR_TOKENS: ColorToken[] = [
-  {
-    name: 'Obsidian Void (Canvas)',
-    hex: '#090C12',
-    rgb: '9, 12, 18',
-    wcagContrast: 'Reference',
-    wcagScore: 'Pass',
-    role: 'Primary Canvas Background. Replaces cold dark-blue AI templates with deep, battery-efficient OLED black.',
-    psychology: 'Signals high seriousness, focus, and battery conservation (saves 38-42% power on budget AMOLED displays).',
-    luminescence: '0.8% relative luminance'
-  },
-  {
-    name: 'Surface Slate (Card / Surface 1)',
-    hex: '#111622',
-    rgb: '17, 22, 34',
-    wcagContrast: '1.2:1 vs Canvas',
-    wcagScore: 'Pass',
-    role: 'Structural container background with 1px border. Never nested within identical surfaces.',
-    psychology: 'Subtle tactile differentiation without relying on tacky drop shadows or heavy blur cards.',
-    luminescence: '2.1% relative luminance'
-  },
-  {
-    name: 'Hairline Boundary (Border)',
-    hex: '#24314A',
-    rgb: '36, 49, 74',
-    wcagContrast: '3.1:1 vs Canvas',
-    wcagScore: 'AA',
-    role: 'Single hairline stroke on cards, tabs, and dividers. Replaces thick colored left bars.',
-    psychology: 'Industrial precision, clarity of compartmentalization.',
-    luminescence: '4.8% relative luminance'
-  },
-  {
-    name: 'Neon Electric Cyan (Primary Accent)',
-    hex: '#00F0FF',
-    rgb: '0, 240, 255',
-    wcagContrast: '13.8:1 vs Canvas',
-    wcagScore: 'AAA',
-    role: 'Primary action targets, active tabs, verified employer badges, forward progress vectors.',
-    psychology: 'Vibrational energy of digital electrification; maximum scannability under direct daylight.',
-    luminescence: '78.2% relative luminance'
-  },
-  {
-    name: 'Neon Cyber Emerald (Success & Match)',
-    hex: '#10F984',
-    rgb: '16, 249, 132',
-    wcagContrast: '12.9:1 vs Canvas',
-    wcagScore: 'AAA',
-    role: 'Skills matched, confirmed wage uplift, verified certificates, high employability index (>75%).',
-    psychology: 'Signals economic prosperity, tangible gain, and official government-accredited success.',
-    luminescence: '73.4% relative luminance'
-  },
-  {
-    name: 'Electric Amber (Skill Gap & Urgency)',
-    hex: '#FFB020',
-    rgb: '255, 176, 32',
-    wcagContrast: '10.4:1 vs Canvas',
-    wcagScore: 'AAA',
-    role: 'Skill deficits, closing deadlines, unfulfilled regional labor demand, required training alert.',
-    psychology: 'Urgency without panic; constructive warning prompting immediate micro-learning action.',
-    luminescence: '54.6% relative luminance'
-  },
-  {
-    name: 'Pure Polar White (Primary Text)',
-    hex: '#F8FAFC',
-    rgb: '248, 250, 252',
-    wcagContrast: '18.2:1 vs Canvas',
-    wcagScore: 'AAA',
-    role: 'Display headings, crucial data figures, job titles, and primary action text.',
-    psychology: 'Uncompromising legibility; optical anti-halation compensation on dark backgrounds.',
-    luminescence: '95.8% relative luminance'
-  },
-  {
-    name: 'Cool Muted Slate (Secondary Text)',
-    hex: '#94A3B8',
-    rgb: '148, 163, 184',
-    wcagContrast: '7.1:1 vs Canvas',
-    wcagScore: 'AAA',
-    role: 'Bilingual Hindi/English subtext, explanatory tooltips, metadata strings with dot separators.',
-    psychology: 'Quiet hierarchy; prevents cognitive fatigue during long assessment sessions.',
-    luminescence: '37.1% relative luminance'
-  }
+  { name: 'Navy Deep Canvas', hex: '#0F172A', role: 'Institutional Anchor Surface' },
+  { name: 'Royal Electric Blue', hex: '#2563EB', role: 'Primary Engineering Action' },
+  { name: 'Emerald Verification', hex: '#10B981', role: 'Placement Cell & T&P Audit Status' },
+  { name: 'Slate Neutral Card', hex: '#F8FAFC', role: 'Readable Elevated Surface' },
+  { name: 'Amber Alert Accent', hex: '#F59E0B', role: 'Skill Gap & Deadline Alerts' }
 ];
 
 export const TYPOGRAPHY_SPECS: TypographySpec[] = [
-  {
-    role: 'Display / Hero Wordmark',
-    family: 'Space Grotesk (Weights: 600, 700)',
-    devanagariFallback: 'Noto Sans Devanagari Bold',
-    sizes: '28px – 36px',
-    lineHeight: '1.2 line height',
-    sampleTextEn: 'KAUSHAL SETU · SKILL BRIDGE',
-    sampleTextHi: 'कौशल सेतु · योग्यता से रोजगार तक',
-    rationale: 'Geometric, authoritative industrial structure without the generic softness of Inter or Geist. Establishes a civic engineering tone.'
-  },
-  {
-    role: 'Body Prose & Interactive Labels',
-    family: 'Plus Jakarta Sans (Weights: 400, 500, 600)',
-    devanagariFallback: 'Noto Sans Devanagari Medium',
-    sizes: '14px – 16px',
-    lineHeight: '1.55 line height',
-    sampleTextEn: 'Verified apprenticeships within 25km radius with direct stipend clarity.',
-    sampleTextHi: '25 किमी के दायरे में सत्यापित शिक्षुता एवं स्पष्ट मासिक मानदेय।',
-    rationale: 'High x-height and open apertures ensure crisp reading even on 720p budget Android screens with tempered glass screen protectors.'
-  },
-  {
-    role: 'Numeric Data & Financial Metrics',
-    family: 'JetBrains Mono (tabular-nums strictly enabled)',
-    devanagariFallback: 'Tabular Arabic Numerals (₹, %, km)',
-    sizes: '13px – 20px',
-    lineHeight: '1.0 line height',
-    sampleTextEn: '₹24,000/mo · Δ +40% Skill Match · 8.5 km',
-    sampleTextHi: '₹24,000/माह · 40% कौशल अंतर · 8.5 किमी',
-    rationale: 'Equal character widths prevent decimal jitter in tables and metric strips. Aligns currency figures vertically for effortless comparison.'
-  },
-  {
-    role: 'Bilingual Micro-Labels & Badges',
-    family: 'Noto Sans Devanagari (Weights: 500, 600)',
-    devanagariFallback: 'System Sans',
-    sizes: '11px – 13px',
-    lineHeight: '1.4 line height',
-    sampleTextEn: 'GOVT VERIFIED · NCVT CERTIFIED',
-    sampleTextHi: 'भारत सरकार सत्यापित · एनसीवीटी मान्यता प्राप्त',
-    rationale: 'Prevents clipping of upper matras (ई, ो, ै) that plagues generic Google Fonts implementations on mobile browsers.'
-  }
+  { name: 'Display Heading', font: 'Plus Jakarta Sans', weight: 'Bold 700', size: '28px / 36px', usage: 'Institutional Hero Titles' },
+  { name: 'Section Header', font: 'Plus Jakarta Sans', weight: 'Bold 600', size: '20px / 28px', usage: 'Pillar Dashboards & Tabs' },
+  { name: 'Data / Code / Metrics', font: 'JetBrains Mono', weight: 'Medium 500 / Bold 700', size: '13px / 18px', usage: 'Skill Scores, Bus ETAs, API Payloads' },
+  { name: 'Vernacular Devanagari', font: 'Noto Sans Devanagari', weight: 'Medium 500', size: '14px / 22px', usage: 'Bilingual Hindi Labels & Tooltips' }
 ];
 
-export const ICON_EMOJI_MATRIX: IconEmojiSpec[] = [
+export const ICON_EMOJI_SPECS: IconEmojiSpec[] = [
+  { name: 'Code Proof-of-Work', lucideIcon: 'Code2', semanticRole: 'GitHub AST code audits' },
+  { name: 'Campus Bus Telemetry', lucideIcon: 'Bus', semanticRole: 'Real-time GPS bus radar' },
+  { name: 'SIH Hackathon Arena', lucideIcon: 'Trophy', semanticRole: 'Smart India Hackathon 2026' },
+  { name: 'ATS Resume Engine', lucideIcon: 'FileText', semanticRole: 'Taleo/Workday optimization' },
+  { name: 'PayPal REST Rail', lucideIcon: 'CreditCard', semanticRole: 'Instant international disbursements' }
+];
+
+
+export const ICON_EMOJI_MATRIX = [
   {
-    trade: 'Electrical & Solar Grid',
-    tradeHi: 'इलेक्ट्रीशियन एवं सोलर ग्रिड',
+    trade: 'Full-Stack Software Engineering',
+    tradeHi: 'सॉफ्टवेयर इंजीनियरिंग व सिस्टम्स',
+    emoji: '💻',
+    svgIconName: 'Code2 / Terminal',
+    semioticMeaning: 'Source code, AST static analysis, high-throughput microservices.',
+    comprehensionRate: '99.2% across engineering students',
+    avoidCliché: 'Avoid abstract gears; use terminal brackets and code syntax.'
+  },
+  {
+    trade: 'AI, Machine Learning & Vision',
+    tradeHi: 'आर्टिफिशियल इंटेलिजेंस व विज़न',
+    emoji: '🧠',
+    svgIconName: 'BrainCircuit / Sparkles',
+    semioticMeaning: 'Neural networks, PyTorch tensors, computer vision.',
+    comprehensionRate: '98.5% across B.Tech AI students',
+    avoidCliché: 'Avoid magic wands; use neural nodes and data tensors.'
+  },
+  {
+    trade: 'Embedded IoT & Robotics',
+    tradeHi: 'एम्बेडेड आईओटी व रोबोटिक्स',
     emoji: '⚡',
-    svgIconName: 'Zap / SunMedium',
-    semioticMeaning: 'Physical electrical current & solar generation; recognized universally regardless of literacy.',
-    comprehensionRate: '98.4% across rural UP pilot groups',
-    avoidCliché: 'Avoid abstract green leaf icons for solar; use literal solar panels and lightning conductors.'
-  },
-  {
-    trade: 'Industrial Fabrication & CNC',
-    tradeHi: 'सीएनसी मशीनिंग व निर्माण',
-    emoji: '⚙️',
-    svgIconName: 'Cog / Wrench',
-    semioticMeaning: 'Machining, lathe operation, physical tooling, and mechanical assembly.',
-    comprehensionRate: '96.2% among ITI diploma holders',
-    avoidCliché: 'Avoid futuristic robotic arms; use standard industrial mechanical gear.'
-  },
-  {
-    trade: 'Logistics, Warehousing & Fleet',
-    tradeHi: 'लॉजिस्टिक्स व गोदाम प्रबंधन',
-    emoji: '📦',
-    svgIconName: 'Package / Truck',
-    semioticMeaning: 'Physical parcel dispatch, inventory barcodes, dispatch staging.',
-    comprehensionRate: '99.1% across Tier-2/3 delivery workforce',
-    avoidCliché: 'Avoid abstract global networking spheres; use tangible cardboard cargo box.'
-  },
-  {
-    trade: 'Healthcare Aide & Nursing Assist',
-    tradeHi: 'स्वास्थ्य सहायक व नर्सिंग',
-    emoji: '🩺',
-    svgIconName: 'Stethoscope / HeartPulse',
-    semioticMeaning: 'Clinical vital signs, patient care, diagnostic assistance, pharmacy retail.',
-    comprehensionRate: '97.5% across rural community health workers',
-    avoidCliché: 'Avoid DNA helix or microscope; stethoscope is the defining clinical badge.'
-  },
-  {
-    trade: 'GST Accounting & Digital Tally',
-    tradeHi: 'जीएसटी लेखांकन व टैली',
-    emoji: '💼',
-    svgIconName: 'FileSpreadsheet / Calculator',
-    semioticMeaning: 'Official ledger, invoice matching, compliance, business banking.',
-    comprehensionRate: '94.8% across commerce graduates',
-    avoidCliché: 'Avoid floating crypto tokens or upward stock arrows; use ledger / invoice.'
-  },
-  {
-    trade: 'Village CSC Digital Operator',
-    tradeHi: 'ग्राम सीएससी व जन सेवा केंद्र',
-    emoji: '🏛️',
-    svgIconName: 'Landmark / Fingerprint',
-    semioticMeaning: 'Government civic services, biometric banking, certificate issuance.',
-    comprehensionRate: '96.0% across rural village citizens',
-    avoidCliché: 'Avoid generic computer monitor; landmark pillars denote official state authority.'
+    svgIconName: 'Cpu / Zap',
+    semioticMeaning: 'Microcontrollers, FreeRTOS, MQTT sensors, robotics.',
+    comprehensionRate: '97.8% across ECE engineers',
+    avoidCliché: 'Avoid generic green leaves; use silicon chips and circuit traces.'
   }
 ];
 
 export const BENCHMARK_COMPARISON = [
   {
-    dimension: 'Visual Architecture & Theme',
-    existingPortals: 'Cluttered light-mode tables, low-contrast washed grays, 2012 bootstrap cards, garish tricolor banners.',
-    genericAiSlop: 'Purple/indigo blur gradients, floating cards inside cards, fake "94% AI Innovation" scoreboards, illegible thin fonts.',
-    kaushalSetuNextGen: 'Minimalist obsidian dark-mode (#090C12), high-luminescence neon cyan (#00F0FF) & emerald (#10F984) accents, OLED power-saving.'
+    dimension: 'Target Demographic & Curriculum',
+    existingPortals: 'General graduates, vocational diplomas, manual labor.',
+    genericAiSlop: 'Generic chatbots with zero university syllabus context.',
+    kaushalSetuNextGen: 'Exclusively B.Tech engineering undergraduates (CSE, AIML, ECE, IT, Core) with AICTE 3-4 MOOC credit mapping.'
   },
   {
-    dimension: 'Target Demographic Literacy',
-    existingPortals: 'Assumes fluent English, corporate resume formatting, high bandwidth, and desktop browser.',
-    genericAiSlop: 'Superficial buzzwords, Americanized Silicon Valley metaphors, zero regional Hindi comprehension.',
-    kaushalSetuNextGen: 'Bilingual Hindi/English first-class, representational iconography (Microsoft NBU standard), 48px thumb zones.'
+    dimension: 'Proof of Work & Code Verification',
+    existingPortals: 'Static text resumes on PDFs; zero verifiable code proof-of-work.',
+    genericAiSlop: 'Hallucinated arbitrary ratings with no AST code analysis.',
+    kaushalSetuNextGen: 'Automated GitHub AST commit auditing, 134 DSA test case validation, and Taleo ATS 91% score.'
   },
   {
-    dimension: 'Skill Gap Quantification',
-    existingPortals: 'Zero gap breakdown; simply shows binary "Apply" button or redirects to broken external portal links.',
-    genericAiSlop: 'Hallucinated arbitrary ratings ("Creativity: 89%") with no actual labor market backing.',
-    kaushalSetuNextGen: 'Granular Skill Delta (Required vs Current), linked directly to real salary impact (+₹8,500/mo) and free NCVT courses.'
-  },
-  {
-    dimension: 'Connectivity & Data Constraints',
-    existingPortals: 'Heavy 4MB+ initial bundles, multi-redirect SSO, lost form data on spotty 4G disconnect.',
-    genericAiSlop: 'Heavy Framer motion loops, uncompressed stock photos, high CPU rendering overhead.',
-    kaushalSetuNextGen: 'Ultralight SVG icons, zero layout thrashing, resilient local state saving mid-questionnaire, <180KB core bundle.'
-  },
-  {
-    dimension: 'Hyperlocal Geographic Reach',
-    existingPortals: 'Metro bias (Bengaluru, Gurgaon, Mumbai); rural and semi-urban UP jobs grouped into generic "Uttar Pradesh".',
-    genericAiSlop: 'Unrealistic "Remote Worldwide AI Engineer" postings disconnected from ITI trades.',
-    kaushalSetuNextGen: 'Precise kilometer radius (e.g. "8.5 km Transport Nagar", "Unnao Bypass 9.5 km"), direct WhatsApp employer dispatch.'
+    dimension: 'Campus Mobility & Utility',
+    existingPortals: 'Disconnected job search apps with zero campus day-to-day utility.',
+    genericAiSlop: 'Theoretical dashboards never used by real students.',
+    kaushalSetuNextGen: 'Live Highway Gate congestion meters (85% rerouting) and 6 campus bus routes with ETAs for 9:00 AM labs.'
   }
 ];

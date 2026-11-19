@@ -18,7 +18,11 @@ import {
   Bus,
   Trophy,
   FileText,
-  Navigation
+  Navigation,
+  GitBranch,
+  Terminal,
+  FileCode2,
+  Layers
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -32,45 +36,45 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
 
   const tradeData = {
     priya: {
-      candidate: 'Priya Sharma, 22',
-      location: 'Gomti Nagar, Lucknow',
-      education: 'B.Com Graduate (Lucknow University)',
-      targetRole: 'Junior GST & Accounts Executive',
-      coreSkill: 'GSTR-2B Reconciliation & E-Way Portal',
-      minMarketScore: 80,
-      startingBase: 15000,
-      maxUplift: 24500,
-      courseModule: '24h Practical GST & TDS Workshop (Free under MSME)',
-      nearestEmployer: 'Kedia Logistics & Cold Chain · Transport Nagar (8.5 km)',
-      openings: '3 vacancies · Direct WhatsApp HR',
+      candidate: 'Aman Sharma, 20 · Roll: 2024-CSE-084',
+      location: 'IET Lucknow Campus · Sitapur Road',
+      education: 'B.Tech Computer Science & Engineering (3rd Sem)',
+      targetRole: 'Junior Software Development Engineer (SDE-1)',
+      coreSkill: 'Data Structures & Distributed Backend (React, Node, PostgreSQL)',
+      minMarketScore: 85,
+      startingBase: 42000,
+      maxUplift: 85000,
+      courseModule: 'NPTEL 12-Week Advanced DSA in C++ (IIT Kharagpur — 3 Credits)',
+      nearestEmployer: 'TCS Innovation Labs & Research Hub · Gomti Nagar (6.2 km)',
+      openings: '14 openings · T&P Cell Direct Walk-In',
       badgeColor: 'text-blue-700 bg-blue-50 border-blue-200'
     },
     rahul: {
-      candidate: 'Rahul Verma, 20',
-      location: 'Panki Industrial Area, Kanpur',
-      education: 'ITI Electrical Diploma (Final Year)',
-      targetRole: 'Rooftop Solar PV Grid Technician',
-      coreSkill: 'Solar Inverter Diagnostics & Anti-Islanding',
-      minMarketScore: 85,
-      startingBase: 12500,
-      maxUplift: 19000,
-      courseModule: 'PM Surya Ghar 30h Weekend ITI Practical Lab',
-      nearestEmployer: 'Tata Power Solar EPC Partner · Fazalganj (11.2 km)',
-      openings: '8 vacancies · NATS Apprenticeship',
-      badgeColor: 'text-amber-700 bg-amber-50 border-amber-200'
+      candidate: 'Rhea Verma, 20 · Roll: 2024-AIML-042',
+      location: 'KNIT Sultanpur / AKTU Affiliated Hub',
+      education: 'B.Tech Artificial Intelligence & Data Science (3rd Sem)',
+      targetRole: 'Associate Machine Learning & Computer Vision Engineer',
+      coreSkill: 'PyTorch Neural Networks & Fast-API MLOps Model Serving',
+      minMarketScore: 88,
+      startingBase: 48000,
+      maxUplift: 95000,
+      courseModule: 'NPTEL Deep Learning for Computer Vision (IIT Madras — 4 Credits)',
+      nearestEmployer: 'Tata Elxsi Autonomous AI Center · Lucknow Hub (8.5 km)',
+      openings: '9 openings · SIH Shortlist Fast-Track',
+      badgeColor: 'text-indigo-700 bg-indigo-50 border-indigo-200'
     },
     sunita: {
-      candidate: 'Sunita Devi, 19',
-      location: 'Fatehpur Block, Barabanki',
-      education: 'Intermediate (12th Pass) · 1st-Gen Mobile User',
-      targetRole: 'Gram Panchayat CSC & Banking Operator',
-      coreSkill: 'AePS Micro-ATM & Citizen Portal Processing',
-      minMarketScore: 75,
-      startingBase: 8000,
-      maxUplift: 12000,
-      courseModule: 'CSC Digital Village Facilitator Training (Free)',
-      nearestEmployer: 'Bank of Baroda CSP Center · Block HQ (3.2 km)',
-      openings: '6 slots · Local Village Posting',
+      candidate: 'Arjun Patel, 20 · Roll: 2024-ECE-031',
+      location: 'BIET Jhansi / AKTU Technology Corridor',
+      education: 'B.Tech Electronics & Communication Engineering (3rd Sem)',
+      targetRole: 'Embedded Firmware & Edge AI Systems Engineer',
+      coreSkill: 'FreeRTOS Concurrency, STM32 Microcontrollers & MQTT',
+      minMarketScore: 82,
+      startingBase: 38000,
+      maxUplift: 78000,
+      courseModule: 'NPTEL Embedded System Design with ARM (IIT Delhi — 3 Credits)',
+      nearestEmployer: 'Schneider Electric Embedded R&D · Kanpur Road (12.4 km)',
+      openings: '11 openings · Hardware Hackathon Verified',
       badgeColor: 'text-emerald-700 bg-emerald-50 border-emerald-200'
     }
   };
@@ -98,13 +102,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
           {/* Institutional Editorial Kicker (Structured Institutional Badges) */}
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold tracking-wide">
             <span className="px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-800 border border-blue-200 font-bold uppercase tracking-wider text-[11px] font-mono-data">
-              PM Internship Scheme & NPTEL Partnered
+              🏛️ AICTE & AKTU Model Curriculum Aligned
             </span>
             <span className="text-slate-300">·</span>
-            <span className="text-slate-600 font-medium">NSQF & MSME Certified</span>
+            <span className="text-slate-700 font-bold">Exclusive B.Tech Engineering Ecosystem</span>
             <span className="text-slate-300">·</span>
-            <span className="text-amber-800 font-semibold bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200 text-[11px] font-mono-data">
-              PayPal AI Verified Payouts
+            <span className="text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200 text-[11px] font-mono-data">
+              NPTEL 3-4 Credit Mooc Transfer
             </span>
           </div>
 
@@ -112,11 +116,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
           <h1 className="text-3xl sm:text-4xl md:text-[2.65rem] lg:text-[2.95rem] font-bold text-slate-900 tracking-[-0.035em] leading-[1.14] text-balance">
             {lang === 'en' ? (
               <>
-                Where Uttar Pradesh’s college degrees turn into <span className="text-blue-700">verified factory careers</span>.
+                Where Uttar Pradesh’s B.Tech Engineers turn code and hardware labs into <span className="text-blue-700">Tier-1 tech careers</span>.
               </>
             ) : (
               <>
-                उत्तर प्रदेश के युवाओं की डिग्री और उद्योगों की असली मांग के बीच का <span className="text-blue-700">सटीक सेतु</span>।
+                बी.टेक इंजीनियरिंग छात्रों की कोडिंग व लैब्स को ग्लोबल टेक कंपनियों के <span className="text-blue-700">सत्यापित करियर</span> में बदलने का सुपर सेतु।
               </>
             )}
           </h1>
@@ -124,8 +128,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
           {/* Subtitle with Real Regional Reality */}
           <p className="text-sm sm:text-base text-slate-600 leading-[1.6] max-w-xl">
             {lang === 'en'
-              ? 'In 3 minutes, diagnose your exact practical deficit against live hiring standards across Lucknow, Kanpur, and Barabanki. Complete free government-funded NCVT modules and connect directly with local employers on WhatsApp.'
-              : '३ मिनट में जानें कि लखनऊ, कानपुर व बाराबंकी के उद्योगों की मांग के मुकाबले आपके ज्ञान में क्या कमी है। निःशुल्क सरकारी प्रशिक्षण लें और २५ किमी के भीतर व्हाट्सएप पर सीधे नौकरी पाएं।'}
+              ? 'Engineered exclusively for 2nd-year B.Tech undergraduates across CSE, AI/DS, ECE, IT, and Core Engineering. Diagnose practical coding deficits, earn NPTEL/SWAYAM credit transfers, and push verified GitHub proof-of-work directly to recruiting directors.'
+              : 'विशेष रूप से द्वितीय वर्ष बी.टेक (CSE, AI/ML, ECE, IT) इंजीनियरिंग छात्रों के लिए तैयार। लाइव कोडिंग असेसमेंट, एनपीटीईएल क्रेडिट ट्रांसफर, और सीधे टेक रिक्रूटर्स के पास गिटहब कोड पोर्टफोलियो।'}
           </p>
 
           {/* Dual Action Buttons: Luminous Royal Blue + Crisp Outlined White */}
@@ -149,14 +153,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
 
           {/* Trust Tokens (Vibrant Emerald & Amber Badges) */}
           <div className="pt-2 flex flex-wrap items-center gap-x-3.5 gap-y-1.5 text-xs text-slate-600">
-            <span className="flex items-center gap-1.5 text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold tracking-tight">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-              Govt. MSME & NCVT Approved
+            <span className="flex items-center gap-1.5 text-blue-800 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 font-semibold tracking-tight">
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+              AICTE Model Curriculum Verified
             </span>
             <span aria-hidden="true" className="text-slate-300">·</span>
-            <span className="text-blue-800 font-semibold tracking-tight">Hyperlocal (≤25 km)</span>
+            <span className="text-purple-800 font-semibold tracking-tight bg-purple-50 px-2 py-0.5 rounded border border-purple-200">B.Tech CSE · AI/DS · ECE · IT · Core</span>
             <span aria-hidden="true" className="text-slate-300">·</span>
-            <span className="text-amber-800 font-semibold tracking-tight bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">100% Free Training</span>
+            <span className="text-emerald-800 font-semibold tracking-tight bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">SIH 2026 Screening</span>
             <span aria-hidden="true" className="text-slate-300">·</span>
             <span className="text-slate-600 font-medium">English & हिंदी</span>
           </div>
@@ -188,9 +192,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
               </span>
               <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100/90 rounded-lg text-xs">
                 {[
-                  { id: 'priya', name: 'Priya', trade: 'B.Com Accounts' },
-                  { id: 'rahul', name: 'Rahul', trade: 'ITI Solar PV' },
-                  { id: 'sunita', name: 'Sunita', trade: 'CSC Banking' }
+                  { id: 'priya', name: 'Aman', trade: 'B.Tech CSE (SDE)' },
+                  { id: 'rahul', name: 'Rhea', trade: 'B.Tech AI & DS' },
+                  { id: 'sunita', name: 'Arjun', trade: 'B.Tech ECE (IoT)' }
                 ].map(tab => (
                   <button
                     key={tab.id}
@@ -287,30 +291,30 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
 
       </section>
 
-      {/* 2. PROOF & KPI STRIP: Colorful Metrics Grounding Every Claim */}
+      {/* 2. PROOF & KPI STRIP: B.Tech Engineering Metrics */}
       <section className="border-y border-slate-200 py-8 bg-slate-50/60 rounded-2xl px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           <div>
-            <div className="text-2xl sm:text-3xl font-bold font-mono-data text-blue-600 tracking-tight">85,420+</div>
-            <div className="text-xs font-bold text-slate-800 mt-1 tracking-tight">Verified Technical Vacancies</div>
-            <div className="text-xs text-slate-500 mt-0.5 leading-[1.6]">Active in Lucknow, Kanpur & Barabanki</div>
+            <div className="text-2xl sm:text-3xl font-bold font-mono-data text-blue-600 tracking-tight">48,500+</div>
+            <div className="text-xs font-bold text-slate-800 mt-1 tracking-tight">B.Tech Engineering Roles</div>
+            <div className="text-xs text-slate-500 mt-0.5 leading-[1.6]">Active across Tier-1 Tech & EPC Partners</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-bold font-mono-data text-emerald-600 tracking-tight">≤ 25 km</div>
-            <div className="text-xs font-bold text-slate-800 mt-1 tracking-tight">Commute Radius Guarantee</div>
-            <div className="text-xs text-slate-500 mt-0.5 leading-[1.6]">Zero forced relocation or hostel expenses</div>
+            <div className="text-2xl sm:text-3xl font-bold font-mono-data text-emerald-600 tracking-tight">3–4 Credits</div>
+            <div className="text-xs font-bold text-slate-800 mt-1 tracking-tight">Automated NPTEL Credit Transfer</div>
+            <div className="text-xs text-slate-500 mt-0.5 leading-[1.6]">Directly mapped into AKTU semester marksheet</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl font-bold font-mono-data text-amber-600 tracking-tight">100% Free</div>
-            <div className="text-xs font-bold text-slate-800 mt-1 tracking-tight">Govt-Sponsored Training</div>
-            <div className="text-xs text-slate-500 mt-0.5 leading-[1.6]">MSME & NCVT certified short practical labs</div>
+            <div className="text-xs font-bold text-slate-800 mt-1 tracking-tight">Govt Sponsored IIT/IISc MOOCs</div>
+            <div className="text-xs text-slate-500 mt-0.5 leading-[1.6]">SWAYAM, NPTEL & PM Internship Scheme</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl font-bold font-mono-data text-indigo-600 tracking-tight">
-              +₹8,500<span className="text-xs text-indigo-400 font-normal">/mo</span>
+              +₹28,000<span className="text-xs text-indigo-400 font-normal">/mo</span>
             </div>
-            <div className="text-xs font-bold text-slate-800 mt-1 tracking-tight">Average Starting Wage Uplift</div>
-            <div className="text-xs text-slate-500 mt-0.5 leading-[1.6]">Immediate salary jump upon gap closure</div>
+            <div className="text-xs font-bold text-slate-800 mt-1 tracking-tight">Average Starting Package Leap</div>
+            <div className="text-xs text-slate-500 mt-0.5 leading-[1.6]">Accelerating 2nd-year placement readiness</div>
           </div>
         </div>
       </section>
@@ -335,9 +339,90 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
           </div>
         </div>
 
-        {/* Feature Grid: 8 Functional Tools */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Feature Grid: Advanced B.Tech Engineering Tools */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           
+          {/* Advanced Tool 1: AI Template Studio */}
+          <div
+            onClick={() => onNavigate('templates')}
+            className="cursor-pointer p-6 rounded-xl bg-gradient-to-br from-indigo-50/70 via-white to-blue-50/50 border border-indigo-200 hover:border-indigo-500 hover:shadow-lg transition-all smooth-card space-y-3 group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shadow-sm shadow-indigo-500/25">
+                <Sparkles className="w-5 h-5 text-amber-300" />
+              </div>
+              <span className="text-[10px] font-mono-data font-bold text-indigo-700 bg-indigo-100/80 px-2 py-0.5 rounded border border-indigo-200">
+                5 AI Templates
+              </span>
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-indigo-700 transition-colors">
+              {lang === 'en' ? 'AI Engineering Template Studio' : 'एआई इंजीनियरिंग टेम्पलेट स्टूडियो'}
+            </h3>
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Generate Overleaf LaTeX resumes, B.Tech Capstone Project Proposals, SIH 2026 pitch decks, and GitHub README blueprints.'
+                : 'बी.टेक कैपस्टोन प्रोजेक्ट, एसआईएच २०२६ पिच डेक और लेटेक्स रेज़्यूमे के लिए त्वरित एआई टेम्पलेट्स।'}
+            </p>
+            <div className="text-xs font-bold text-indigo-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Open AI Templates' : 'टेम्पलेट स्टूडियो खोलें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
+          </div>
+
+          {/* Advanced Tool 2: B.Tech Specialization Roadmaps */}
+          <div
+            onClick={() => onNavigate('roadmap')}
+            className="cursor-pointer p-6 rounded-xl bg-gradient-to-br from-blue-50/70 via-white to-cyan-50/50 border border-blue-200 hover:border-blue-500 hover:shadow-lg transition-all smooth-card space-y-3 group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-sm shadow-blue-500/25">
+                <GitBranch className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-mono-data font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded border border-blue-200">
+                AICTE Aligned
+              </span>
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-blue-700 transition-colors">
+              {lang === 'en' ? 'B.Tech Specialization Roadmaps' : 'बी.टेक इंजीनियरिंग रोडमैप्स'}
+            </h3>
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Semester 3 & 4 milestone ladders for CSE, AIML, ECE & Core Eng with Striver 450 DSA trackers and NPTEL credit mapping.'
+                : 'सीएसई, एआई/डीएस, ईसीई के लिए सेमेस्टर-वार रोडमैप, 450 डीएसए शीट और एनपीटीईएल क्रेडिट ट्रांसफर।'}
+            </p>
+            <div className="text-xs font-bold text-blue-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Explore Roadmaps' : 'रोडमैप देखें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
+          </div>
+
+          {/* Advanced Tool 3: AI Mock Tech Interviewer */}
+          <div
+            onClick={() => onNavigate('interview')}
+            className="cursor-pointer p-6 rounded-xl bg-gradient-to-br from-emerald-50/70 via-white to-teal-50/50 border border-emerald-200 hover:border-emerald-500 hover:shadow-lg transition-all smooth-card space-y-3 group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shadow-sm shadow-emerald-500/25">
+                <Terminal className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-mono-data font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded border border-emerald-200">
+                SDE-1 Simulator
+              </span>
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-emerald-700 transition-colors">
+              {lang === 'en' ? 'AI SDE Mock Interview & System Design' : 'एआई टेक्निकल इंटरव्यू सिमुलेटर'}
+            </h3>
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Live coding rounds on LRU Cache, Distributed Redis System Design, and Concurrency with instant AI code evaluation.'
+                : 'डीएसए, सिस्टम डिज़ाइन और ऑपरेटिंग सिस्टम्स पर लाइव कोडिंग राउंड और एआई कोड रिव्यू।'}
+            </p>
+            <div className="text-xs font-bold text-emerald-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Start Mock Interview' : 'इंटरव्यू शुरू करें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
+          </div>
+
           {/* Tool 1: Campus Transit */}
           <div
             onClick={() => onNavigate('mobility')}

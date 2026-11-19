@@ -22,7 +22,11 @@ import {
   Zap,
   Navigation,
   Trophy,
-  Award
+  Award,
+  GitBranch,
+  Sparkles,
+  Terminal,
+  GraduationCap
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -51,10 +55,13 @@ export const Header: React.FC<HeaderProps> = ({
 
   const navTabs = [
     { id: 'landing', labelEn: 'Home', labelHi: 'होम' },
+    { id: 'roadmap', labelEn: 'Roadmaps', labelHi: 'रोडमैप' },
+    { id: 'templates', labelEn: 'AI Templates', labelHi: 'एआई टेम्पलेट्स' },
+    { id: 'interview', labelEn: 'AI Interview', labelHi: 'एआई इंटरव्यू' },
     { id: 'mobility', labelEn: 'Transit Radar', labelHi: 'कैंपस बस व गेट' },
     { id: 'courses', labelEn: '24+ Courses', labelHi: 'प्रमाणित कोर्स' },
-    { id: 'opportunities', labelEn: 'Opportunities & SIH', labelHi: 'अवसर व हैकाथॉन' },
-    { id: 'skill-score', labelEn: 'Live Skill Score', labelHi: 'कौशल स्कोर' },
+    { id: 'opportunities', labelEn: 'SIH & Internships', labelHi: 'अवसर व हैकाथॉन' },
+    { id: 'skill-score', labelEn: 'Skill Score', labelHi: 'कौशल स्कोर' },
     { id: 'resume', labelEn: 'ATS Studio', labelHi: 'एटीएस रेज़्यूमे' },
     { id: 'payouts', labelEn: 'PayPal Rail', labelHi: 'पेपाल रेल' },
     { id: 'dashboard', labelEn: 'Dashboard', labelHi: 'डैशबोर्ड' },
@@ -62,6 +69,9 @@ export const Header: React.FC<HeaderProps> = ({
 
   const sitemapPages = [
     { id: 'landing', labelEn: 'Home', labelHi: 'मुख्य पृष्ठ', icon: Home },
+    { id: 'roadmap', labelEn: 'B.Tech Specialization Roadmaps', labelHi: 'इंजीनियरिंग रोडमैप्स', icon: GitBranch },
+    { id: 'templates', labelEn: 'AI Engineering Template Studio', labelHi: 'एआई टेम्पलेट स्टूडियो', icon: Sparkles },
+    { id: 'interview', labelEn: 'AI Mock Technical Interviewer', labelHi: 'एआई टेक्निकल इंटरव्यू', icon: Terminal },
     { id: 'mobility', labelEn: 'Campus Transit & Gate Radar', labelHi: 'कैंपस बस व गेट रडार', icon: Navigation },
     { id: 'opportunities', labelEn: 'Opportunities & Hackathons', labelHi: 'छात्र अवसर व हैकाथॉन', icon: Trophy },
     { id: 'skill-score', labelEn: 'Live Verified Skill Score', labelHi: 'सत्यापित कौशल स्कोर', icon: Award },
