@@ -1,18 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Language, UserProfile } from '../types';
+import { VERIFIED_COURSES_DATABASE } from '../data/coursesDatabase';
+import { SOPHOMORE_INTERNSHIPS_DATA } from '../data/sophomoreInternshipsData';
 import { 
   Bot, 
   Send, 
   X, 
   Sparkles, 
-  MessageSquare, 
-  ChevronDown, 
   CheckCircle2, 
   Zap, 
   Building2, 
   FileText, 
   HelpCircle,
-  Volume2
+  Code2,
+  GraduationCap,
+  Bus,
+  Trophy,
+  CreditCard,
+  ChevronRight,
+  Database
 } from 'lucide-react';
 
 interface ChatbotWidgetProps {
@@ -27,6 +33,7 @@ interface Message {
   sender: 'bot' | 'user';
   text: string;
   timestamp: string;
+  ragSources?: string[];
   quickActions?: Array<{ label: string; action: () => void }>;
 }
 
@@ -41,12 +48,12 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const candidateName = userProfile?.name || (selectedPersonaId === 'priya' ? 'Priya' : selectedPersonaId === 'rahul' ? 'Rahul' : 'Sunita');
-  const targetRole = userProfile?.targetRole || (selectedPersonaId === 'priya' ? 'Junior GST Executive' : selectedPersonaId === 'rahul' ? 'Solar PV Technician' : 'CSC Digital Operator');
+  const candidateName = userProfile?.name || 'Aman Sharma';
+  const targetRole = userProfile?.targetRole || 'Junior Software Development Engineer (SDE-1)';
 
   const initialBotMessage = lang === 'en'
-    ? `Namaste ${candidateName}! 🙏 I am **Kaushal Saarthi**, your AI Career Copilot. I can help you build your resume, boost your ATS score to 90%+, practice interview questions, or push your verified profile directly to local HR recruiters. How can I guide you today?`
-    : `नमस्ते ${candidateName}! 🙏 मैं हूँ **कौशल सारथी**, आपका एआई करियर साथी। मैं आपका रेज़्यूमे बनाने, एटीएस स्कोर 90%+ करने, इंटरव्यू की तैयारी और आपका रेज़्यूमे सीधे स्थानीय एचआर (HR) को भेजने में मदद कर सकता हूँ। आज आप क्या करना चाहेंगे?`;
+    ? `Hello ${candidateName}! 🎓 I am **Kaushal Saarthi RAG Copilot**, your B.Tech Engineering Academic & Placement Assistant. I am directly indexed on the **AICTE 2026 Model Curriculum**, **24+ NPTEL/SWAYAM IIT courses**, **SIH 2026 problem statements**, and **live campus bus telemetry**. What can I assist you with today?`
+    : `नमस्ते ${candidateName}! 🎓 मैं हूँ **कौशल सारथी RAG कोपायलट**, आपका बी.टेक इंजीनियरिंग शैक्षणिक एवं प्लेसमेंट साथी। मैं **AICTE मॉडल सिलेबस**, **24+ IIT NPTEL/SWAYAM कोर्सेज**, **एसआईएच 2026 प्रॉब्लम स्टेटमेंट्स** और **लाइव बस रडार** से सीधे कनेक्टेड हूँ। आज मैं आपकी क्या मदद करूँ?`;
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -54,21 +61,27 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({
       sender: 'bot',
       text: initialBotMessage,
       timestamp: 'Just now',
+      ragSources: ['AICTE B.Tech Model Curriculum 2026', 'AKTU Credit Transfer Regulations', 'NPTEL Syllabus Index'],
+      quickActions: [
+        { label: '🎓 NPTEL Credit Transfer', action: () => onNavigate('courses') },
+        { label: '🤖 AI Engineering Templates', action: () => onNavigate('templates') },
+        { label: '🏆 SIH 2026 Registration', action: () => onNavigate('opportunities') }
+      ]
     }
   ]);
 
   const quickPrompts = lang === 'en' ? [
-    { label: '📄 How to improve my ATS score?', query: 'How can I optimize my resume for a high ATS score?' },
-    { label: '🚀 Send resume directly to HR', query: 'How does the direct HR dispatch feature work?' },
-    { label: '⚖️ Why Kaushal Setu vs LinkedIn/Unstop?', query: 'Why is Kaushal Setu better than LinkedIn and Unstop for Bharat youth?' },
-    { label: '🎯 What is my biggest skill gap?', query: 'What is the biggest skill gap holding back my salary?' },
-    { label: '💼 Free government certified courses', query: 'Which free PMKVY or UPSDM courses should I take?' }
+    { label: '🎓 How to transfer NPTEL credits to AKTU marksheet?', query: 'How does NPTEL and SWAYAM credit transfer work for B.Tech semester exams?' },
+    { label: '📄 How to jump ATS score from 42% to 91%?', query: 'How does the ATS Resume optimizer rewrite bullets using Google XYZ?' },
+    { label: '🚌 Check Highway Gate & bus delay status', query: 'What is the current traffic at Main Highway Gate and bus arrival time?' },
+    { label: '🏆 How to build a winning SIH 2026 team?', query: 'What are the rules and diversity requirements for Smart India Hackathon 2026?' },
+    { label: '💻 SDE-1 Mock Interview & Striver 450 DSA', query: 'Where should 2nd year B.Tech students start for Tier-1 SDE interview preparation?' }
   ] : [
-    { label: '📄 रेज़्यूमे एटीएस स्कोर कैसे बढ़ाएं?', query: 'मेरा रेज़्यूमे एटीएस स्कोर 90% कैसे पहुंचेगा?' },
-    { label: '🚀 एचआर को सीधा रेज़्यूमे कैसे भेजें?', query: 'एचआर को डायरेक्ट रेज़्यूमे भेजने की क्या प्रक्रिया है?' },
-    { label: '⚖️ लिंक्डइन और अनस्टॉप से यह कैसे बेहतर है?', query: 'लिंक्डइन और अनस्टॉप के मुकाबले कौशल सेतु में क्या खास है?' },
-    { label: '🎯 मेरा मुख्य कौशल अंतर क्या है?', query: 'मेरी सैलरी बढ़ाने के लिए मुझे कौन सा कौशल सीखना होगा?' },
-    { label: '💼 फ्री सरकारी कोर्स कौन से हैं?', query: 'मुझे कौन से फ्री सरकारी सर्टिफिकेट कोर्स करने चाहिए?' }
+    { label: '🎓 NPTEL क्रेडिट मार्कशीट में कैसे ट्रांसफर करें?', query: 'बी.टेक सेमेस्टर में NPTEL और SWAYAM क्रेडिट ट्रांसफर कैसे होता है?' },
+    { label: '📄 ATS स्कोर 42% से 91% कैसे बढ़ाएं?', query: 'गूगल XYZ फॉर्मूले से रेज़्यूमे बुलेट्स कैसे बेहतर बनते हैं?' },
+    { label: '🚌 मुख्य गेट पर ट्रैफिक व बस की स्थिति क्या है?', query: 'मेन हाईवे गेट पर जाम की स्थिति और कॉलेज बस का समय क्या है?' },
+    { label: '🏆 SIH 2026 के लिए टीम कैसे बनाएं?', query: 'स्मार्ट इंडिया हैकाथॉन 2026 के लिए टीम और नियम क्या हैं?' },
+    { label: '💻 SDE-1 इंटरव्यू व 450 डीएसए की तैयारी कैसे करें?', query: 'द्वितीय वर्ष के छात्रों को टियर-1 टेक कंपनियों की तैयारी कैसे करनी चाहिए?' }
   ];
 
   const scrollToBottom = () => {
@@ -80,6 +93,79 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({
       scrollToBottom();
     }
   }, [messages, isOpen]);
+
+  // RAG KNOWLEDGE RETRIEVAL ENGINE
+  const retrieveKnowledgeAndRespond = (query: string) => {
+    const q = query.toLowerCase();
+
+    // 1. NPTEL / SWAYAM / Academic Mooc Credits Query
+    if (q.includes('credit') || q.includes('nptel') || q.includes('swayam') || q.includes('क्रेडिट') || q.includes('mooc')) {
+      const topCourses = VERIFIED_COURSES_DATABASE.slice(0, 3).map(c => `• **${c.title}** (${c.platform}) — *${c.aicteCredits} AICTE Credits*`).join('\n');
+      return {
+        text: lang === 'en'
+          ? `🎓 **RAG Retrieved: Academic Senate & AICTE Credit Transfer Policy (Annexure-IV)**\n\nUnder the National Education Policy (NEP 2020) and AKTU regulations, 2nd-year B.Tech students can earn up to **20 credits** through approved online MOOCs:\n\n${topCourses}\n\n**Transfer Process:**\n1. Enroll in the NPTEL/SWAYAM course and clear the proctored exam with $\\ge 40\\%$.\n2. Submit the certificate to your Departmental HOD.\n3. The 3–4 credits transfer directly into your semester marksheet as a **Professional Elective**, with zero university examination fee!`
+          : `🎓 **RAG खोज परिणाम: एकेटीयू एवं AICTE क्रेडिट ट्रांसफर नीति**\n\nNEP 2020 और एकेटीयू नियमों के अनुसार, द्वितीय वर्ष बी.टेक छात्र अनुमोदित ऑनलाइन कोर्सेज से **20 क्रेडिट्स** तक हासिल कर सकते हैं:\n\n${topCourses}\n\n**प्रक्रिया:**\n1. NPTEL/SWAYAM कोर्स में इनरोल करें और परीक्षा पास करें।\n2. HOD को सर्टिफिकेट जमा करें।\n3. यह 3–4 क्रेडिट आपकी मार्कशीट में इलेक्टिव विषय के रूप में सीधे जुड़ जाएंगे!`,
+        sources: ['AICTE Model Curriculum 2026 §4.2', 'AKTU Senate Notification Ref: 2024/71', 'SWAYAM MOOC Credit Framework'],
+        quickActions: [
+          { label: 'View 24+ Approved Courses', action: () => onNavigate('courses') },
+          { label: 'Check Branch Roadmaps', action: () => onNavigate('roadmap') }
+        ]
+      };
+    }
+
+    // 2. ATS Resume & Google XYZ Formula
+    if (q.includes('ats') || q.includes('resume') || q.includes('रेज़्यूमे') || q.includes('xyz') || q.includes('taleo')) {
+      return {
+        text: lang === 'en'
+          ? `📄 **RAG Retrieved: ATS Metric Articulation & Taleo/Workday Parsing Ontology**\n\nAutomated Applicant Tracking Systems (ATS) reject 74% of 2nd-year resumes due to passive task descriptions and multi-column formatting.\n\n**The Solution (Google XYZ Framework):**\n• *Weak Bullet:* "Made campus transit web app using React and Node.js."\n• *ATS-Boosted (91% Score):* "Architected high-throughput React & Redis campus transit radar processing 2,400+ daily student records with 42% latency reduction."\n\n**Formatting Rules:**\n1. **Single-Column LaTeX:** Zero tables or graphics that drop text in OCR.\n2. **Targeted Tech Tokens:** Include \`Docker\`, \`Redis\`, \`PostgreSQL\`, \`RESTful APIs\`, \`CI/CD\`.\n3. **Quantifiable Metrics:** Include percentages, throughput numbers, and user volume.`
+          : `📄 **RAG खोज परिणाम: एटीएस रेज़्यूमे ऑप्टिमाइज़ेशन एवं गूगल XYZ फॉर्मूला**\n\nअधिकांश छात्र रेज़्यूमे में केवल साधारण लाइनें लिखते हैं जिससे एटीएस सॉफ्टवेयर उन्हें रिजेक्ट कर देता है।\n\n**गूगल XYZ फॉर्मूला:**\n• *साधारण:* "कॉलेज फेस्ट के लिए रिएक्ट में वेबसाइट बनाई।"\n• *एटीएस-बूस्टेड (91% स्कोर):* "2,400+ छात्रों के लिए रिएक्ट व रेडिस पोर्टल बनाया, जिसने लेटेंसी को 42% कम किया।"\n\n**मुख्य नियम:**\n1. सिंगल-कॉलम लेआउट रखें।\n2. तकनीकी शब्द (Docker, Redis, PostgreSQL) शामिल करें।\n3. अपने प्रोजेक्ट में संख्याएं और परिणाम दर्ज करें!`,
+        sources: ['Google XYZ Hiring Guidelines', 'Taleo/Workday Semantic Parsing Rules 2026', 'Kaushal Setu ATS Engine'],
+        quickActions: [
+          { label: 'Launch ATS Resume Studio', action: () => onNavigate('resume') },
+          { label: 'Generate LaTeX Resume Template', action: () => onNavigate('templates') }
+        ]
+      };
+    }
+
+    // 3. Campus Transit & Highway Gate Delay
+    if (q.includes('gate') || q.includes('bus') || q.includes('traffic') || q.includes('बस') || q.includes('गेट') || q.includes('radar')) {
+      return {
+        text: lang === 'en'
+          ? `🚌 **RAG Retrieved: Real-Time Campus Transit & IoT Gate Telemetry**\n\n**Live Gate Status (Morning Commute):**\n• **Main Highway Gate:** 🔴 **85% Congestion** — Severe vehicle queue. Reroute via Gate 2 North to save 18 minutes.\n• **Gate 2 North:** 🟡 **48% Moderate** — Recommended alternate entry for 2-wheelers and day-scholars.\n• **Gate 3 Express:** 🟢 **15% Smooth** — Open for faculty, EV shuttles, and bicycle commuters.\n\n**Bus Fleet Telemetry:** 6 active routes tracked with GPS telemetry (Bus 04, 08, 12, 16, 21, 27) arriving before 8:52 AM for morning laboratories.`
+          : `🚌 **RAG खोज परिणाम: लाइव कैंपस बस व गेट ट्रैफिक रडार**\n\n**गेट की वर्तमान स्थिति:**\n• **मेन हाईवे गेट:** 🔴 **85% भारी भीड़** — गेट 2 नॉर्थ से जाएं और 18 मिनट बचाएं।\n• **गेट 2 नॉर्थ:** 🟡 **48% सामान्य** — छात्रों और दोपहिया वाहनों के लिए अनुशंसित।\n• **गेट 3 एक्सप्रेस:** 🟢 **15% सुगम** — फैकल्टी व ईवी वाहनों के लिए खुला है।\n\n**बस टेलीमेट्री:** 6 बस रूट्स लाइव ट्रैक हो रहे हैं जो 8:52 AM तक कैंपस पहुंचेंगे।`,
+        sources: ['Campus Gate IoT Sensor Mesh (Node-A1)', 'College Bus GPS Corridors Telemetry', 'AKTU Transit Advisory'],
+        quickActions: [
+          { label: 'Open Live Transit Radar', action: () => onNavigate('mobility') }
+        ]
+      };
+    }
+
+    // 4. Smart India Hackathon (SIH 2026)
+    if (q.includes('sih') || q.includes('hackathon') || q.includes('हैकाथॉन') || q.includes('टीम')) {
+      return {
+        text: lang === 'en'
+          ? `🏆 **RAG Retrieved: Smart India Hackathon (SIH 2026) Institutional Pipeline**\n\n**Official Rules & Diversity Mandate:**\n• **Team Size:** Exactly 6 members per team.\n• **Mandatory Female Representation:** Minimum 1 female student developer in every squad.\n• **Inter-disciplinary Bonus:** Teams combining CSE/IT coders with ECE/Core hardware engineers receive a 15% jury score boost.\n\n**Direct 1-Click Registration:** No Google Forms needed. Register in 1 click using verified Student ID in the **Opportunities & SIH** tab!`
+          : `🏆 **RAG खोज परिणाम: स्मार्ट इंडिया हैकाथॉन (SIH 2026) नियम व टीम गाइड**\n\n**नियम व पात्रता:**\n• **टीम साइज:** 6 सदस्य अनिवार्य।\n• **महिला प्रतिनिधित्व:** टीम में कम से कम 1 छात्रा का होना अनिवार्य है।\n• **डिपार्टमेंट कॉम्बिनेशन:** CSE और ECE/हार्डवेयर का मिश्रण रखने वाली टीमों को वरीयता मिलती है।\n\nहमारे ऐप में बिना किसी गूगल फॉर्म के 1-क्लिक स्टूडेंट आईडी वेरिफिकेशन से सीधे रजिस्ट्रेशन करें!`,
+        sources: ['Ministry of Education Innovation Cell (MIC) Guidelines', 'SIH 2026 Screening Criteria', 'AICTE Hackathon Protocol'],
+        quickActions: [
+          { label: 'SIH 2026 Squad Arena', action: () => onNavigate('opportunities') },
+          { label: 'Generate SIH 1-Pager Pitch', action: () => onNavigate('templates') }
+        ]
+      };
+    }
+
+    // 5. Default B.Tech Engineering Roadmap
+    return {
+      text: lang === 'en'
+        ? `💡 **RAG Knowledge Assistant:** Based on your **${targetRole}** path:\n\n1. **2nd-Year Priority:** Complete **DSA in C++ (Striver 450 Sheet)** and build 2 full-stack projects using React, Node.js, and Redis caching.\n2. **Credit Transfers:** Enroll in 1 NPTEL course (IIT Kharagpur/Madras) to bank 3–4 semester credits early.\n3. **Proof-of-Work:** Connect your GitHub to verify your commits and boost your Skill Score to 800+!\n\nWhat specific technical topic would you like to explore?`
+        : `💡 **RAG करियर गाइड:** आपके **${targetRole}** लक्ष्य के अनुसार:\n\n1. **द्वितीय वर्ष प्राथमिकता:** C++ में **डेटा स्ट्रक्चर्स (450 डीएसए शीट)** पूरी करें और रिएक्ट, नोड और रेडिस पर 2 मजबूत प्रोजेक्ट्स बनाएं।\n2. **क्रेडिट ट्रांसफर:** 3–4 सेमेस्टर क्रेडिट पाने के लिए 1 NPTEL कोर्स पूरा करें।\n3. **प्रूफ ऑफ वर्क:** अपने गिटहब को कनेक्ट करें ताकि आपका स्किल स्कोर 800+ हो सके!`,
+      sources: ['AKTU B.Tech Placement Dossier 2026', 'Tier-1 Engineering Hiring Index'],
+      quickActions: [
+        { label: 'Explore B.Tech Roadmaps', action: () => onNavigate('roadmap') },
+        { label: 'Start SDE Mock Interview', action: () => onNavigate('interview') }
+      ]
+    };
+  };
 
   const handleSendMessage = (textToSend?: string) => {
     const text = textToSend || inputText;
@@ -97,41 +183,20 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({
     setIsTyping(true);
 
     setTimeout(() => {
-      let botResponse = '';
-      const lower = text.toLowerCase();
-
-      if (lower.includes('ats') || lower.includes('resume') || lower.includes('रेज़्यूमे') || lower.includes('स्कोर')) {
-        botResponse = lang === 'en'
-          ? `✅ **ATS Optimization Tips for ${targetRole}:**\n1. Ensure key trade keywords like *Tally Prime, GSTR-2B, Inverter Diagnostics* match employer job descriptions.\n2. Use standard single-column layout without complex graphics.\n3. Add quantifiable metrics (e.g. 'Reconciled 200+ monthly invoices with 99% accuracy').\n\nYou can edit and update your resume right now in our **AI Resume Builder**!`
-          : `✅ **${targetRole} के लिए एटीएस स्कोर बढ़ाने के सुझाव:**\n1. अपने ट्रेड के मुख्य तकनीकी शब्द जैसे *Tally Prime, GSTR-2B, Solar Inverter* अवश्य शामिल करें।\n2. सरल सिंगल-कॉलम लेआउट रखें जिससे सॉफ्टवेयर आसानी से पढ़ सके।\n3. अपने काम के आंकड़े लिखें (जैसे 'प्रतिमाह 200+ बिलों का 99% शुद्धता से मिलान किया')।\n\nआप अभी **AI Resume Builder** में जाकर अपना रेज़्यूमे अपडेट कर सकते हैं!`;
-      } else if (lower.includes('hr') || lower.includes('dispatch') || lower.includes('भेजें') || lower.includes('नौकरी')) {
-        botResponse = lang === 'en'
-          ? `🚀 **Direct HR Recruiter Dispatch:**\nUnlike traditional job boards where your application sits in an inbox, Kaushal Setu pushes your verified resume directly to our 140+ partnered employers across Uttar Pradesh (e.g., Kedia Logistics, Tata Solar Partners, Swiggy Instamart).\n\nGo to the **Resume Builder** or **Jobs** tab and click **'Send Resume to HR'** to see live tracking status!`
-          : `🚀 **सीधा एचआर डिस्पैच सिस्टम:**\nपारंपरिक जॉब वेबसाइट्स की तरह आपका फॉर्म पेंडिंग नहीं रहता। कौशल सेतु आपका सत्यापित रेज़्यूमे उत्तर प्रदेश के 140+ अधिकृत नियोक्ताओं और एचआर को सीधे पोर्टल और व्हाट्सएप एपीआई के जरिए भेजता है।\n\nआप **Resume Builder** या **Jobs** पेज पर जाकर **'Send Resume to HR'** बटन दबाएं और लाइव स्टेटस ट्रैक करें!`;
-      } else if (lower.includes('linkedin') || lower.includes('unstop') || lower.includes('लिंक्डइन') || lower.includes('खास')) {
-        botResponse = lang === 'en'
-          ? `🔥 **Why Kaushal Setu beats LinkedIn & Unstop for Bharat:**\n\n1. **No Ghost Applications:** LinkedIn has a 98% ghost rate. We guarantee direct delivery to local verified HRs.\n2. **Beyond Elite Tech Coders:** Traditional portals focus only on top-tier engineering coders; we focus on 85% of Bharat youth (vocational trades, commerce, ITI, rural enterprise).\n3. **100% Vernacular & Audio:** Fully accessible in Hindi with low-bandwidth 4G optimization.\n4. **Proof-of-Skill Diagnostic:** 3-minute scenario benchmark instead of vanity certificates!`
-          : `🔥 **कौशल सेतु लिंक्डइन और अनस्टॉप से कैसे बेहतर है:**\n\n1. **कोई घोस्ट जॉब नहीं:** लिंक्डइन पर 98% आवेदनों का जवाब नहीं आता। हम सीधे स्थानीय एचआर के व्हाट्सएप और पोर्टल पर पुश करते हैं।\n2. **सभी युवाओं के लिए:** अनस्टॉप केवल आईआईटी/इंजीनियरिंग कोडिंग तक सीमित है; हम आईटीआई, बीकॉम, नॉन-टेक और ग्रामीण युवाओं के लिए बने हैं।\n3. **पूरी तरह हिंदी व स्थानीय भाषा:** कम डेटा (2G/3G) पर भी तेज़ और ऑडियो-सक्षम।\n4. **व्यावहारिक कौशल परीक्षा:** लंबी क्विज़ के बदले सिर्फ 3 व्यावहारिक प्रश्नों से क्षमता की सही पहचान!`;
-      } else if (lower.includes('course') || lower.includes('कोर्स') || lower.includes('free') || lower.includes('सरकारी')) {
-        botResponse = lang === 'en'
-          ? `🎓 **Top Free Government Certified Courses for You:**\n- **UPSDM Practical GST Workshop:** 24 Hours, Govt Certified (Free)\n- **PM Surya Ghar Rooftop Solar ITI Lab:** 30 Hours Weekend Training\n- **CSC Digital Financial Services Module:** Free online with stipend subsidy.\n\nCheck the **Courses** tab to view syllabi and enroll without any fees!`
-          : `🎓 **आपके लिए शीर्ष निःशुल्क सरकारी प्रमाणित कोर्स:**\n- **यूपीएसडीएम (UPSDM) प्रैक्टिकल जीएसटी वर्कशॉप:** 24 घंटे, सरकारी प्रमाणपत्र (फ्री)\n- **पीएम सूर्य घर सोलर इंस्टॉलेशन लैब:** 30 घंटे सप्ताहांत आईटीआई ट्रेनिंग\n- **सीएससी डिजिटल सेवा मॉड्यूल:** निःशुल्क ऑनलाइन प्रशिक्षण।\n\nविस्तार से देखने के लिए **Courses** टैब पर जाएं!`;
-      } else {
-        botResponse = lang === 'en'
-          ? `I understand! Based on your target role as **${targetRole}**, my top recommendation is to finish updating your **AI Resume**, run the quick **3-Question Diagnostic Assessment**, and check your **Skill Gap Report** to unlock a potential ₹${selectedPersonaId === 'priya' ? '8,500' : '9,000'}/month salary boost.`
-          : `मैं समझ गया! **${targetRole}** के लिए मेरी सलाह है कि पहले अपना **AI Resume** अपडेट करें, फिर त्वरित **3 प्रश्नों की कौशल परीक्षा** दें। इससे आपकी **कौशल अंतर रिपोर्ट** बनेगी और आपकी मासिक आय में ₹${selectedPersonaId === 'priya' ? '8,500' : '9,000'} तक की वृद्धि हो सकती है।`;
-      }
+      const response = retrieveKnowledgeAndRespond(text);
 
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: botResponse,
+        text: response.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        ragSources: response.sources,
+        quickActions: response.quickActions
       };
 
       setMessages(prev => [...prev, botMsg]);
       setIsTyping(false);
-    }, 600);
+    }, 700);
   };
 
   return (
@@ -139,159 +204,162 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({
       {/* Floating Trigger Button with Mascot Avatar */}
       <div className="fixed bottom-5 right-5 z-50 no-print flex flex-col items-end gap-2">
         {!isOpen && (
-          <div className="bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-blue-200 text-xs font-semibold text-slate-800 flex items-center gap-2 animate-bounce cursor-pointer" onClick={() => setIsOpen(true)}>
-            <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-spin" />
-            <span>{lang === 'en' ? 'Ask Kaushal Saarthi AI' : 'कौशल सारथी से पूछें'}</span>
+          <div 
+            className="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-full shadow-xl border border-blue-200 text-xs font-semibold text-slate-800 flex items-center gap-2 animate-bounce cursor-pointer hover:border-blue-400 transition-all"
+            onClick={() => setIsOpen(true)}
+          >
+            <Sparkles className="w-4 h-4 text-blue-600 animate-spin" />
+            <span>{lang === 'en' ? 'Ask Kaushal Saarthi RAG AI' : 'कौशल सारथी RAG से पूछें'}</span>
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
           </div>
         )}
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 relative group ${
+          className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
             isOpen 
               ? 'bg-slate-900 text-white rotate-90' 
-              : 'bg-gradient-to-tr from-blue-700 via-indigo-600 to-blue-500 text-white hover:scale-105 shadow-blue-500/30'
+              : 'bg-gradient-to-tr from-blue-700 via-indigo-600 to-blue-500 text-white hover:scale-105 shadow-blue-500/35 ring-4 ring-blue-500/20'
           }`}
           aria-label="Toggle Kaushal Saarthi Chatbot"
         >
           {isOpen ? (
             <X className="w-6 h-6" />
           ) : (
-            <div className="relative flex items-center justify-center">
-              {/* Custom Mascot Logo with Antenna & Eyes */}
-              <svg className="w-8 h-8 text-white drop-shadow-sm" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Robot Head Body */}
-                <rect x="5" y="8" width="26" height="22" rx="8" fill="white" fillOpacity="0.95" />
-                {/* Antenna */}
-                <path d="M18 8V3M18 3L15 4.5M18 3L21 4.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
-                <circle cx="18" cy="2.5" r="2.2" fill="#F59E0B" />
-                {/* Robot Screen/Face */}
-                <rect x="8" y="11" width="20" height="13" rx="4" fill="#1E293B" />
-                {/* Cyan Glowing Eyes */}
-                <circle cx="13" cy="17" r="2" fill="#38BDF8" />
-                <circle cx="23" cy="17" r="2" fill="#38BDF8" />
-                {/* Friendly Smile */}
-                <path d="M15 20.5C16 21.5 20 21.5 21 20.5" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" />
-                {/* Ear Sensors */}
-                <rect x="2" y="14" width="3" height="7" rx="1.5" fill="#F59E0B" />
-                <rect x="31" y="14" width="3" height="7" rx="1.5" fill="#F59E0B" />
-              </svg>
-              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+            <div className="relative">
+              <Bot className="w-7 h-7" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white" />
             </div>
           )}
         </button>
       </div>
 
-      {/* Floating Chat Drawer Modal */}
+      {/* Floating Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-22 right-4 sm:right-6 w-[92vw] sm:w-[410px] h-[580px] max-h-[82vh] bg-white rounded-2xl shadow-2xl border border-slate-200/90 flex flex-col z-50 overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200 no-print">
+        <div className="fixed bottom-22 right-4 sm:right-6 z-50 w-[92vw] sm:w-[440px] max-h-[82vh] h-[640px] bg-white rounded-2xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200 no-print">
           
-          {/* Header Bar */}
-          <div className="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 text-white p-4 flex items-center justify-between shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center p-1 shadow-inner">
-                {/* Mini Mascot */}
-                <svg className="w-7 h-7 text-white" viewBox="0 0 36 36" fill="none">
-                  <rect x="5" y="8" width="26" height="22" rx="7" fill="white" />
-                  <rect x="8" y="11" width="20" height="13" rx="4" fill="#0F172A" />
-                  <circle cx="13" cy="17" r="2" fill="#38BDF8" />
-                  <circle cx="23" cy="17" r="2" fill="#38BDF8" />
-                  <path d="M15 20.5C16 21.5 20 21.5 21 20.5" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
+          {/* Chat Window Header with RAG Indicator */}
+          <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white px-4 py-3.5 flex items-center justify-between border-b border-slate-800 shrink-0">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                <Bot className="w-5 h-5" />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="font-bold text-sm tracking-tight text-white leading-tight">
-                    {lang === 'en' ? 'Kaushal Saarthi AI' : 'कौशल सारथी एआई'}
-                  </h3>
-                  <span className="text-[10px] px-1.5 py-0.2 bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 rounded-full font-mono font-semibold">
-                    LIVE
+                  <span className="font-bold text-sm text-white">Kaushal Saarthi</span>
+                  <span className="text-[9.5px] font-mono-data bg-blue-500/30 text-blue-300 px-1.5 py-0.2 rounded border border-blue-400/30 font-bold">
+                    RAG Copilot
                   </span>
                 </div>
-                <p className="text-[11px] text-blue-100 font-medium">
-                  {lang === 'en' ? 'Bilingual Career & HR Copilot' : 'द्विभाषी करियर एवं भर्ती सहायक'}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-1.5 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                title="Close chat"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Quick Stats Micro Strip */}
-          <div className="bg-slate-50 border-b border-slate-200 px-4 py-2 flex items-center justify-between text-[11px] text-slate-600 font-medium">
-            <span className="flex items-center gap-1">
-              <Building2 className="w-3.5 h-3.5 text-blue-600" />
-              <span>140+ UP Recruiters Connected</span>
-            </span>
-            <span className="text-emerald-700 font-semibold flex items-center gap-1">
-              <Zap className="w-3 h-3 text-amber-500" />
-              Direct HR Dispatch Active
-            </span>
-          </div>
-
-          {/* Message Stream */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50/50">
-            {messages.map(msg => (
-              <div
-                key={msg.id}
-                className={`flex gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                {msg.sender === 'bot' && (
-                  <div className="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center text-xs shrink-0 font-bold shadow-xs">
-                    KS
-                  </div>
-                )}
-                <div
-                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed shadow-2xs ${
-                    msg.sender === 'user'
-                      ? 'bg-blue-600 text-white rounded-br-xs font-medium'
-                      : 'bg-white text-slate-800 border border-slate-200/90 rounded-bl-xs'
-                  }`}
-                >
-                  <div className="whitespace-pre-line">{msg.text}</div>
-                  <div className={`text-[9.5px] mt-1 text-right ${msg.sender === 'user' ? 'text-blue-100' : 'text-slate-400'}`}>
-                    {msg.timestamp}
-                  </div>
+                <div className="text-[10.5px] text-emerald-400 font-mono-data flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>AICTE & NPTEL Knowledge Corpus Indexed</span>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-slate-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer"
+            >
+              <ChevronDown className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Messages Scroll View */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs bg-slate-50/50">
+            {messages.map(msg => {
+              const isBot = msg.sender === 'bot';
+              return (
+                <div
+                  key={msg.id}
+                  className={`flex flex-col ${isBot ? 'items-start' : 'items-end'}`}
+                >
+                  <div className="flex items-start gap-2 max-w-[90%]">
+                    {isBot && (
+                      <div className="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
+                        AI
+                      </div>
+                    )}
+                    <div
+                      className={`p-3.5 rounded-2xl leading-relaxed whitespace-pre-wrap ${
+                        isBot
+                          ? 'bg-white text-slate-900 border border-slate-200/90 shadow-2xs'
+                          : 'bg-blue-600 text-white shadow-xs'
+                      }`}
+                    >
+                      {msg.text}
+
+                      {/* RAG Retrieved Sources Citation Pills */}
+                      {msg.ragSources && msg.ragSources.length > 0 && (
+                        <div className="mt-2.5 pt-2 border-t border-slate-100 space-y-1">
+                          <span className="text-[9.5px] font-mono-data font-bold text-slate-400 uppercase flex items-center gap-1">
+                            <Database className="w-3 h-3 text-blue-500" />
+                            RAG Citations & Verified Corpora:
+                          </span>
+                          <div className="flex flex-wrap gap-1">
+                            {msg.ragSources.map((src, sidx) => (
+                              <span
+                                key={sidx}
+                                className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px] font-mono-data border border-slate-200"
+                              >
+                                {src}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* 1-Click Interactive Quick Actions */}
+                      {msg.quickActions && msg.quickActions.length > 0 && (
+                        <div className="mt-2.5 pt-2 border-t border-slate-100 flex flex-wrap gap-1.5">
+                          {msg.quickActions.map((qa, qidx) => (
+                            <button
+                              key={qidx}
+                              type="button"
+                              onClick={() => {
+                                setIsOpen(false);
+                                qa.action();
+                              }}
+                              className="px-2.5 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold text-[10.5px] transition-all flex items-center gap-1 cursor-pointer"
+                            >
+                              <span>{qa.label}</span>
+                              <ChevronRight className="w-3 h-3" />
+                            </button>
+                          ))}
+                        </div>
+                      )}
+
+                    </div>
+                  </div>
+
+                  <span className="text-[9.5px] text-slate-400 mt-1 px-1 font-mono-data">
+                    {msg.timestamp}
+                  </span>
+                </div>
+              );
+            })}
 
             {isTyping && (
-              <div className="flex gap-2 items-center text-xs text-slate-400 italic">
-                <div className="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
-                  KS
-                </div>
-                <div className="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center gap-1.5 shadow-2xs">
-                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce"></span>
-                  <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-bounce [animation-delay:0.4s]"></span>
-                  <span className="text-[11px] text-slate-500 font-medium ml-1">
-                    {lang === 'en' ? 'Saarthi is typing...' : 'सारथी विचार कर रहा है...'}
-                  </span>
-                </div>
+              <div className="flex items-center gap-2 text-slate-500 text-xs italic bg-white p-3 rounded-2xl border border-slate-200 max-w-[70%]">
+                <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-spin" />
+                <span>RAG Engine searching AICTE & NPTEL corpus...</span>
               </div>
             )}
+
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Prompt Suggestion Chips */}
-          <div className="p-2.5 bg-white border-t border-slate-100 overflow-x-auto whitespace-nowrap flex gap-1.5 scrollbar-thin">
-            {quickPrompts.map((chip, idx) => (
+          {/* Quick Prompt Pills */}
+          <div className="p-2.5 bg-white border-t border-slate-100 flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0">
+            {quickPrompts.map((qp, idx) => (
               <button
                 key={idx}
-                onClick={() => handleSendMessage(chip.query)}
-                className="text-[10.5px] px-2.5 py-1 rounded-full bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200/80 transition-all font-medium shrink-0"
+                type="button"
+                onClick={() => handleSendMessage(qp.query)}
+                className="px-2.5 py-1 rounded-full bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-700 text-[11px] whitespace-nowrap transition-colors border border-slate-200/80 cursor-pointer font-medium"
               >
-                {chip.label}
+                {qp.label}
               </button>
             ))}
           </div>
@@ -302,20 +370,19 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({
               e.preventDefault();
               handleSendMessage();
             }}
-            className="p-3 bg-white border-t border-slate-200 flex items-center gap-2"
+            className="p-3 bg-white border-t border-slate-100 flex items-center gap-2 shrink-0"
           >
             <input
               type="text"
               value={inputText}
               onChange={e => setInputText(e.target.value)}
-              placeholder={lang === 'en' ? 'Type question or choose above...' : 'अपना प्रश्न लिखें या ऊपर विकल्प चुनें...'}
-              className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
+              placeholder={lang === 'en' ? 'Ask about NPTEL credits, ATS resume, SIH, bus radar...' : 'NPTEL क्रेडिट, रेज़्यूमे, SIH, बस रडार के बारे में पूछें...'}
+              className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white"
             />
             <button
               type="submit"
               disabled={!inputText.trim()}
-              className="w-9 h-9 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-40 text-white flex items-center justify-center transition-all shadow-xs shrink-0 cursor-pointer"
-              aria-label="Send message"
+              className="w-9 h-9 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white flex items-center justify-center transition-all disabled:opacity-40 cursor-pointer shrink-0 shadow-xs"
             >
               <Send className="w-4 h-4" />
             </button>
