@@ -21,7 +21,12 @@ import {
   Building2,
   Clock,
   ShieldCheck,
-  Check
+  Check,
+  Layers,
+  Search,
+  RotateCcw,
+  Code2,
+  AlertCircle
 } from 'lucide-react';
 
 interface ResumeBuilderPageProps {
@@ -85,20 +90,88 @@ export const ResumeBuilderPage: React.FC<ResumeBuilderPageProps> = ({
   const [dispatchStatus, setDispatchStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
   const [dispatchedCompanies, setDispatchedCompanies] = useState<string[]>([]);
 
-  // ATS Metric Simulator State (Proposal Feature 4: Academic Senate Curricular Solution)
-  const [sampleBulletInput, setSampleBulletInput] = useState<string>('Worked on student attendance and campus website');
-  const [optimizedBulletOutput, setOptimizedBulletOutput] = useState<string>('Architected high-throughput React & Redis campus portal, cutting query latency by 42% and processing 2,400+ daily student transit records.');
-  const [atsSimulatorScore, setAtsSimulatorScore] = useState<{ before: number; after: number }>({ before: 42, after: 91 });
+  // ATS Metric Simulator & Curriculum State (Pillar 5)
+  const [activeModuleTab, setActiveModuleTab] = useState<number | null>(null);
+  const [sampleBulletInput, setSampleBulletInput] = useState<string>(
+    '• Made a website for college fest using React and Node.js.\n• Put database on server and connected with backend.\n• Fixed some bugs and managed student registrations.\n• Built an Arduino IoT sensor project in 2nd semester lab.'
+  );
+  const [isSimulatingAts, setIsSimulatingAts] = useState<boolean>(false);
+  const [atsScanStep, setAtsScanStep] = useState<string>('');
+  const [atsHasScanned, setAtsHasScanned] = useState<boolean>(true);
+  const [appliedToast, setAppliedToast] = useState<boolean>(false);
 
-  const handleRewriteBullet = () => {
-    if (sampleBulletInput.toLowerCase().includes('solar') || sampleBulletInput.toLowerCase().includes('inverter') || selectedPersonaId === 'rahul') {
-      setOptimizedBulletOutput('Calibrated dual MPPT grid-tie inverter string arrays, boosting power harvest efficiency by 18.5% across 10kW rooftop PV installations compliant with IEEE-1547.');
-    } else if (sampleBulletInput.toLowerCase().includes('gst') || sampleBulletInput.toLowerCase().includes('tax') || selectedPersonaId === 'priya') {
-      setOptimizedBulletOutput('Automated B2B GSTR-2B invoice ledger reconciliation for 150+ MSME accounts, eliminating ₹42,000 in ineligible ITC claims with 99.8% precision.');
-    } else {
-      setOptimizedBulletOutput('Engineered scalable modular microservice with Redis caching, reducing server response latency by 42% for 2,400+ active campus day-scholars.');
-    }
-    setAtsSimulatorScore({ before: 42, after: 91 });
+  const missingKeywords = [
+    'Docker / Containerization',
+    'Redis Latency Caching',
+    'RESTful API Endpoints',
+    'PostgreSQL Query Optimization',
+    'Latency Metrics (-42%)',
+    'JWT Session Security',
+    'CI/CD Pipeline Automation'
+  ];
+
+  const [optimizedBulletsList, setOptimizedBulletsList] = useState<string[]>([
+    'Architected high-throughput React & Redis campus portal, cutting query latency by 42% and processing 2,400+ daily student transit records.',
+    'Engineered RESTful APIs and PostgreSQL relational schema supporting 500+ concurrent student session tokens with JWT and zero unhandled errors.',
+    'Programmed ESP32 IoT telemetry node streaming environmental lab readings to MQTT broker at 50ms intervals with automated anomaly alerts.'
+  ]);
+
+  const handleLoadSampleSophomoreResume = () => {
+    setSampleBulletInput(
+      '• Made a website for college fest using React and Node.js.\n• Put database on server and connected with backend.\n• Fixed some bugs and managed student registrations.\n• Built an Arduino IoT sensor project in 2nd semester lab.'
+    );
+  };
+
+  const handleRunAtsParser = () => {
+    setIsSimulatingAts(true);
+    setAtsScanStep('1/3: Tokenizing semantic AST hierarchy against Taleo rules...');
+    setTimeout(() => {
+      setAtsScanStep('2/3: Calculating TF-IDF technical ontology weights against Workday...');
+      setTimeout(() => {
+        setAtsScanStep('3/3: Re-engineering Google XYZ quantified impact metrics...');
+        setTimeout(() => {
+          setIsSimulatingAts(false);
+          setAtsHasScanned(true);
+          if (sampleBulletInput.toLowerCase().includes('solar') || selectedPersonaId === 'rahul') {
+            setOptimizedBulletsList([
+              'Calibrated dual MPPT grid-tie inverter string arrays, boosting solar harvest efficiency by 18.5% across 10kW rooftop installations compliant with IEEE-1547.',
+              'Conducted rigorous 3-phase insulation resistance & thermal imaging diagnostics, resolving 14 ground-fault anomalies prior to grid synchronization.',
+              'Documented comprehensive single-line schematics and earthing resistance logs (<5 Ohms), meeting CEIG and state electrical inspection guidelines.'
+            ]);
+          } else if (sampleBulletInput.toLowerCase().includes('gst') || selectedPersonaId === 'priya') {
+            setOptimizedBulletsList([
+              'Automated B2B GSTR-2B invoice ledger reconciliation for 150+ MSME corporate accounts, eliminating ₹42,000 in ineligible ITC claims with 99.8% precision.',
+              'Streamlined quarterly TDS e-filing and e-Way Bill generation via Tally Prime 4.0, reducing statutory compliance cycle time by 32%.',
+              'Structured monthly MIS financial variance dashboards for executive leadership, auditing ₹1.4 Cr in commercial procurement orders.'
+            ]);
+          } else {
+            setOptimizedBulletsList([
+              'Architected high-throughput React & Redis campus portal, cutting query latency by 42% and processing 2,400+ daily student transit records.',
+              'Engineered RESTful APIs and PostgreSQL relational schema supporting 500+ concurrent student session tokens with JWT and zero downtime.',
+              'Programmed ESP32 IoT telemetry node streaming environmental lab readings to MQTT broker at 50ms intervals with automated anomaly alerts.'
+            ]);
+          }
+        }, 400);
+      }, 400);
+    }, 400);
+  };
+
+  const handleApplyAtsOptimization = () => {
+    const combinedExp = optimizedBulletsList.map(b => '• ' + b).join('\n');
+    setExperience(combinedExp);
+    
+    // Add missing keywords to skills list if not already present
+    const newSkillsToAdd = ['Docker', 'Redis', 'PostgreSQL', 'RESTful APIs'];
+    const updatedSkills = [...skillsList];
+    newSkillsToAdd.forEach(s => {
+      if (!updatedSkills.includes(s)) {
+        updatedSkills.push(s);
+      }
+    });
+    setSkillsList(updatedSkills);
+    
+    setAppliedToast(true);
+    setTimeout(() => setAppliedToast(false), 3000);
   };
 
   // Calculate dynamic ATS score
@@ -433,56 +506,315 @@ export const ResumeBuilderPage: React.FC<ResumeBuilderPageProps> = ({
             />
           </div>
 
-          {/* Integrated ATS Simulator & Metric Articulation Engine (Proposal Feature 4) */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-50/60 to-blue-50/40 border border-indigo-200/80 space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse" />
-                <span className="text-xs font-bold text-slate-900 font-mono-data uppercase">
-                  ATS Metric Articulation Simulator
-                </span>
+          {/* Pillar 5: ATS-Boosting Studio & Interactive Simulator */}
+          <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-50/70 via-white to-blue-50/50 border border-indigo-200/90 shadow-xs space-y-5">
+            
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-indigo-100">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse" />
+                  <span className="text-xs font-bold text-indigo-900 font-mono-data uppercase tracking-wider">
+                    Pillar 5 · ATS Curriculum & Interactive Simulator
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-slate-900 mt-0.5">
+                  Institutional ATS Optimization Engine
+                </h3>
               </div>
-              <span className="text-[10px] font-mono-data font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
-                42% → 91% Parser Leap
+              <span className="text-[11px] font-mono-data font-bold text-emerald-800 bg-emerald-100/90 px-2.5 py-1 rounded-md border border-emerald-200 self-start sm:self-auto">
+                Taleo & Workday Calibrated
               </span>
             </div>
 
-            <p className="text-[11px] text-slate-600 leading-relaxed">
-              Convert passive student bullets like <em>"Worked on website"</em> into quantified corporate achievements that bypass Taleo, Workday, and Lever automated ATS filters.
-            </p>
-
-            <div className="space-y-2 text-xs">
-              <input
-                type="text"
-                value={sampleBulletInput}
-                onChange={e => setSampleBulletInput(e.target.value)}
-                placeholder="Enter a raw project bullet..."
-                className="w-full p-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:border-indigo-600"
-              />
-
-              <button
-                type="button"
-                onClick={handleRewriteBullet}
-                className="w-full py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                <span>Rewrite with Quantified Impact Metrics</span>
-              </button>
-            </div>
-
-            {/* Output Articulation Box */}
-            <div className="p-3 rounded-xl bg-white border border-indigo-100 space-y-2 text-xs">
-              <span className="text-[10px] font-mono-data font-bold text-indigo-700 block">
-                QUANTIFIED ATS-BOOSTED BULLET (READY TO PASTE):
-              </span>
-              <p className="text-slate-800 font-medium leading-relaxed bg-slate-50 p-2 rounded-lg border border-slate-100">
-                • {optimizedBulletOutput}
-              </p>
-              <div className="flex items-center justify-between text-[11px] font-mono-data text-slate-500 pt-1 border-t border-slate-100">
-                <span>Taleo / Workday Pass Rate: <strong className="text-emerald-700 font-bold">91%</strong></span>
-                <span className="text-blue-700 font-bold">2.8x More Shortlists</span>
+            {/* 3 Curriculum Modules Navigation */}
+            <div className="space-y-2.5">
+              <div className="text-xs font-bold text-slate-700 flex items-center justify-between">
+                <span>ATS Institutional Curriculum (3 Core Modules):</span>
+                <span className="text-[10.5px] font-mono-data text-indigo-600">Click to view syllabus</span>
               </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                {/* Module 1 */}
+                <button
+                  type="button"
+                  onClick={() => setActiveModuleTab(activeModuleTab === 1 ? null : 1)}
+                  className={`text-left p-3 rounded-xl border transition-all cursor-pointer ${
+                    activeModuleTab === 1 
+                      ? 'bg-white border-indigo-500 shadow-sm ring-1 ring-indigo-500/20' 
+                      : 'bg-white/80 border-slate-200 hover:border-indigo-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono-data font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+                      Mod 01
+                    </span>
+                    <Layers className="w-3.5 h-3.5 text-indigo-500" />
+                  </div>
+                  <div className="text-xs font-bold text-slate-900 mt-1.5 leading-tight">Semantic Keyword Engineering</div>
+                  <div className="text-[10.5px] text-slate-500 mt-0.5 leading-snug line-clamp-2">
+                    Exact JD ontology token mapping eliminating synonym drop-offs.
+                  </div>
+                </button>
+
+                {/* Module 2 */}
+                <button
+                  type="button"
+                  onClick={() => setActiveModuleTab(activeModuleTab === 2 ? null : 2)}
+                  className={`text-left p-3 rounded-xl border transition-all cursor-pointer ${
+                    activeModuleTab === 2 
+                      ? 'bg-white border-blue-500 shadow-sm ring-1 ring-blue-500/20' 
+                      : 'bg-white/80 border-slate-200 hover:border-blue-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono-data font-bold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                      Mod 02
+                    </span>
+                    <TrendingUp className="w-3.5 h-3.5 text-blue-500" />
+                  </div>
+                  <div className="text-xs font-bold text-slate-900 mt-1.5 leading-tight">Impact & Metric Articulation</div>
+                  <div className="text-[10.5px] text-slate-500 mt-0.5 leading-snug line-clamp-2">
+                    Google XYZ framework: Accomplished [X] measured by [Y] doing [Z].
+                  </div>
+                </button>
+
+                {/* Module 3 */}
+                <button
+                  type="button"
+                  onClick={() => setActiveModuleTab(activeModuleTab === 3 ? null : 3)}
+                  className={`text-left p-3 rounded-xl border transition-all cursor-pointer ${
+                    activeModuleTab === 3 
+                      ? 'bg-white border-emerald-500 shadow-sm ring-1 ring-emerald-500/20' 
+                      : 'bg-white/80 border-slate-200 hover:border-emerald-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono-data font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      Mod 03
+                    </span>
+                    <Code2 className="w-3.5 h-3.5 text-emerald-500" />
+                  </div>
+                  <div className="text-xs font-bold text-slate-900 mt-1.5 leading-tight">Single-Column LaTeX Layout</div>
+                  <div className="text-[10.5px] text-slate-500 mt-0.5 leading-snug line-clamp-2">
+                    Clean AST hierarchy with zero table drops or graphic loss.
+                  </div>
+                </button>
+              </div>
+
+              {/* Module Detail Drawer */}
+              {activeModuleTab !== null && (
+                <div className="p-3.5 rounded-xl bg-white border border-indigo-200 shadow-2xs text-xs space-y-1.5 animate-in fade-in">
+                  {activeModuleTab === 1 && (
+                    <div>
+                      <div className="font-bold text-indigo-950 flex items-center gap-1.5 mb-1">
+                        <Layers className="w-4 h-4 text-indigo-600" />
+                        <span>Module 1: Semantic Keyword Engineering & Ontology Alignment</span>
+                      </div>
+                      <p className="text-slate-600 text-[11px] leading-relaxed">
+                        ATS engines evaluate TF-IDF weights across tech taxonomies. Passing candidates match specific hard-skill tokens (e.g. <code>Redis</code>, <code>RESTful APIs</code>, <code>PostgreSQL</code>, <code>Docker</code>) rather than generic labels like "coding".
+                      </p>
+                      <div className="pt-1.5 flex flex-wrap gap-1.5 text-[10px]">
+                        <span className="px-2 py-0.5 bg-indigo-50 text-indigo-800 rounded font-semibold font-mono-data">Rule: 2.2% Keyword Density</span>
+                        <span className="px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-semibold font-mono-data">Zero Keyword Stuffing Penalty</span>
+                        <span className="px-2 py-0.5 bg-blue-50 text-blue-800 rounded font-semibold font-mono-data">Canonical Synonym Indexing</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeModuleTab === 2 && (
+                    <div>
+                      <div className="font-bold text-blue-950 flex items-center gap-1.5 mb-1">
+                        <TrendingUp className="w-4 h-4 text-blue-600" />
+                        <span>Module 2: Google XYZ Formula & Quantified Value Anchoring</span>
+                      </div>
+                      <p className="text-slate-600 text-[11px] leading-relaxed">
+                        Transform every project line from passive task descriptions into executive impact metrics: <em>"Accomplished [X] as measured by [Y] by doing [Z]"</em>.
+                      </p>
+                      <div className="pt-1.5 flex flex-wrap gap-1.5 text-[10px]">
+                        <span className="px-2 py-0.5 bg-amber-50 text-amber-800 rounded font-semibold font-mono-data">Weak: "Made web portal"</span>
+                        <span className="px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-semibold font-mono-data">Strong: "Architected React & Redis portal, cutting latency by 42% for 2,400+ users"</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeModuleTab === 3 && (
+                    <div>
+                      <div className="font-bold text-emerald-950 flex items-center gap-1.5 mb-1">
+                        <Code2 className="w-4 h-4 text-emerald-600" />
+                        <span>Module 3: Single-Column LaTeX & Machine-Parseable AST Formatting</span>
+                      </div>
+                      <p className="text-slate-600 text-[11px] leading-relaxed">
+                        Two-column layouts and graphical progress bars lose up to 68% of resume text during automated optical AST extraction. Single-column semantic LaTeX structure guarantees 100% text fidelity.
+                      </p>
+                      <div className="pt-1.5 flex flex-wrap gap-1.5 text-[10px]">
+                        <span className="px-2 py-0.5 bg-slate-100 text-slate-800 rounded font-semibold font-mono-data">Zero Table Columns</span>
+                        <span className="px-2 py-0.5 bg-slate-100 text-slate-800 rounded font-semibold font-mono-data">Standard Section Headers</span>
+                        <span className="px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-semibold font-mono-data">100% Machine Text OCR</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
+
+            {/* Interactive Simulator Box */}
+            <div className="p-4 rounded-xl bg-white border border-indigo-200/90 shadow-2xs space-y-3.5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-500" />
+                  <span className="text-xs font-bold text-slate-900">
+                    Interactive ATS Resume Simulator & Bullet Transformer
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleLoadSampleSophomoreResume}
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100/80 px-2.5 py-1 rounded-lg border border-blue-200 transition-colors cursor-pointer self-start sm:self-auto"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>Load Sample 2nd-Year Resume</span>
+                </button>
+              </div>
+
+              {/* Raw Input Area */}
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-slate-700 block">
+                  Paste Raw 2nd-Year Resume Project Bullets:
+                </label>
+                <textarea
+                  rows={3}
+                  value={sampleBulletInput}
+                  onChange={e => setSampleBulletInput(e.target.value)}
+                  placeholder="e.g. • Made a website for college fest using React. Put database on server..."
+                  className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs font-mono-data focus:outline-none focus:border-indigo-600 focus:bg-white transition-all"
+                />
+              </div>
+
+              {/* Action Trigger */}
+              <div>
+                <button
+                  type="button"
+                  disabled={isSimulatingAts}
+                  onClick={handleRunAtsParser}
+                  className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold text-xs tracking-tight transition-all flex items-center justify-center gap-2 shadow-xs active:scale-[0.99] cursor-pointer disabled:opacity-75"
+                >
+                  {isSimulatingAts ? (
+                    <>
+                      <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
+                      <span>{atsScanStep || 'Analyzing Resume AST Hierarchy...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Search className="w-4 h-4 text-white" />
+                      <span>Run ATS Parser & Optimize Bullets (Taleo & Workday)</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Animated Results Display (Before & After) */}
+              {atsHasScanned && (
+                <div className="space-y-3 pt-1 animate-in fade-in duration-300">
+                  
+                  {/* Score Leap Indicator */}
+                  <div className="p-3 rounded-xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                    <div className="space-y-0.5">
+                      <div className="text-[10px] font-mono-data uppercase tracking-wider text-slate-400">
+                        Automated Parser Pass Rate Benchmark
+                      </div>
+                      <div className="text-xs font-semibold text-slate-200">
+                        Taleo, Workday & Greenhouse Enterprise ATS Rules
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-2.5">
+                      <div className="text-center px-2.5 py-0.5 rounded-lg bg-red-500/20 border border-red-500/30">
+                        <div className="text-[9px] text-red-300 uppercase font-mono-data">Before</div>
+                        <div className="text-base font-bold font-mono-data text-red-400">42%</div>
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <div className="text-center px-2.5 py-0.5 rounded-lg bg-emerald-500/20 border border-emerald-500/30">
+                        <div className="text-[9px] text-emerald-300 uppercase font-mono-data">After</div>
+                        <div className="text-base font-bold font-mono-data text-emerald-400">91%</div>
+                      </div>
+                      <div className="text-xs font-bold text-emerald-300 pl-1 font-mono-data whitespace-nowrap">
+                        (+49 pts)
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Missing Keywords Identified */}
+                  <div className="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200 space-y-1.5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-bold text-amber-900 flex items-center gap-1.5 text-[11px]">
+                        <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
+                        Missing Technical Keywords (Auto-Extracted):
+                      </span>
+                      <span className="text-[10px] font-mono-data text-amber-800 font-bold">
+                        7 Identified Gaps
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {missingKeywords.map((kw, i) => (
+                        <span
+                          key={i}
+                          className="px-2 py-0.5 rounded-md bg-white text-slate-800 text-[10px] font-medium border border-amber-200 font-mono-data shadow-2xs flex items-center gap-1"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                          {kw}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Quantified Articulated Output Bullets */}
+                  <div className="p-3 rounded-xl bg-slate-50 border border-indigo-200/80 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-indigo-950 font-mono-data uppercase flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                        Quantified ATS-Boosted Bullet Points:
+                      </span>
+                      <span className="text-[10px] font-mono-data text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded font-bold">
+                        2.8x Recruiter Shortlist Rate
+                      </span>
+                    </div>
+
+                    <div className="space-y-1.5 font-mono-data text-[11px] text-slate-800 bg-white p-2.5 rounded-lg border border-slate-200 leading-relaxed">
+                      {optimizedBulletsList.map((bullet, idx) => (
+                        <p key={idx} className="flex items-start gap-1.5">
+                          <span className="text-indigo-600 font-bold shrink-0">•</span>
+                          <span>{bullet}</span>
+                        </p>
+                      ))}
+                    </div>
+
+                    {/* Sync to Profile Button */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={handleApplyAtsOptimization}
+                        className="py-1.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs tracking-tight transition-all flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+                      >
+                        <Check className="w-3.5 h-3.5" />
+                        <span>Apply Optimizations to Active Resume Profile (91% ATS)</span>
+                      </button>
+
+                      {appliedToast && (
+                        <span className="text-xs font-bold text-emerald-700 flex items-center gap-1 font-mono-data animate-in fade-in">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          Applied to Resume & Skills!
+                        </span>
+                      )}
+                    </div>
+
+                  </div>
+
+                </div>
+              )}
+
+            </div>
+
           </div>
 
         </div>

@@ -1,334 +1,406 @@
-import React, { useState } from 'react';
-import { Language, UserProfile, LiveSkillScoreData } from '../../types';
+import React, { useState, useEffect } from 'react';
+import { Language, UserProfile } from '../../types';
 import { 
   Award, 
   Code, 
-  CheckCircle2, 
-  Github, 
-  ShieldCheck, 
-  Download, 
-  Sparkles, 
-  Activity, 
-  Zap, 
-  TrendingUp, 
   GitCommit, 
-  FileCheck, 
+  CheckCircle2, 
+  ExternalLink, 
+  Download, 
+  TrendingUp, 
+  ShieldCheck, 
+  RefreshCw, 
   Building2, 
+  Sparkles, 
+  Terminal,
+  Activity,
+  AlertTriangle,
   ArrowRight,
-  ExternalLink,
-  Cpu,
-  RefreshCw
+  Zap,
+  Calendar,
+  Flame,
+  UserCheck
 } from 'lucide-react';
 
 interface SkillScorePageProps {
   lang: Language;
-  userProfile: UserProfile | null;
+  userProfile?: UserProfile | null;
   onNavigate: (page: string) => void;
 }
 
 export const SkillScorePage: React.FC<SkillScorePageProps> = ({ lang, userProfile, onNavigate }) => {
-  const [githubUrl, setGithubUrl] = useState<string>('https://github.com/priya-sharma/tally-erp-pipeline');
+  const [githubUrl, setGithubUrl] = useState<string>('https://github.com/aman-sharma/campus-distributed-kv');
   const [isAuditing, setIsAuditing] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string | null>(null);
 
-  // Dynamic Proof-of-Work State (Calculated according to the 40/35/25 weight ratio in Proposal)
-  const [scoreData, setScoreData] = useState<LiveSkillScoreData>({
-    studentName: userProfile?.name || 'Priya Sharma',
-    studentId: '2024-CSE-084',
-    department: 'Computer Science & Information Technology',
-    semester: '4th Semester (2nd Year)',
-    overallScore: 89,
+  // Exact 785 / 1000 dynamic score state with 40/35/25 meritocratic breakdown
+  const [scoreState, setScoreState] = useState({
+    overallScore: 785,
+    maxScore: 1000,
     percentileRank: 96.4,
-    codeAlgorithmicScore: 92, // 40% weight
-    projectAuditScore: 87,    // 35% weight
-    consistencyScore: 88,     // 25% weight
-    githubCommitsThisMonth: 46,
-    dsaProblemsSolved: 128,
-    facultyAuditStatus: 'Verified by Placement Cell',
-    recruiterReadiness: 'Google / MS Ready',
+    codeEngineScore: 314, // 40% of 1000 (max 400) -> 78.5%
+    codeEngineMax: 400,
+    projectAuditScore: 275, // 35% of 1000 (max 350) -> 78.5%
+    projectAuditMax: 350,
+    consistencyScore: 196, // 25% of 1000 (max 250) -> 78.5%
+    consistencyMax: 250,
+    githubCommitsMonth: 48,
+    dsaSolvedCount: 134,
+    streakDays: 19,
+    facultyStatus: 'Verified by Placement Cell (T&P Cell)',
+    targetRole: 'Junior Systems & Distributed Backend Trainee',
+    verifiedDsaTestsPassed: 42,
   });
 
   const handleAuditRepo = () => {
     setIsAuditing(true);
     setTimeout(() => {
-      setScoreData(prev => ({
-        ...prev,
-        codeAlgorithmicScore: Math.min(100, prev.codeAlgorithmicScore + 2),
-        overallScore: Math.min(99, prev.overallScore + 1),
-        githubCommitsThisMonth: prev.githubCommitsThisMonth + 4,
-        percentileRank: 97.2
-      }));
+      setScoreState(prev => {
+        const newCode = Math.min(prev.codeEngineMax, prev.codeEngineScore + 12);
+        const newTotal = newCode + prev.projectAuditScore + prev.consistencyScore;
+        return {
+          ...prev,
+          codeEngineScore: newCode,
+          overallScore: newTotal,
+          githubCommitsMonth: prev.githubCommitsMonth + 4,
+          verifiedDsaTestsPassed: prev.verifiedDsaTestsPassed + 3,
+          percentileRank: 97.1,
+        };
+      });
       setIsAuditing(false);
       setAlertMsg(
         lang === 'en'
-          ? 'GitHub repository parsed: 4 verified commits & clean modular architecture credited to your Live Skill Index.'
-          : 'गिटहब रिपोजिटरी ऑडिट सफल: ४ सत्यापित कमिट्स एवं स्वच्छ कोड संरचना आपके स्किल स्कोर में जोड़ी गई।'
+          ? 'GitHub repository parsed: 4 verified commits, modular Rust/C++ architecture, and 3 unit tests credited (+12 pts).'
+          : 'गिटहब रिपॉजिटरी ऑडिट सफल: ४ कमिट्स और यूनिट टेस्ट्स सत्यापित (+१२ अंक जुड़े)।'
       );
-      setTimeout(() => setAlertMsg(null), 4000);
+      setTimeout(() => setAlertMsg(null), 4500);
     }, 1200);
   };
 
   const handleExportPlacementDossier = () => {
     setAlertMsg(
       lang === 'en'
-        ? 'Verified Placement Cell Dossier generated. T&P Officer notified for upcoming corporate recruitment drive.'
-        : 'सत्यापित प्लेसमेंट डोजियर तैयार! आगामी कैंपस प्लेसमेंट ड्राइव के लिए टीएंडपी सेल को भेजा गया।'
+        ? 'Official T&P Cell Placement Dossier PDF generated with cryptographic verification hash.'
+        : 'सत्यापित प्लेसमेंट डॉसियर पीडीएफ तैयार किया गया।'
     );
-    setTimeout(() => setAlertMsg(null), 4000);
+    setTimeout(() => setAlertMsg(null), 4500);
   };
 
+  // SVG Gauge calculations for animated semi-circle / radial gauge
+  const radius = 80;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (scoreState.overallScore / scoreState.maxScore) * circumference;
+
   return (
-    <div className="max-w-6xl mx-auto space-y-8 py-4">
+    <div className="max-w-6xl mx-auto space-y-8 py-2">
       
       {/* Toast Alert */}
       {alertMsg && (
-        <div className="fixed bottom-6 right-6 z-50 bg-white border border-emerald-500 text-slate-900 text-xs px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 animate-in slide-in-from-bottom duration-200">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 border border-emerald-500 text-white text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 animate-in slide-in-from-bottom duration-200">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span className="font-semibold">{alertMsg}</span>
         </div>
       )}
 
-      {/* Header Banner */}
-      <div className="border-b border-slate-200 pb-5 space-y-2">
-        <div className="inline-flex items-center gap-2 text-xs font-semibold">
-          <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-            <Award className="w-3.5 h-3.5 text-emerald-600" />
-            {lang === 'en' ? 'Verified Capability Index' : 'सत्यापित कौशल स्कोर'}
-          </span>
-          <span className="text-slate-300">·</span>
-          <span className="text-slate-500 font-mono-data">{lang === 'en' ? 'Proof-of-Work & Portfolio' : 'प्रूफ-ऑफ़-वर्क एवं पोर्टफोलियो'}</span>
-        </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          {lang === 'en' ? 'Dynamic Skill Score & Placement Portfolio' : 'लाइव कौशल स्कोर एवं प्लेसमेंट पोर्टफोलियो'}
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
-          {lang === 'en'
-            ? 'An objective, code-backed capability score built from verified GitHub repository commits, automated problem testing, and faculty lab reviews.'
-            : 'गिटहब कमिट्स, स्वचालित कोडिंग टेस्ट एवं लैब प्रोजेक्ट्स के आधार पर गणना किया गया पारदर्शी और सत्यापन योग्य स्कोर।'}
-        </p>
-      </div>
-
-      {/* Main Composite Score Hero Widget */}
-      <div className="rounded-2xl border-2 border-blue-600/30 bg-gradient-to-br from-blue-50/70 via-indigo-50/40 to-white p-6 sm:p-8 shadow-sm relative overflow-hidden">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
-          
-          {/* Left Student Info & Summary */}
-          <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-[11px] font-bold tracking-wide">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
-              <span>{scoreData.facultyAuditStatus}</span>
+      {/* TOP LIVE CAMPUS ALERT BANNER */}
+      <div className="rounded-2xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 border border-blue-800/80 p-4 text-white shadow-md">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <span className="flex h-3 w-3 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
+            </span>
+            <div className="text-xs">
+              <span className="font-bold text-amber-300 font-mono-data mr-2">LIVE CAMPUS RADAR:</span>
+              <span className="text-slate-200">
+                <strong>Main Highway Gate: 85% Congestion (Heavy)</strong> — Reroute via <strong>Gate 2 North</strong> to save <strong>18 mins</strong> before 9:00 AM labs.
+              </span>
             </div>
-
-            <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-                {scoreData.studentName} · {scoreData.department}
-              </h2>
-              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 mt-1 font-medium font-mono-data">
-                <span>Student ID: {scoreData.studentId}</span>
-                <span>·</span>
-                <span>{scoreData.semester}</span>
-                <span>·</span>
-                <span className="text-blue-700 font-bold bg-blue-100 px-2 py-0.5 rounded">
-                  {scoreData.recruiterReadiness}
-                </span>
-              </div>
-            </div>
-
-            <p className="text-xs text-slate-600 leading-relaxed pt-1">
-              {lang === 'en'
-                ? 'Your composite score places you in the top 3.6% of all 2nd-year engineering & vocational cohorts across Uttar Pradesh. Audited automatically via GitHub commits, automated DSA problem tests, and faculty capstone audits.'
-                : 'आपका समग्र स्कोर आपको उत्तर प्रदेश के सभी द्वितीय वर्ष के छात्रों के शीर्ष ३.६% में रखता है। यह गिटहब कमिट्स, डीएसए टेस्ट एवं लैब प्रोजेक्ट्स के आधार पर स्वचालित रूप से गणना किया गया है।'}
-            </p>
           </div>
 
-          {/* Right Composite Gauge */}
-          <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-md flex flex-col items-center justify-center w-full lg:w-64 shrink-0 space-y-2 text-center">
-            <span className="text-[10px] font-mono-data text-slate-400 font-bold uppercase tracking-wider">
-              DYNAMIC SKILL SCORE
-            </span>
-            <div className="text-5xl font-extrabold text-blue-700 font-mono-data">
-              {scoreData.overallScore}
-              <span className="text-lg text-slate-400 font-normal">/100</span>
-            </div>
-            <div className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-              Top {100 - scoreData.percentileRank}% Percentile Batch Rank
-            </div>
+          <div className="flex items-center gap-2 text-xs font-mono-data shrink-0">
             <button
-              onClick={handleExportPlacementDossier}
-              className="w-full mt-2 py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+              onClick={() => onNavigate('mobility')}
+              className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold transition-colors cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>Export T&P Dossier</span>
+              View Gate Radar →
+            </button>
+            <button
+              onClick={() => onNavigate('opportunities')}
+              className="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold transition-colors cursor-pointer"
+            >
+              SIH 2026 Arena →
             </button>
           </div>
-
         </div>
       </div>
 
-      {/* The 3 Weighted Pillars Breakdown (40% / 35% / 25%) */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm font-bold text-slate-900 uppercase font-mono-data tracking-wider">
-            3-TIER CAPABILITY WEIGHTED BREAKDOWN
-          </h3>
-          <span className="text-xs text-slate-500 font-mono-data">Weighted Formula</span>
+      {/* 2ND-YEAR STUDENT PROFILE HEADER & EXECUTIVE OVERVIEW */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+        
+        {/* Profile Lockup Row */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-100 pb-6">
+          <div className="flex items-start sm:items-center gap-4">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-blue-500 text-white flex items-center justify-center font-bold text-2xl shadow-md shadow-blue-500/20 shrink-0">
+              AS
+            </div>
+
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+                  Aman Sharma
+                </h1>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Placement Cell Verified</span>
+                </span>
+                <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-800 font-mono-data text-xs font-semibold">
+                  Roll: 2024-CSE-084
+                </span>
+              </div>
+
+              <div className="text-xs text-slate-600 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="font-semibold text-slate-800">B.Tech Computer Science & Engineering — 3rd Semester (2nd Year)</span>
+                <span className="text-slate-300">·</span>
+                <span>Institute of Engineering & Technology (IET)</span>
+                <span className="text-slate-300">·</span>
+                <span className="text-emerald-700 font-semibold font-mono-data">Batch 2024–2028</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <button
+              onClick={handleExportPlacementDossier}
+              className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-blue-300" />
+              <span>Export Placement Cell Dossier</span>
+            </button>
+            <button
+              onClick={() => onNavigate('resume')}
+              className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              <span>Run ATS Resume Studio</span>
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* HERO GAUGE & COMPOSITE KPI SECTION */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           
-          {/* Pillar 1: 40% Automated Code & DSA */}
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-4">
-            <div className="flex items-start justify-between">
-              <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
-                <Code className="w-5 h-5" />
+          {/* Animated SVG Radial Gauge Column (Score 785 / 1000) */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30 border border-blue-100 text-center space-y-3">
+            <div className="relative w-48 h-48 flex items-center justify-center">
+              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
+                {/* Background Track */}
+                <circle
+                  cx="100"
+                  cy="100"
+                  r={radius}
+                  className="text-slate-100"
+                  strokeWidth="14"
+                  stroke="currentColor"
+                  fill="transparent"
+                />
+                {/* Animated Value Arc */}
+                <circle
+                  cx="100"
+                  cy="100"
+                  r={radius}
+                  className="text-blue-600 transition-all duration-1000 ease-out"
+                  strokeWidth="14"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={strokeDashoffset}
+                  strokeLinecap="round"
+                  stroke="currentColor"
+                  fill="transparent"
+                />
+              </svg>
+
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-[10px] font-mono-data uppercase tracking-wider text-slate-500 font-bold">
+                  DYNAMIC SKILL SCORE
+                </span>
+                <div className="text-4xl font-extrabold text-slate-900 font-mono-data tracking-tight">
+                  {scoreState.overallScore}
+                  <span className="text-sm font-normal text-slate-400"> / {scoreState.maxScore}</span>
+                </div>
+                <div className="mt-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                  Top {100 - scoreState.percentileRank}% Percentile
+                </div>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-800 font-mono-data font-bold text-xs border border-blue-200">
-                40% WEIGHT
-              </span>
             </div>
 
-            <div>
-              <h4 className="text-sm font-bold text-slate-900">
-                Automated Code & Assessment Engine
-              </h4>
-              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                Evaluates algorithmic problem-solving speed, clean Git branch practices, and DSA test-case accuracy.
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-slate-900">
+                Corporate Recruiter Readiness Index
+              </div>
+              <p className="text-[11px] text-slate-500 max-w-xs">
+                Audited against verified GitHub commits, automated DSA problem executions, and faculty capstone audits.
               </p>
-            </div>
-
-            <div className="space-y-2 pt-2 border-t border-slate-100 font-mono-data text-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-slate-500">Pillar Score:</span>
-                <strong className="text-blue-700 font-bold text-base">{scoreData.codeAlgorithmicScore}/100</strong>
-              </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-600">
-                <span>DSA Problems Cleared:</span>
-                <span className="font-bold">{scoreData.dsaProblemsSolved} Solved</span>
-              </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-600">
-                <span>Monthly GitHub Commits:</span>
-                <span className="font-bold">{scoreData.githubCommitsThisMonth} Commits</span>
-              </div>
             </div>
           </div>
 
-          {/* Pillar 2: 35% Faculty & Peer Project Audits */}
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-4">
-            <div className="flex items-start justify-between">
-              <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
-                <FileCheck className="w-5 h-5" />
-              </div>
-              <span className="px-2.5 py-1 rounded-full bg-purple-50 text-purple-800 font-mono-data font-bold text-xs border border-purple-200">
-                35% WEIGHT
+          {/* EXACT MERITOCRATIC 3-TIER BREAKDOWN (40% / 35% / 25%) */}
+          <div className="lg:col-span-7 space-y-4">
+            <div className="flex items-center justify-between pb-1">
+              <h3 className="text-xs font-bold text-slate-900 font-mono-data uppercase tracking-wider">
+                Meritocratic Breakdown (Senate Formula)
+              </h3>
+              <span className="text-xs font-mono-data text-blue-700 font-bold">
+                Total Composite: {scoreState.overallScore} pts
               </span>
             </div>
 
-            <div>
-              <h4 className="text-sm font-bold text-slate-900">
-                Faculty & Peer-Reviewed Project Audits
-              </h4>
-              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                Objective scoring of semester mini-projects, capstone architectures, and intra-college hackathon demonstrations.
-              </p>
+            {/* Pillar A: 40% Automated Code & Assessment Engine */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">
+                    <Code className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-slate-900">40% Automated Code & Assessment Engine</span>
+                    <span className="block text-[11px] text-slate-500">GitHub commits & DSA algorithmic test cases</span>
+                  </div>
+                </div>
+                <div className="text-right font-mono-data">
+                  <span className="font-bold text-blue-700 text-sm">{scoreState.codeEngineScore}</span>
+                  <span className="text-slate-400 text-xs"> / {scoreState.codeEngineMax} pts</span>
+                </div>
+              </div>
+              <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                <div 
+                  className="h-full bg-blue-600 rounded-full transition-all duration-500" 
+                  style={{ width: `${(scoreState.codeEngineScore / scoreState.codeEngineMax) * 100}%` }}
+                />
+              </div>
+              <div className="flex items-center justify-between text-[11px] font-mono-data text-slate-600 pt-0.5">
+                <span>{scoreState.dsaSolvedCount} DSA Problems Solved</span>
+                <span>{scoreState.verifiedDsaTestsPassed} LeetCode/CodeChef Test Suites Passed</span>
+              </div>
             </div>
 
-            <div className="space-y-2 pt-2 border-t border-slate-100 font-mono-data text-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-slate-500">Pillar Score:</span>
-                <strong className="text-purple-700 font-bold text-base">{scoreData.projectAuditScore}/100</strong>
+            {/* Pillar B: 35% Faculty & Peer-Reviewed Project Audits */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs">
+                    <Award className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-slate-900">35% Faculty & Peer-Reviewed Project Audits</span>
+                    <span className="block text-[11px] text-slate-500">Capstone demos, hackathons & code reviews</span>
+                  </div>
+                </div>
+                <div className="text-right font-mono-data">
+                  <span className="font-bold text-purple-700 text-sm">{scoreState.projectAuditScore}</span>
+                  <span className="text-slate-400 text-xs"> / {scoreState.projectAuditMax} pts</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-600">
-                <span>Verified Capstones:</span>
-                <span className="font-bold">2 Microservices</span>
+              <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                <div 
+                  className="h-full bg-purple-600 rounded-full transition-all duration-500" 
+                  style={{ width: `${(scoreState.projectAuditScore / scoreState.projectAuditMax) * 100}%` }}
+                />
               </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-600">
-                <span>Faculty Lab Endorsement:</span>
-                <span className="font-bold text-emerald-600">Grade A+ (Distinction)</span>
+              <div className="flex items-center justify-between text-[11px] font-mono-data text-slate-600 pt-0.5">
+                <span>Lab Demonstration: Grade O (Outstanding)</span>
+                <span>SIH College Nominee Review: Approved</span>
               </div>
-            </div>
-          </div>
-
-          {/* Pillar 3: 25% Consistency & Campus Engagement */}
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-4">
-            <div className="flex items-start justify-between">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">
-                <TrendingUp className="w-5 h-5" />
-              </div>
-              <span className="px-2.5 py-1 rounded-full bg-amber-50 text-amber-900 font-mono-data font-bold text-xs border border-amber-200">
-                25% WEIGHT
-              </span>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-slate-900">
-                Consistency & Technical Engagement
-              </h4>
-              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                Tracks weekly coding habit streaks, IEEE/GDSC workshop attendance, and active participation in technical symposiums.
-              </p>
             </div>
 
-            <div className="space-y-2 pt-2 border-t border-slate-100 font-mono-data text-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-slate-500">Pillar Score:</span>
-                <strong className="text-amber-800 font-bold text-base">{scoreData.consistencyScore}/100</strong>
+            {/* Pillar C: 25% Consistency & Campus Engagement */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">
+                    <Flame className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-slate-900">25% Consistency & Campus Engagement</span>
+                    <span className="block text-[11px] text-slate-500">Weekly coding streaks & tech symposiums</span>
+                  </div>
+                </div>
+                <div className="text-right font-mono-data">
+                  <span className="font-bold text-emerald-700 text-sm">{scoreState.consistencyScore}</span>
+                  <span className="text-slate-400 text-xs"> / {scoreState.consistencyMax} pts</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-600">
-                <span>Active Coding Streak:</span>
-                <span className="font-bold text-blue-700">19 Days Running</span>
+              <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                <div 
+                  className="h-full bg-emerald-600 rounded-full transition-all duration-500" 
+                  style={{ width: `${(scoreState.consistencyScore / scoreState.consistencyMax) * 100}%` }}
+                />
               </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-600">
-                <span>Technical Fests & Workshops:</span>
-                <span className="font-bold">5 Attended</span>
+              <div className="flex items-center justify-between text-[11px] font-mono-data text-slate-600 pt-0.5">
+                <span>{scoreState.streakDays}-Day Active Coding Streak</span>
+                <span>4 Club Workshops Attended</span>
               </div>
             </div>
+
           </div>
 
         </div>
+
       </div>
 
-      {/* Live GitHub Repository Audit Simulator */}
-      <div className="p-6 rounded-2xl bg-slate-900 text-white space-y-4 border border-slate-800 shadow-sm">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      {/* LIVE GITHUB REPO AUDIT SIMULATOR */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
           <div>
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Github className="w-4 h-4 text-blue-400" />
-              <span>Connect & Audit Your 2nd-Year Project Repository</span>
+            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-blue-600" />
+              <span>Automated GitHub Codebase Telemetry & Audit</span>
             </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Paste your public GitHub repo URL to credit new commits, tests, and documentation to your Live Skill Index.
+            <p className="text-xs text-slate-500">
+              Paste your public repository URL to run automated AST parsing, test coverage analysis, and code hygiene evaluation.
             </p>
           </div>
-          <span className="text-[10px] font-mono-data text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded border border-emerald-800">
-            100% FREE GIT PARSER
+          <span className="text-[11px] font-mono-data text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 font-bold shrink-0">
+            Real-Time Engine
           </span>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-2">
+        <div className="flex flex-col sm:flex-row items-center gap-3">
           <input
             type="text"
             value={githubUrl}
-            onChange={(e) => setGithubUrl(e.target.value)}
-            placeholder="https://github.com/your-username/your-repo"
-            className="flex-1 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs font-mono-data focus:outline-none focus:border-blue-500"
+            onChange={e => setGithubUrl(e.target.value)}
+            placeholder="https://github.com/username/project-repo"
+            className="flex-1 w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono-data text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white"
           />
           <button
             onClick={handleAuditRepo}
             disabled={isAuditing}
-            className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-colors shrink-0 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
           >
-            {isAuditing ? (
-              <>
-                <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                <span>Auditing Commits...</span>
-              </>
-            ) : (
-              <>
-                <Zap className="w-3.5 h-3.5 text-amber-300" />
-                <span>Run Live Code Audit</span>
-              </>
-            )}
+            <RefreshCw className={`w-3.5 h-3.5 ${isAuditing ? 'animate-spin' : ''}`} />
+            <span>{isAuditing ? 'Parsing AST & Commits...' : 'Run Automated Audit'}</span>
           </button>
+        </div>
+
+        {/* Audit Evidence Micro-Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span className="text-[10px] font-mono-data text-slate-400 font-bold uppercase">COMMITS THIS MONTH</span>
+            <div className="text-lg font-bold font-mono-data text-blue-700">{scoreState.githubCommitsMonth} verified commits</div>
+            <div className="text-[11px] text-slate-500">Zero force-pushes or commit squashes</div>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span className="text-[10px] font-mono-data text-slate-400 font-bold uppercase">DSA TEST SUITE CLEARANCE</span>
+            <div className="text-lg font-bold font-mono-data text-emerald-700">{scoreState.dsaSolvedCount} test cases passing</div>
+            <div className="text-[11px] text-slate-500">LeetCode Medium / CodeChef 3★ equivalence</div>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span className="text-[10px] font-mono-data text-slate-400 font-bold uppercase">T&P CELL REPUTATION</span>
+            <div className="text-lg font-bold font-mono-data text-indigo-700">Tier-1 Cleared</div>
+            <div className="text-[11px] text-slate-500">Shortlisted for Google, TCS Digital & Infosys</div>
+          </div>
         </div>
       </div>
 

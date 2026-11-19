@@ -52,10 +52,11 @@ export const Header: React.FC<HeaderProps> = ({
   const navTabs = [
     { id: 'landing', labelEn: 'Home', labelHi: 'होम' },
     { id: 'mobility', labelEn: 'Transit Radar', labelHi: 'कैंपस बस व गेट' },
-    { id: 'opportunities', labelEn: 'Opportunities', labelHi: 'अवसर व हैकाथॉन' },
-    { id: 'skill-score', labelEn: 'Skill Score', labelHi: 'कौशल स्कोर' },
-    { id: 'resume', labelEn: 'ATS Resume', labelHi: 'एआई रेज़्यूमे' },
-    { id: 'jobs', labelEn: 'Jobs', labelHi: 'नौकरियां' },
+    { id: 'courses', labelEn: '24+ Courses', labelHi: 'प्रमाणित कोर्स' },
+    { id: 'opportunities', labelEn: 'Opportunities & SIH', labelHi: 'अवसर व हैकाथॉन' },
+    { id: 'skill-score', labelEn: 'Live Skill Score', labelHi: 'कौशल स्कोर' },
+    { id: 'resume', labelEn: 'ATS Studio', labelHi: 'एटीएस रेज़्यूमे' },
+    { id: 'payouts', labelEn: 'PayPal Rail', labelHi: 'पेपाल रेल' },
     { id: 'dashboard', labelEn: 'Dashboard', labelHi: 'डैशबोर्ड' },
   ];
 
