@@ -19,7 +19,10 @@ import {
   ChevronDown,
   Bookmark,
   CheckCircle2,
-  Zap
+  Zap,
+  Navigation,
+  Trophy,
+  Award
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -48,25 +51,27 @@ export const Header: React.FC<HeaderProps> = ({
 
   const navTabs = [
     { id: 'landing', labelEn: 'Home', labelHi: 'होम' },
-    { id: 'resume', labelEn: 'AI Resume Studio', labelHi: 'एआई रेज़्यूमे' },
-    { id: 'assessment', labelEn: 'Skill Diagnostic', labelHi: 'कौशल परीक्षा' },
-    { id: 'gap-report', labelEn: 'Gap Report', labelHi: 'अंतर रिपोर्ट' },
-    { id: 'jobs', labelEn: 'Jobs & HR Connect', labelHi: 'नौकरियां व HR' },
-    { id: 'courses', labelEn: 'Academy & Courses', labelHi: 'कोर्स व प्रमाणन' },
-    { id: 'payouts', labelEn: 'AI Escrow Payouts', labelHi: 'एआई एस्क्रो भुगतान' },
+    { id: 'mobility', labelEn: 'Smart Mobility', labelHi: 'कैंपस ट्रैफिक' },
+    { id: 'opportunities', labelEn: 'Opportunity Hub', labelHi: 'अवसर व हैकाथॉन' },
+    { id: 'skill-score', labelEn: 'Live Skill Score', labelHi: 'कौशल स्कोर' },
+    { id: 'resume', labelEn: 'AI Resume & ATS', labelHi: 'एआई रेज़्यूमे' },
+    { id: 'payouts', labelEn: 'PayPal AI Escrow', labelHi: 'पेपाल पेआउट' },
     { id: 'dashboard', labelEn: 'My Dashboard', labelHi: 'डैशबोर्ड' },
   ];
 
   const sitemapPages = [
     { id: 'landing', labelEn: 'Home', labelHi: 'मुख्य पृष्ठ', icon: Home },
-    { id: 'resume', labelEn: 'AI Resume Studio', labelHi: 'एआई रेज़्यूमे', icon: FileText },
-    { id: 'assessment', labelEn: 'Skill Diagnostic', labelHi: 'कौशल परीक्षा', icon: HelpCircle },
+    { id: 'mobility', labelEn: 'Smart Campus Mobility & Traffic', labelHi: 'कैंपस ट्रैफिक व बस ट्रैकिंग', icon: Navigation },
+    { id: 'opportunities', labelEn: 'Curated Opportunity Hub & SIH', labelHi: 'हैकाथॉन व द्वितीय वर्ष अवसर', icon: Trophy },
+    { id: 'skill-score', labelEn: 'Live Skill Score (Proof-of-Work)', labelHi: 'लाइव कौशल स्कोर (प्रूफ-ऑफ़-वर्क)', icon: Award },
+    { id: 'resume', labelEn: 'AI Resume Studio & ATS Simulator', labelHi: 'एआई रेज़्यूमे एवं एटीएस सिमुलेटर', icon: FileText },
+    { id: 'payouts', labelEn: 'PayPal AI Escrow Milestone Payouts', labelHi: 'पेपाल एस्क्रो भुगतान', icon: Zap },
+    { id: 'assessment', labelEn: 'Skill Diagnostic Diagnostic', labelHi: 'कौशल परीक्षा', icon: HelpCircle },
     { id: 'gap-report', labelEn: 'Skill Gap Report', labelHi: 'कौशल अंतर रिपोर्ट', icon: FileSpreadsheet },
-    { id: 'jobs', labelEn: 'Local Jobs & HR Connect', labelHi: 'स्थानीय नौकरियां व HR', icon: Briefcase },
-    { id: 'courses', labelEn: 'Academy & Certifications', labelHi: 'प्रमाणित कोर्स व चेकआउट', icon: BookOpen },
-    { id: 'payouts', labelEn: 'AI Escrow Milestone Payouts', labelHi: 'एआई एस्क्रो भुगतान', icon: Zap },
-    { id: 'dashboard', labelEn: 'Candidate Dashboard', labelHi: 'उम्मीदवार डैशबोर्ड', icon: LayoutDashboard },
-    { id: 'about', labelEn: 'Social Impact & Mission', labelHi: 'सामाजिक प्रभाव', icon: Info },
+    { id: 'jobs', labelEn: 'Jobs & Placement Cell Sync', labelHi: 'नौकरियां व प्लेसमेंट सेल', icon: Briefcase },
+    { id: 'courses', labelEn: 'Academy & Certification Checkout', labelHi: 'प्रमाणित कोर्स व चेकआउट', icon: BookOpen },
+    { id: 'dashboard', labelEn: 'Student Capability Dashboard', labelHi: 'छात्र डैशबोर्ड', icon: LayoutDashboard },
+    { id: 'about', labelEn: 'College Director Proposal & Mission', labelHi: 'डायरेक्टर विज़न व प्रभाव', icon: Info },
   ];
 
   return (
@@ -84,18 +89,18 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-slate-900 text-sm tracking-tight leading-tight whitespace-nowrap group-hover:text-blue-700 transition-colors">
-                {lang === 'en' ? 'KAUSHAL SETU' : 'कौशल सेतु'}
+                {lang === 'en' ? 'KAUSHAL SETU 2.0' : 'कौशल सेतु २.०'}
               </span>
               <span className="text-[10.5px] text-slate-500 font-medium tracking-tight hidden sm:block leading-none mt-0.5">
-                {lang === 'en' ? 'Skills, Resume & Direct HR Pipeline' : 'कौशल, रेज़्यूमे एवं सीधा एचआर प्रेषण'}
+                {lang === 'en' ? 'Campus-to-Corporate & Smart Mobility Super App' : 'कैंपस-टू-कॉरपोरेट एवं स्मार्ट मोबिलिटी सुपर ऐप'}
               </span>
             </div>
           </button>
 
-          {/* Live Industrial Activity Micro-Badge */}
+          {/* Live Industrial & Mobility Telemetry Micro-Badge */}
           <div className="hidden xl:flex items-center gap-1.5 pl-3 border-l border-slate-200 text-[11px] font-medium text-slate-500">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>{lang === 'en' ? '140+ UP Employers Active' : '१४०+ नियोक्ता सक्रिय'}</span>
+            <span>{lang === 'en' ? 'Gate Telemetry & 2nd-Year Hub Online' : 'कैंपस गेट टेलीमेट्री व अवसर सक्रिय'}</span>
           </div>
         </div>
 

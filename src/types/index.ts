@@ -201,3 +201,80 @@ export interface AgenticCourseOrder {
   timestamp: string;
   captureId?: string;
 }
+
+// ==========================================
+// KAUSHAL SETU 2.0 SUPER APP TYPES
+// ==========================================
+
+export interface CampusGateCongestion {
+  id: string;
+  gateName: string;
+  gateNameHi: string;
+  location: string;
+  status: 'Normal' | 'Moderate' | 'Heavy' | 'Gridlock';
+  statusHi: 'सामान्य' | 'मध्यम' | 'भारी' | 'जाम';
+  avgWaitMins: number;
+  vehiclesPerHour: number;
+  lastUpdated: string;
+  recommendedEntry: boolean;
+}
+
+export interface CampusTransitRoute {
+  id: string;
+  busNumber: string;
+  routeName: string;
+  routeNameHi: string;
+  origin: string;
+  destination: string;
+  currentLocation: string;
+  etaToCampusMins: number;
+  occupancyPercent: number;
+  delayMins: number;
+  status: 'On Time' | 'Slight Delay' | 'Heavy Traffic' | 'Departed';
+  statusHi: 'समय पर' | 'हल्का विलंब' | 'भारी जाम' | 'रवाना हुआ';
+}
+
+export interface CollegeOpportunity {
+  id: string;
+  title: string;
+  titleHi: string;
+  type: 'Intra-College Hackathon' | 'Club Challenge' | 'SIH 2026 Pipeline' | '2nd-Year Tech Internship';
+  typeHi: 'इंटर-डिपार्टमेंट हैकाथॉन' | 'क्लब प्रतियोगिता' | 'SIH 2026 पाइपलाइन' | 'द्वितीय वर्ष इंटर्नशिप';
+  organizer: string;
+  department: string;
+  eligibility: string;
+  deadline: string;
+  prizePool: string;
+  participantsCount: number;
+  teamSize: string;
+  skillsDemanded: string[];
+  registered?: boolean;
+}
+
+export interface LiveSkillScoreData {
+  studentName: string;
+  studentId: string;
+  department: string;
+  semester: string;
+  overallScore: number; // 0 - 100
+  percentileRank: number;
+  codeAlgorithmicScore: number; // 40% weight
+  projectAuditScore: number; // 35% weight
+  consistencyScore: number; // 25% weight
+  githubCommitsThisMonth: number;
+  dsaProblemsSolved: number;
+  facultyAuditStatus: 'Verified by Placement Cell' | 'Pending Review';
+  recruiterReadiness: 'Google / MS Ready' | 'Tier-1 Product Ready' | 'Enterprise IT Ready';
+}
+
+export interface AtsBulletOptimization {
+  id: string;
+  role: string;
+  originalBullet: string;
+  optimizedBullet: string;
+  targetMetric: string;
+  scoreBefore: number;
+  scoreAfter: number;
+  keywordsAdded: string[];
+}
+

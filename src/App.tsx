@@ -16,6 +16,9 @@ import { AssessmentPage } from './components/pages/AssessmentPage';
 import { GapReportPage } from './components/pages/GapReportPage';
 import { CoursesPage } from './components/pages/CoursesPage';
 import { EscrowPayoutsPage } from './components/pages/EscrowPayoutsPage';
+import { CampusMobilityPage } from './components/pages/CampusMobilityPage';
+import { OpportunityHubPage } from './components/pages/OpportunityHubPage';
+import { SkillScorePage } from './components/pages/SkillScorePage';
 import { JobsPage } from './components/pages/JobsPage';
 import { DashboardPage } from './components/pages/DashboardPage';
 import { AboutImpactPage } from './components/pages/AboutImpactPage';
@@ -244,6 +247,31 @@ export default function App() {
             <EscrowPayoutsPage
               lang={lang}
               selectedPersonaId={selectedPersonaId}
+              userProfile={userProfile}
+              onNavigate={handleNavigate}
+            />
+          )}
+
+          {/* 7c. Pillar 1: Smart Campus Mobility & Traffic Control */}
+          {currentPage === 'mobility' && (
+            <CampusMobilityPage
+              lang={lang}
+              onNavigate={handleNavigate}
+            />
+          )}
+
+          {/* 7d. Pillar 2: Curated Opportunity Hub & SIH 2026 */}
+          {currentPage === 'opportunities' && (
+            <OpportunityHubPage
+              lang={lang}
+              onNavigate={handleNavigate}
+            />
+          )}
+
+          {/* 7e. Pillar 3: Dynamic Live Skill Score & Placement Index */}
+          {currentPage === 'skill-score' && (
+            <SkillScorePage
+              lang={lang}
               userProfile={userProfile}
               onNavigate={handleNavigate}
             />

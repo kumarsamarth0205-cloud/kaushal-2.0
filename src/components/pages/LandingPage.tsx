@@ -412,53 +412,164 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
 
       </section>
 
-      {/* 4. FIELD RESEARCH & EMPIRICAL COMPARISON: Engaging Color Signals */}
-      <section className="bg-slate-50/80 rounded-2xl border border-slate-200/90 p-8 sm:p-10 space-y-6">
+      {/* 4. KAUSHAL SETU 2.0: 5 PILLARS SUPER APP ARCHITECTURE */}
+      <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white rounded-3xl p-8 sm:p-10 border border-blue-900 shadow-xl space-y-8">
         
-        <div className="max-w-2xl space-y-1">
-          <div className="text-xs font-bold text-blue-600 uppercase tracking-wider">
-            Field Research & Usability Evidence
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-blue-800/80 pb-5">
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-2 text-xs font-mono-data text-amber-300 font-bold uppercase tracking-wider">
+              <span>ACADEMIC SENATE PROPOSAL · 2ND-YEAR DEPLOYABLE ARCHITECTURE</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-white">
+              The 5 Pillars Powering the Kaushal Setu 2.0 Super App
+            </h2>
+            <p className="text-xs sm:text-sm text-blue-200 max-w-2xl">
+              Transforming college education from 7th-semester placement anxiety into organic 2nd-year continuous growth, verifiable code proof-of-work, and daily campus utility.
+            </p>
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-[-0.03em] leading-[1.22]">
-            Why Conventional Portals Fail First-Generation Job Seekers
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-[1.6]">
-            Empirical findings from vocational testing in Lucknow (Amausi), Kanpur (Panki), and Barabanki (Deva Road).
-          </p>
+
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => onNavigate('mobility')}
+              className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer"
+            >
+              Smart Mobility
+            </button>
+            <button
+              onClick={() => onNavigate('opportunities')}
+              className="px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-xs transition-colors cursor-pointer"
+            >
+              Opportunity Hub
+            </button>
+            <button
+              onClick={() => onNavigate('skill-score')}
+              className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-xs transition-colors cursor-pointer"
+            >
+              Live Skill Score
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
-          
-          <div className="bg-white p-5 rounded-xl border border-rose-200 space-y-2">
-            <span className="text-[11px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded block w-fit">
-              ✕ GOVERNMENT PORTALS (SKILL INDIA)
-            </span>
-            <h3 className="text-sm font-bold text-slate-900 tracking-tight">Complex Forms & Session Drop-off</h3>
-            <p className="text-xs text-slate-600 leading-[1.6]">
-              Dense English dropdowns and timed OTP authentications cause <strong>72% drop-off</strong> on metered 4G connections.
+        {/* 5 Pillar Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div
+            onClick={() => onNavigate('mobility')}
+            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+          >
+            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 1</div>
+            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+              Smart Traffic Control
+            </h3>
+            <p className="text-[11px] text-blue-200 leading-relaxed">
+              Live gate congestion sensors & college bus GPS telemetry eliminating 9:00 AM lecture bottlenecks.
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-xl border border-amber-200 space-y-2">
-            <span className="text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded block w-fit">
-              ⚠ METRO PORTALS (NAUKRI, LINKEDIN)
-            </span>
-            <h3 className="text-sm font-bold text-slate-900 tracking-tight">Zero Commute Distance Filtering</h3>
-            <p className="text-xs text-slate-600 leading-[1.6]">
-              Portals treat all Uttar Pradesh as one bucket. An ITI electrician in Unnao cannot commute 250 km for a ₹13,000 job without local proximity filters.
+          <div
+            onClick={() => onNavigate('opportunities')}
+            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+          >
+            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 2</div>
+            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+              Opportunity Hub
+            </h3>
+            <p className="text-[11px] text-blue-200 leading-relaxed">
+              2nd-year friendly internships, intra-dept hackathons, and Smart India Hackathon (SIH 2026) team incubator.
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-xl border border-blue-300 space-y-2 bg-gradient-to-b from-blue-50/40 to-white shadow-xs">
-            <span className="text-[11px] font-bold text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded block w-fit">
-              ✓ KAUSHAL SETU ARCHITECTURE
-            </span>
-            <h3 className="text-sm font-bold text-slate-900 tracking-tight">Hyperlocal, WhatsApp-First, Auto-Saved</h3>
-            <p className="text-xs text-slate-600 leading-[1.6]">
-              Built for Sunita in rural Barabanki: 44px minimum tap targets, Hindi-first calibration, zero session loss, and direct recruiter dispatch.
+          <div
+            onClick={() => onNavigate('skill-score')}
+            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+          >
+            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 3</div>
+            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+              Live Skill Score
+            </h3>
+            <p className="text-[11px] text-blue-200 leading-relaxed">
+              Objective capability index (40% Code/DSA + 35% Project Audits + 25% Consistency) for visiting recruiters.
             </p>
           </div>
 
+          <div
+            onClick={() => onNavigate('resume')}
+            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+          >
+            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 4</div>
+            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+              ATS-Boosting Studio
+            </h3>
+            <p className="text-[11px] text-blue-200 leading-relaxed">
+              Metric articulation rewriting bullets, jumping parser pass rates from 42% to 91% across Taleo & Workday.
+            </p>
+          </div>
+
+          <div
+            onClick={() => onNavigate('payouts')}
+            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+          >
+            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 5</div>
+            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+              PayPal Financial Rail
+            </h3>
+            <p className="text-[11px] text-blue-200 leading-relaxed">
+              Autonomous escrow milestone disbursements ($25-$45 USD) and instant global certification checkout.
+            </p>
+          </div>
+        </div>
+
+        {/* Competitive Benchmarking Matrix from Proposal */}
+        <div className="pt-4 border-t border-blue-800/80 space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-bold uppercase font-mono-data text-blue-300 tracking-wider">
+              COMPETITIVE BENCHMARKING: WHY CONVENTIONAL PORTALS FAIL 2ND-YEAR STUDENTS
+            </h3>
+            <span className="text-[11px] font-mono-data text-emerald-400">Institutional Analysis</span>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-blue-800/80 rounded-xl overflow-hidden">
+              <thead className="bg-blue-950/90 text-blue-300 font-mono-data text-[11px] uppercase">
+                <tr>
+                  <th className="p-3 border-b border-blue-800/80">Evaluation Metric</th>
+                  <th className="p-3 border-b border-blue-800/80">LinkedIn</th>
+                  <th className="p-3 border-b border-blue-800/80">Unstop</th>
+                  <th className="p-3 border-b border-blue-800/80">Naukri.com</th>
+                  <th className="p-3 border-b border-blue-800/80 bg-blue-800/60 text-white font-bold">Kaushal Setu 2.0</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-blue-800/50 text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold text-white">Target Audience Fit</td>
+                  <td className="p-3 text-slate-400">Senior corporate lateral hires</td>
+                  <td className="p-3 text-slate-400">Generic national college pool</td>
+                  <td className="p-3 text-slate-400">Experienced professionals</td>
+                  <td className="p-3 font-bold text-emerald-400 bg-blue-900/30">Exclusively for 2nd-year college batches</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold text-white">Skill Verification</td>
+                  <td className="p-3 text-slate-400">Self-declared endorsements</td>
+                  <td className="p-3 text-slate-400">Contest leaderboard only</td>
+                  <td className="p-3 text-slate-400">Keywords on uploaded PDFs</td>
+                  <td className="p-3 font-bold text-emerald-400 bg-blue-900/30">Dynamic Live Skill Score backed by code & tests</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold text-white">Opportunity Relevance</td>
+                  <td className="p-3 text-slate-400">Demands 3+ yrs exp on entry jobs</td>
+                  <td className="p-3 text-slate-400">Lacks intra-college departmental tiers</td>
+                  <td className="p-3 text-slate-400">Spam recruitment agency listings</td>
+                  <td className="p-3 font-bold text-emerald-400 bg-blue-900/30">Curated 2nd-year internships & SIH sprints</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold text-white">Daily Campus Utility</td>
+                  <td className="p-3 text-rose-400">Zero daily campus utility</td>
+                  <td className="p-3 text-rose-400">Zero daily utility (only contests)</td>
+                  <td className="p-3 text-rose-400">Zero daily utility (dormant app)</td>
+                  <td className="p-3 font-bold text-emerald-400 bg-blue-900/30">High DAU: Live Gate Traffic & Bus Telemetry</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
       </section>
