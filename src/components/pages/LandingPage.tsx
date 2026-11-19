@@ -14,7 +14,11 @@ import {
   GraduationCap,
   Briefcase,
   Zap,
-  PhoneCall
+  PhoneCall,
+  Bus,
+  Trophy,
+  FileText,
+  Navigation
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -311,265 +315,205 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
         </div>
       </section>
 
-      {/* 3. SEQUENTIAL PRODUCT ARCHITECTURE: Four Color-Coded Clean Deliverables */}
-      <section className="space-y-8">
+      {/* 3. INTEGRATED CAMPUS & CAREER PLATFORM FEATURES */}
+      <section className="space-y-10">
         
-        <div className="max-w-2xl space-y-2">
-          <div className="text-xs font-bold text-blue-600 uppercase tracking-wider">
-            Sequential Product Architecture
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-5">
+          <div className="max-w-2xl space-y-1.5">
+            <div className="text-xs font-bold text-blue-600 uppercase tracking-wider font-mono-data">
+              {lang === 'en' ? 'Core Platform Features' : 'प्लेटफॉर्म की मुख्य सुविधाएं'}
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-[-0.03em] leading-[1.22]">
+              {lang === 'en' ? 'Everything Students & Job Seekers Need in One App' : 'छात्रों और नौकरी चाहने वालों के लिए संपूर्ण समाधान'}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'From morning campus bus tracking to live code verification, ATS resume building, and verified local employment.'
+                : 'सुबह कॉलेज बस ट्रैकिंग से लेकर लाइव कोड सत्यापन, एटीएस रेज़्यूमे और स्थानीय रोजगार तक।'}
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-[-0.03em] leading-[1.22]">
-            From Confusion to Formal Employment in Four Stages
-          </h2>
-          <p className="text-sm sm:text-base text-slate-600 leading-[1.6]">
-            Most vocational candidates abandon long government forms. Kaushal Setu is structured into four distinct, sequential deliverables that build momentum.
-          </p>
         </div>
 
+        {/* Feature Grid: 8 Functional Tools */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           
-          {/* Deliverable 1: Blue Theme */}
-          <div
-            onClick={() => onNavigate('assessment')}
-            className="cursor-pointer p-6 rounded-xl bg-white border border-blue-100 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/10 smooth-card space-y-3 group"
-          >
-            <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 font-mono-data font-bold text-xs flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
-              01
-            </div>
-            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-blue-700 transition-colors">
-              Practical Skill Diagnostic
-            </h3>
-            <p className="text-xs text-slate-600 leading-[1.6]">
-              3-minute visual test tailored to your trade. Evaluates real tool troubleshooting and procedural knowledge, not textbook memorization.
-            </p>
-            <div className="text-xs font-bold text-blue-600 inline-flex items-center gap-1 pt-1 tracking-tight">
-              <span>Start diagnostic</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
-
-          {/* Deliverable 2: Emerald Theme */}
-          <div
-            onClick={() => onNavigate('gap-report')}
-            className="cursor-pointer p-6 rounded-xl bg-white border border-emerald-100 hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-500/10 smooth-card space-y-3 group"
-          >
-            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 font-mono-data font-bold text-xs flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-              02
-            </div>
-            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-emerald-700 transition-colors">
-              Personalized Gap Report
-            </h3>
-            <p className="text-xs text-slate-600 leading-[1.6]">
-              Explicitly charts your score against current Lucknow & Kanpur hiring standards, showing the exact monthly wage boost for closing each gap.
-            </p>
-            <div className="text-xs font-bold text-emerald-600 inline-flex items-center gap-1 pt-1 tracking-tight">
-              <span>View sample report</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
-
-          {/* Deliverable 3: Amber Theme */}
-          <div
-            onClick={() => onNavigate('courses')}
-            className="cursor-pointer p-6 rounded-xl bg-white border border-amber-100 hover:border-amber-300 hover:shadow-md hover:shadow-amber-500/10 smooth-card space-y-3 group"
-          >
-            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 font-mono-data font-bold text-xs flex items-center justify-center group-hover:bg-amber-600 group-hover:text-white transition-colors">
-              03
-            </div>
-            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-amber-700 transition-colors">
-              Free Government Modules
-            </h3>
-            <p className="text-xs text-slate-600 leading-[1.6]">
-              Short 12h–40h targeted practical workshops certified by MSME, NISE, and PM Surya Ghar with government-backed credentials.
-            </p>
-            <div className="text-xs font-bold text-amber-700 inline-flex items-center gap-1 pt-1 tracking-tight">
-              <span>Browse courses</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
-
-          {/* Deliverable 4: Indigo Theme */}
-          <div
-            onClick={() => onNavigate('jobs')}
-            className="cursor-pointer p-6 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 hover:shadow-md hover:shadow-indigo-500/10 smooth-card space-y-3 group"
-          >
-            <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-700 font-mono-data font-bold text-xs flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-              04
-            </div>
-            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-indigo-700 transition-colors">
-              Hyperlocal Job Board
-            </h3>
-            <p className="text-xs text-slate-600 leading-[1.6]">
-              Openings filtered by physical distance from your residence (≤25 km). Guaranteed stipends with direct one-tap WhatsApp employer contact.
-            </p>
-            <div className="text-xs font-bold text-indigo-600 inline-flex items-center gap-1 pt-1 tracking-tight">
-              <span>Explore jobs</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* 4. KAUSHAL SETU 2.0: 5 PILLARS SUPER APP ARCHITECTURE */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white rounded-3xl p-8 sm:p-10 border border-blue-900 shadow-xl space-y-8">
-        
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-blue-800/80 pb-5">
-          <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 text-xs font-mono-data text-amber-300 font-bold uppercase tracking-wider">
-              <span>ACADEMIC SENATE PROPOSAL · 2ND-YEAR DEPLOYABLE ARCHITECTURE</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-white">
-              The 5 Pillars Powering the Kaushal Setu 2.0 Super App
-            </h2>
-            <p className="text-xs sm:text-sm text-blue-200 max-w-2xl">
-              Transforming college education from 7th-semester placement anxiety into organic 2nd-year continuous growth, verifiable code proof-of-work, and daily campus utility.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => onNavigate('mobility')}
-              className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer"
-            >
-              Smart Mobility
-            </button>
-            <button
-              onClick={() => onNavigate('opportunities')}
-              className="px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-xs transition-colors cursor-pointer"
-            >
-              Opportunity Hub
-            </button>
-            <button
-              onClick={() => onNavigate('skill-score')}
-              className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-xs transition-colors cursor-pointer"
-            >
-              Live Skill Score
-            </button>
-          </div>
-        </div>
-
-        {/* 5 Pillar Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {/* Tool 1: Campus Transit */}
           <div
             onClick={() => onNavigate('mobility')}
-            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+            className="cursor-pointer p-6 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-md hover:shadow-blue-500/10 smooth-card space-y-3 group"
           >
-            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 1</div>
-            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
-              Smart Traffic Control
+            <div className="w-9 h-9 rounded-lg bg-sky-50 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors">
+              <Bus className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-blue-700 transition-colors">
+              {lang === 'en' ? 'Campus Transit & Bus Radar' : 'कैंपस बस व गेट रडार'}
             </h3>
-            <p className="text-[11px] text-blue-200 leading-relaxed">
-              Live gate congestion sensors & college bus GPS telemetry eliminating 9:00 AM lecture bottlenecks.
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Live campus entry gate sensors, 4 college bus corridors with GPS telemetry, and commute time estimator.'
+                : 'कॉलेज मुख्य द्वारों पर लाइव भीड़ सेंसर, ४ बस रूट की जीपीएस ट्रैकिंग और समय पर पहुंचने के लिए सुझाव।'}
             </p>
+            <div className="text-xs font-bold text-sky-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Check gate traffic' : 'ट्रैफिक स्थिति देखें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
           </div>
 
+          {/* Tool 2: Opportunities & Hackathons */}
           <div
             onClick={() => onNavigate('opportunities')}
-            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+            className="cursor-pointer p-6 rounded-xl bg-white border border-slate-200 hover:border-purple-400 hover:shadow-md hover:shadow-purple-500/10 smooth-card space-y-3 group"
           >
-            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 2</div>
-            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
-              Opportunity Hub
+            <div className="w-9 h-9 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-xs group-hover:bg-purple-600 group-hover:text-white transition-colors">
+              <Trophy className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-purple-700 transition-colors">
+              {lang === 'en' ? 'Opportunities & Hackathons' : 'अवसर व हैकाथॉन हब'}
             </h3>
-            <p className="text-[11px] text-blue-200 leading-relaxed">
-              2nd-year friendly internships, intra-dept hackathons, and Smart India Hackathon (SIH 2026) team incubator.
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Intra-college departmental sprints, Smart India Hackathon squad builder, and verified 2nd-year internships.'
+                : 'विभाग-स्तरीय हैकाथॉन, स्मार्ट इंडिया हैकाथॉन टीम निर्माण और द्वितीय वर्ष के छात्रों हेतु इंटर्नशिप।'}
             </p>
+            <div className="text-xs font-bold text-purple-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Explore opportunities' : 'अवसर देखें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
           </div>
 
+          {/* Tool 3: Live Skill Score */}
           <div
             onClick={() => onNavigate('skill-score')}
-            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+            className="cursor-pointer p-6 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-md hover:shadow-emerald-500/10 smooth-card space-y-3 group"
           >
-            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 3</div>
-            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
-              Live Skill Score
+            <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+              <Award className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-emerald-700 transition-colors">
+              {lang === 'en' ? 'Live Skill Score' : 'लाइव कौशल स्कोर'}
             </h3>
-            <p className="text-[11px] text-blue-200 leading-relaxed">
-              Objective capability index (40% Code/DSA + 35% Project Audits + 25% Consistency) for visiting recruiters.
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Objective capability index based on code commits, automated DSA problem tests, and exportable recruiter dossiers.'
+                : 'गिटहब कोड ऑडिट, स्वचालित कोडिंग टेस्ट और कंपनियों के लिए सत्यापन योग्य कौशल रिपोर्ट।'}
             </p>
+            <div className="text-xs font-bold text-emerald-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'View my score' : 'अपना स्कोर देखें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
           </div>
 
+          {/* Tool 4: AI Resume Studio */}
           <div
             onClick={() => onNavigate('resume')}
-            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+            className="cursor-pointer p-6 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-md hover:shadow-blue-500/10 smooth-card space-y-3 group"
           >
-            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 4</div>
-            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
-              ATS-Boosting Studio
+            <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs group-hover:bg-blue-600 group-hover:text-white transition-colors">
+              <FileText className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-blue-700 transition-colors">
+              {lang === 'en' ? 'AI Resume & ATS Optimizer' : 'एआई रेज़्यूमे व एटीएस'}
             </h3>
-            <p className="text-[11px] text-blue-200 leading-relaxed">
-              Metric articulation rewriting bullets, jumping parser pass rates from 42% to 91% across Taleo & Workday.
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Convert passive bullets into quantified metric achievements and clear corporate ATS filters with 90%+ confidence.'
+                : 'कमजोर बुलेट पॉइंट्स को मजबूत मेट्रिक्स में बदलें और कॉरपोरेट एटीएस स्क्रीनिंग को आसानी से पार करें।'}
             </p>
+            <div className="text-xs font-bold text-blue-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Optimize resume' : 'रेज़्यूमे बनाएं'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
           </div>
 
+          {/* Tool 5: Skill Diagnostic */}
           <div
-            onClick={() => onNavigate('payouts')}
-            className="p-5 rounded-2xl bg-blue-900/40 border border-blue-700/60 hover:border-blue-400 hover:bg-blue-900/60 transition-all cursor-pointer space-y-2 group"
+            onClick={() => onNavigate('assessment')}
+            className="cursor-pointer p-6 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-md hover:shadow-blue-500/10 smooth-card space-y-3 group"
           >
-            <div className="text-amber-400 font-mono-data font-bold text-xs uppercase">Pillar 5</div>
-            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
-              PayPal Financial Rail
+            <div className="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs group-hover:bg-blue-600 group-hover:text-white transition-colors">
+              <CheckCircle2 className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-blue-700 transition-colors">
+              {lang === 'en' ? 'Practical Skill Diagnostic' : 'व्यावहारिक कौशल टेस्ट'}
             </h3>
-            <p className="text-[11px] text-blue-200 leading-relaxed">
-              Autonomous escrow milestone disbursements ($25-$45 USD) and instant global certification checkout.
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? '3-minute visual test tailored to your trade. Evaluates real tool troubleshooting and procedural knowledge.'
+                : 'अपने ट्रेड अनुसार ३ मिनट का व्यावहारिक टेस्ट दें और वास्तविक टूल ज्ञान का मूल्यांकन करें।'}
             </p>
+            <div className="text-xs font-bold text-blue-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Start diagnostic' : 'टेस्ट शुरू करें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
           </div>
-        </div>
 
-        {/* Competitive Benchmarking Matrix from Proposal */}
-        <div className="pt-4 border-t border-blue-800/80 space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold uppercase font-mono-data text-blue-300 tracking-wider">
-              COMPETITIVE BENCHMARKING: WHY CONVENTIONAL PORTALS FAIL 2ND-YEAR STUDENTS
+          {/* Tool 6: Gap Report */}
+          <div
+            onClick={() => onNavigate('gap-report')}
+            className="cursor-pointer p-6 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-md hover:shadow-emerald-500/10 smooth-card space-y-3 group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+              <TrendingUp className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-emerald-700 transition-colors">
+              {lang === 'en' ? 'Personalized Gap Report' : 'कौशल अंतर रिपोर्ट'}
             </h3>
-            <span className="text-[11px] font-mono-data text-emerald-400">Institutional Analysis</span>
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Explicitly charts your score against current hiring standards, showing the exact monthly wage boost for closing gaps.'
+                : 'स्थानीय उद्योगों के मानकों के मुकाबले अपने स्कोर की तुलना करें और वेतन वृद्धि की संभावना समझें।'}
+            </p>
+            <div className="text-xs font-bold text-emerald-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'View gap report' : 'रिपोर्ट देखें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs border border-blue-800/80 rounded-xl overflow-hidden">
-              <thead className="bg-blue-950/90 text-blue-300 font-mono-data text-[11px] uppercase">
-                <tr>
-                  <th className="p-3 border-b border-blue-800/80">Evaluation Metric</th>
-                  <th className="p-3 border-b border-blue-800/80">LinkedIn</th>
-                  <th className="p-3 border-b border-blue-800/80">Unstop</th>
-                  <th className="p-3 border-b border-blue-800/80">Naukri.com</th>
-                  <th className="p-3 border-b border-blue-800/80 bg-blue-800/60 text-white font-bold">Kaushal Setu 2.0</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-blue-800/50 text-slate-200">
-                <tr>
-                  <td className="p-3 font-semibold text-white">Target Audience Fit</td>
-                  <td className="p-3 text-slate-400">Senior corporate lateral hires</td>
-                  <td className="p-3 text-slate-400">Generic national college pool</td>
-                  <td className="p-3 text-slate-400">Experienced professionals</td>
-                  <td className="p-3 font-bold text-emerald-400 bg-blue-900/30">Exclusively for 2nd-year college batches</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Skill Verification</td>
-                  <td className="p-3 text-slate-400">Self-declared endorsements</td>
-                  <td className="p-3 text-slate-400">Contest leaderboard only</td>
-                  <td className="p-3 text-slate-400">Keywords on uploaded PDFs</td>
-                  <td className="p-3 font-bold text-emerald-400 bg-blue-900/30">Dynamic Live Skill Score backed by code & tests</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Opportunity Relevance</td>
-                  <td className="p-3 text-slate-400">Demands 3+ yrs exp on entry jobs</td>
-                  <td className="p-3 text-slate-400">Lacks intra-college departmental tiers</td>
-                  <td className="p-3 text-slate-400">Spam recruitment agency listings</td>
-                  <td className="p-3 font-bold text-emerald-400 bg-blue-900/30">Curated 2nd-year internships & SIH sprints</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Daily Campus Utility</td>
-                  <td className="p-3 text-rose-400">Zero daily campus utility</td>
-                  <td className="p-3 text-rose-400">Zero daily utility (only contests)</td>
-                  <td className="p-3 text-rose-400">Zero daily utility (dormant app)</td>
-                  <td className="p-3 font-bold text-emerald-400 bg-blue-900/30">High DAU: Live Gate Traffic & Bus Telemetry</td>
-                </tr>
-              </tbody>
-            </table>
+          {/* Tool 7: Government Courses */}
+          <div
+            onClick={() => onNavigate('courses')}
+            className="cursor-pointer p-6 rounded-xl bg-white border border-slate-200 hover:border-amber-400 hover:shadow-md hover:shadow-amber-500/10 smooth-card space-y-3 group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs group-hover:bg-amber-600 group-hover:text-white transition-colors">
+              <GraduationCap className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-amber-700 transition-colors">
+              {lang === 'en' ? 'Free Government Modules' : 'मुफ्त प्रमाणित कोर्स'}
+            </h3>
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Short 12h–40h targeted practical workshops certified by MSME, NISE, and PM Surya Ghar with govt credentials.'
+                : 'एमएसएमई एवं सरकारी मान्यता प्राप्त १२ से ४० घंटे के शॉर्ट-टर्म प्रैक्टिकल वर्कशॉप्स।'}
+            </p>
+            <div className="text-xs font-bold text-amber-700 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Browse courses' : 'कोर्स देखें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
           </div>
+
+          {/* Tool 8: Hyperlocal Job Board */}
+          <div
+            onClick={() => onNavigate('jobs')}
+            className="cursor-pointer p-6 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md hover:shadow-indigo-500/10 smooth-card space-y-3 group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <Briefcase className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-indigo-700 transition-colors">
+              {lang === 'en' ? 'Hyperlocal Job Board' : 'स्थानीय रोजगार बोर्ड'}
+            </h3>
+            <p className="text-xs text-slate-600 leading-[1.6]">
+              {lang === 'en'
+                ? 'Openings filtered by physical distance from your residence (≤25 km) with direct one-tap WhatsApp contact.'
+                : '२५ किमी के भीतर सत्यापित स्थानीय नौकरियां और सीधे नियोक्ता से व्हाट्सएप पर संपर्क।'}
+            </p>
+            <div className="text-xs font-bold text-indigo-600 inline-flex items-center gap-1 pt-1 tracking-tight">
+              <span>{lang === 'en' ? 'Explore jobs' : 'नौकरियां देखें'}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </div>
+          </div>
+
         </div>
 
       </section>
@@ -580,10 +524,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-              Three Personas Who Set Our Usability Floor
+              {lang === 'en' ? 'Designed for Real Student & Job Seeker Journeys' : 'वास्तविक छात्रों एवं युवाओं के लिए निर्मित'}
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
-              Verified against Section 2 of the National Skill Ecosystem judging brief.
+              {lang === 'en'
+                ? 'Tailored workflows calibrated for college students, ITI technicians, and rural candidates.'
+                : 'कॉलेज छात्रों, आईटीआई तकनीशियनों एवं ग्रामीण युवाओं के लिए विशेष रूप से डिज़ाइन किया गया।'}
             </p>
           </div>
           <button

@@ -466,7 +466,7 @@ export const ResumeBuilderPage: React.FC<ResumeBuilderPageProps> = ({
                 className="w-full py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                <span>Rewrite with Metric Articulation (Module 2)</span>
+                <span>Rewrite with Quantified Impact Metrics</span>
               </button>
             </div>
 

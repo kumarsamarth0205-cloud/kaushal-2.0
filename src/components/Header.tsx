@@ -51,27 +51,27 @@ export const Header: React.FC<HeaderProps> = ({
 
   const navTabs = [
     { id: 'landing', labelEn: 'Home', labelHi: 'होम' },
-    { id: 'mobility', labelEn: 'Smart Mobility', labelHi: 'कैंपस ट्रैफिक' },
-    { id: 'opportunities', labelEn: 'Opportunity Hub', labelHi: 'अवसर व हैकाथॉन' },
-    { id: 'skill-score', labelEn: 'Live Skill Score', labelHi: 'कौशल स्कोर' },
-    { id: 'resume', labelEn: 'AI Resume & ATS', labelHi: 'एआई रेज़्यूमे' },
-    { id: 'payouts', labelEn: 'PayPal AI Escrow', labelHi: 'पेपाल पेआउट' },
-    { id: 'dashboard', labelEn: 'My Dashboard', labelHi: 'डैशबोर्ड' },
+    { id: 'mobility', labelEn: 'Transit Radar', labelHi: 'कैंपस बस व गेट' },
+    { id: 'opportunities', labelEn: 'Opportunities', labelHi: 'अवसर व हैकाथॉन' },
+    { id: 'skill-score', labelEn: 'Skill Score', labelHi: 'कौशल स्कोर' },
+    { id: 'resume', labelEn: 'ATS Resume', labelHi: 'एआई रेज़्यूमे' },
+    { id: 'jobs', labelEn: 'Jobs', labelHi: 'नौकरियां' },
+    { id: 'dashboard', labelEn: 'Dashboard', labelHi: 'डैशबोर्ड' },
   ];
 
   const sitemapPages = [
     { id: 'landing', labelEn: 'Home', labelHi: 'मुख्य पृष्ठ', icon: Home },
-    { id: 'mobility', labelEn: 'Smart Campus Mobility & Traffic', labelHi: 'कैंपस ट्रैफिक व बस ट्रैकिंग', icon: Navigation },
-    { id: 'opportunities', labelEn: 'Curated Opportunity Hub & SIH', labelHi: 'हैकाथॉन व द्वितीय वर्ष अवसर', icon: Trophy },
-    { id: 'skill-score', labelEn: 'Live Skill Score (Proof-of-Work)', labelHi: 'लाइव कौशल स्कोर (प्रूफ-ऑफ़-वर्क)', icon: Award },
-    { id: 'resume', labelEn: 'AI Resume Studio & ATS Simulator', labelHi: 'एआई रेज़्यूमे एवं एटीएस सिमुलेटर', icon: FileText },
-    { id: 'payouts', labelEn: 'PayPal AI Escrow Milestone Payouts', labelHi: 'पेपाल एस्क्रो भुगतान', icon: Zap },
-    { id: 'assessment', labelEn: 'Skill Diagnostic Diagnostic', labelHi: 'कौशल परीक्षा', icon: HelpCircle },
-    { id: 'gap-report', labelEn: 'Skill Gap Report', labelHi: 'कौशल अंतर रिपोर्ट', icon: FileSpreadsheet },
-    { id: 'jobs', labelEn: 'Jobs & Placement Cell Sync', labelHi: 'नौकरियां व प्लेसमेंट सेल', icon: Briefcase },
-    { id: 'courses', labelEn: 'Academy & Certification Checkout', labelHi: 'प्रमाणित कोर्स व चेकआउट', icon: BookOpen },
-    { id: 'dashboard', labelEn: 'Student Capability Dashboard', labelHi: 'छात्र डैशबोर्ड', icon: LayoutDashboard },
-    { id: 'about', labelEn: 'College Director Proposal & Mission', labelHi: 'डायरेक्टर विज़न व प्रभाव', icon: Info },
+    { id: 'mobility', labelEn: 'Campus Transit & Gate Radar', labelHi: 'कैंपस बस व गेट रडार', icon: Navigation },
+    { id: 'opportunities', labelEn: 'Opportunities & Hackathons', labelHi: 'छात्र अवसर व हैकाथॉन', icon: Trophy },
+    { id: 'skill-score', labelEn: 'Live Verified Skill Score', labelHi: 'सत्यापित कौशल स्कोर', icon: Award },
+    { id: 'resume', labelEn: 'AI Resume & ATS Optimizer', labelHi: 'एआई रेज़्यूमे व एटीएस', icon: FileText },
+    { id: 'payouts', labelEn: 'Milestone Escrow & Rewards', labelHi: 'माइलस्टोन एस्क्रो व रिवॉर्ड', icon: Zap },
+    { id: 'assessment', labelEn: 'Practical Skill Diagnostic', labelHi: 'व्यावहारिक कौशल टेस्ट', icon: HelpCircle },
+    { id: 'gap-report', labelEn: 'Personalized Gap Report', labelHi: 'कौशल अंतर रिपोर्ट', icon: FileSpreadsheet },
+    { id: 'jobs', labelEn: 'Jobs & Placement Openings', labelHi: 'नौकरियां व प्लेसमेंट', icon: Briefcase },
+    { id: 'courses', labelEn: 'Govt Certified Courses', labelHi: 'प्रमाणित कोर्स व ट्रेनिंग', icon: BookOpen },
+    { id: 'dashboard', labelEn: 'Student Profile & Dashboard', labelHi: 'छात्र डैशबोर्ड', icon: LayoutDashboard },
+    { id: 'about', labelEn: 'Platform Mission & Impact', labelHi: 'मिशन एवं प्रभाव', icon: Info },
   ];
 
   return (
@@ -92,15 +92,15 @@ export const Header: React.FC<HeaderProps> = ({
                 {lang === 'en' ? 'KAUSHAL SETU 2.0' : 'कौशल सेतु २.०'}
               </span>
               <span className="text-[10.5px] text-slate-500 font-medium tracking-tight hidden sm:block leading-none mt-0.5">
-                {lang === 'en' ? 'Campus-to-Corporate & Smart Mobility Super App' : 'कैंपस-टू-कॉरपोरेट एवं स्मार्ट मोबिलिटी सुपर ऐप'}
+                {lang === 'en' ? 'Smart Student & Career Platform' : 'छात्र कौशल एवं करियर प्लेटफॉर्म'}
               </span>
             </div>
           </button>
 
-          {/* Live Industrial & Mobility Telemetry Micro-Badge */}
+          {/* Live System Micro-Badge */}
           <div className="hidden xl:flex items-center gap-1.5 pl-3 border-l border-slate-200 text-[11px] font-medium text-slate-500">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>{lang === 'en' ? 'Gate Telemetry & 2nd-Year Hub Online' : 'कैंपस गेट टेलीमेट्री व अवसर सक्रिय'}</span>
+            <span>{lang === 'en' ? 'Live Campus & Opportunities Online' : 'कैंपस व अवसर हब सक्रिय'}</span>
           </div>
         </div>
 

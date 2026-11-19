@@ -159,21 +159,21 @@ export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, on
 
       {/* Header Banner */}
       <div className="border-b border-slate-200 pb-5 space-y-2">
-        <div className="inline-flex items-center gap-2 text-xs font-mono-data text-blue-700 font-bold tracking-wider uppercase">
-          <span className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-100 text-blue-900">
-            <Trophy className="w-3.5 h-3.5 text-blue-600" />
-            PILLAR 2: 2ND-YEAR OPPORTUNITY HUB
+        <div className="inline-flex items-center gap-2 text-xs font-semibold">
+          <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-800 border border-purple-200">
+            <Trophy className="w-3.5 h-3.5 text-purple-600" />
+            {lang === 'en' ? 'Opportunities & Challenges' : 'अवसर एवं प्रतियोगिताएं'}
           </span>
-          <span>·</span>
-          <span>SMART INDIA HACKATHON & INTERNSHIPS</span>
+          <span className="text-slate-300">·</span>
+          <span className="text-slate-500 font-mono-data">{lang === 'en' ? 'SIH 2026 & Internships' : 'SIH २०२६ व इंटर्नशिप'}</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 tracking-tight">
-          {lang === 'en' ? 'Curated Competitions, Hackathons & Internships' : 'क्यूरेटेड हैकाथॉन, प्रतियोगिताएं व इंटर्नशिप्स'}
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+          {lang === 'en' ? 'Student Competitions, Hackathons & Internships' : 'छात्र प्रतियोगिताएं, हैकाथॉन एवं इंटर्नशिप'}
         </h1>
         <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
           {lang === 'en'
-            ? 'Early intervention designed for 3rd and 4th semester students: intra-college coding sprints, Smart India Hackathon (SIH) pipeline screening, and vetted tech internships stripped of unrealistic 3+ years experience barriers.'
-            : 'द्वितीय वर्ष (तीसरे व चौथे सेमेस्टर) के छात्रों के लिए विशेष मंच: अंतर-विभागीय हैकाथॉन, स्मार्ट इंडिया हैकाथॉन टीम निर्माण, एवं वास्तविक इंटर्नशिप्स जहाँ ३ साल के अनुभव की कोई भ्रामक मांग नहीं है।'}
+            ? 'Discover departmental coding challenges, build your Smart India Hackathon (SIH 2026) squad, and apply for vetted internships designed specifically for college students.'
+            : 'विभागीय कोडिंग चुनौतियां खोजें, स्मार्ट इंडिया हैकाथॉन के लिए टीम बनाएं और कॉलेज छात्रों के लिए विशेष इंटर्नशिप में आवेदन करें।'}
         </p>
       </div>
 

@@ -90,21 +90,21 @@ export const SkillScorePage: React.FC<SkillScorePageProps> = ({ lang, userProfil
 
       {/* Header Banner */}
       <div className="border-b border-slate-200 pb-5 space-y-2">
-        <div className="inline-flex items-center gap-2 text-xs font-mono-data text-blue-700 font-bold tracking-wider uppercase">
-          <span className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-100 text-blue-900">
-            <Award className="w-3.5 h-3.5 text-blue-600" />
-            PILLAR 3: DYNAMIC LIVE SKILL SCORE
+        <div className="inline-flex items-center gap-2 text-xs font-semibold">
+          <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+            <Award className="w-3.5 h-3.5 text-emerald-600" />
+            {lang === 'en' ? 'Verified Capability Index' : 'सत्यापित कौशल स्कोर'}
           </span>
-          <span>·</span>
-          <span>TAMPER-PROOF PROOF-OF-WORK INDEX</span>
+          <span className="text-slate-300">·</span>
+          <span className="text-slate-500 font-mono-data">{lang === 'en' ? 'Proof-of-Work & Portfolio' : 'प्रूफ-ऑफ़-वर्क एवं पोर्टफोलियो'}</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 tracking-tight">
-          {lang === 'en' ? 'Continuous Proof-of-Work & Placement Index' : 'लाइव कौशल स्कोर एवं सत्यापित क्षमता सूचकांक'}
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+          {lang === 'en' ? 'Dynamic Skill Score & Placement Portfolio' : 'लाइव कौशल स्कोर एवं प्लेसमेंट पोर्टफोलियो'}
         </h1>
         <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
           {lang === 'en'
-            ? 'Replace inflated static resume bullets and unverified CGPA with an objective capability index. Visiting recruiters (Google, Microsoft, TCS, Infosys) can filter students by verified day-one developer performance.'
-            : 'पारंपरिक रिज्यूम और केवल किताबी सीजीपीए के स्थान पर वास्तविक कोड कमिट्स, लैब प्रोजेक्ट्स और तकनीकी निरंतरता का वस्तुनिष्ठ स्कोर — ताकि कैंपस आने वाली कंपनियों को मिले सत्यापित प्रतिभा।'}
+            ? 'An objective, code-backed capability score built from verified GitHub repository commits, automated problem testing, and faculty lab reviews.'
+            : 'गिटहब कमिट्स, स्वचालित कोडिंग टेस्ट एवं लैब प्रोजेक्ट्स के आधार पर गणना किया गया पारदर्शी और सत्यापन योग्य स्कोर।'}
         </p>
       </div>
 
@@ -169,7 +169,7 @@ export const SkillScorePage: React.FC<SkillScorePageProps> = ({ lang, userProfil
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold text-slate-900 uppercase font-mono-data tracking-wider">
-            THE 3-TIER CAPABILITY MATRIX (ACADEMIC SENATE PROPOSAL ARCHITECTURE)
+            3-TIER CAPABILITY WEIGHTED BREAKDOWN
           </h3>
           <span className="text-xs text-slate-500 font-mono-data">Weighted Formula</span>
         </div>

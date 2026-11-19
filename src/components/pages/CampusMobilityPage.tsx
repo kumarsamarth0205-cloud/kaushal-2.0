@@ -179,21 +179,21 @@ export const CampusMobilityPage: React.FC<CampusMobilityPageProps> = ({ lang, on
       {/* Header Banner */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
         <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-2 text-xs font-mono-data text-blue-700 font-bold tracking-wider uppercase">
-            <span className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-100 text-blue-900">
-              <Radio className="w-3.5 h-3.5 text-blue-600 animate-pulse" />
-              PILLAR 1: SMART CAMPUS MOBILITY
+          <div className="inline-flex items-center gap-2 text-xs font-semibold">
+            <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+              <Radio className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
+              {lang === 'en' ? 'Live Campus Radar' : 'लाइव कैंपस रडार'}
             </span>
-            <span>·</span>
-            <span>KAUSHAL SETU 2.0 SUPER APP</span>
+            <span className="text-slate-300">·</span>
+            <span className="text-slate-500 font-mono-data">{lang === 'en' ? 'Gate Telemetry & Bus GPS' : 'गेट सेंसर व बस जीपीएस'}</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 tracking-tight">
-            {lang === 'en' ? 'Smart Traffic Control & Campus Transit' : 'स्मार्ट कैंपस ट्रैफिक व बस आवागमन प्रणाली'}
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+            {lang === 'en' ? 'Campus Transit & Gate Traffic Radar' : 'कैंपस बस व गेट ट्रैफिक रडार'}
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
             {lang === 'en'
-              ? 'Real-time entry gate telemetry, college bus fleet tracking, and dynamic congestion advisories engineered to eliminate 9:00 AM lecture bottlenecks for 2nd-year students & faculty.'
-              : 'कॉलेज मुख्य द्वारों पर लाइव सेंसर डेटा, छात्र बसों की जीपीएस ट्रैकिंग एवं जाम से बचने हेतु वैकल्पिक मार्ग सुझाव — ताकि सुबह ९ बजे की कक्षा में कभी विलंब न हो।'}
+              ? 'Real-time entry gate congestion, college bus tracking, and smart commute advisories to ensure you reach morning lectures on time.'
+              : 'कॉलेज मुख्य द्वारों पर लाइव भीड़ की स्थिति, बसों की जीपीएस ट्रैकिंग एवं समय पर पहुंचने हेतु सटीक मार्ग सुझाव।'}
           </p>
         </div>
 
