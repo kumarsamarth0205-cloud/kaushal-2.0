@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Language, UserProfile, CourseRecommendation, AgenticCourseOrder } from '../../types';
 import { COURSES_DATA } from '../../data/researchData';
+import { NPTEL_COURSES_DATA } from '../../data/nptelCoursesData';
 import { 
   BookOpen, 
   Clock, 
@@ -136,6 +137,7 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
   const discountedPriceInr = Math.round(activeCert.originalPriceInr * (1 - scholarshipDiscountPct / 100));
 
   const allCourses = [
+    ...NPTEL_COURSES_DATA,
     ...(COURSES_DATA.priya || []),
     ...(COURSES_DATA.rahul || []),
     ...(COURSES_DATA.sunita || []),
@@ -143,7 +145,8 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
 
   const filteredCourses = allCourses.filter(c => {
     if (filterMode === 'all') return true;
-    if (filterMode === 'recommended') return (COURSES_DATA[selectedPersonaId] || []).some(rc => rc.id === c.id);
+    if (filterMode === 'nptel') return c.category === 'NPTEL';
+    if (filterMode === 'recommended') return c.category !== 'NPTEL' && (COURSES_DATA[selectedPersonaId] || []).some(rc => rc.id === c.id);
     return true;
   });
 
@@ -439,6 +442,20 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
           {lang === 'en' ? 'AI Recommended Bundles' : 'एआई अनुशंसित प्रमाणन'}
         </button>
         <button
+          onClick={() => setFilterMode('nptel')}
+          className={`px-3.5 py-1.5 rounded-lg font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+            filterMode === 'nptel'
+              ? 'bg-white text-blue-700 shadow-xs font-bold ring-1 ring-blue-500/20'
+              : 'text-slate-600 hover:text-slate-900'
+          }`}
+        >
+          <Award className="w-3.5 h-3.5 text-blue-600" />
+          <span>{lang === 'en' ? 'NPTEL · SWAYAM (IITs)' : 'एनपीटीईएल (आईआईटी)'}</span>
+          <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold flex items-center justify-center">
+            {NPTEL_COURSES_DATA.length}
+          </span>
+        </button>
+        <button
           onClick={() => setFilterMode('recommended')}
           className={`px-3.5 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
             filterMode === 'recommended'
@@ -640,10 +657,10 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
       )}
 
       {/* VIEW 3: Standard Free Courses Catalog */}
-      {(filterMode === 'recommended' || filterMode === 'all') && (
+      {(filterMode === 'recommended' || filterMode === 'all' || filterMode === 'nptel') && (
         <div className="space-y-4">
           <div className="text-xs font-mono-data text-slate-500 uppercase tracking-wider">
-            {filterMode === 'recommended' ? 'DIAGNOSTIC SKILL GAP MODULES' : 'ALL GOVERNMENT MODULES'}
+            {filterMode === 'nptel' ? 'IIT & SWAYAM ACCREDITED NPTEL COURSES' : filterMode === 'recommended' ? 'DIAGNOSTIC SKILL GAP MODULES' : 'ALL ACCREDITED MODULES & NPTEL'}
           </div>
 
           <div className="space-y-3">
@@ -680,6 +697,25 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
                     🎯 {course.addressesGap}
                   </div>
 
+                  {/* NPTEL Special Metadata Banner */}
+                  {course.category === 'NPTEL' && (
+                    <div className="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50/50 border border-blue-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-0.5 rounded bg-blue-700 text-white font-bold text-[10px] font-mono-data">
+                          {course.nptelInstitution}
+                        </span>
+                        <span className="text-slate-700 font-medium font-mono-data">
+                          Instructor: <strong>{course.nptelInstructor}</strong>
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 text-[11px] font-mono-data text-blue-800 font-bold">
+                        <span>Code: {course.swayamCourseCode}</span>
+                        <span>·</span>
+                        <span className="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">{course.aicteCredits} AICTE Credits</span>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Card Footer Actions */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-slate-100">
                     <div className="flex items-center gap-2 text-xs text-slate-600 font-mono-data">
@@ -695,23 +731,35 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
                         {lang === 'en' ? 'View Syllabus' : 'पाठ्यक्रम देखें'}
                       </button>
 
-                      <button
-                        onClick={() => handleEnroll(course.id, course.title)}
-                        className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                          isEnrolled
-                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold'
-                            : 'bg-blue-600 text-white hover:bg-blue-700 shadow-xs'
-                        }`}
-                      >
-                        {isEnrolled ? (
-                          <span className="flex items-center gap-1.5">
-                            <Check className="w-3.5 h-3.5" />
-                            <span>{lang === 'en' ? 'Enrolled' : 'नामांकित'}</span>
-                          </span>
-                        ) : (
-                          <span>{lang === 'en' ? 'Enroll Free' : 'मुफ़्त पंजीकरण'}</span>
-                        )}
-                      </button>
+                      {course.swayamEnrollUrl ? (
+                        <a
+                          href={course.swayamEnrollUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                        >
+                          <span>{lang === 'en' ? 'Enroll Free on SWAYAM' : 'स्वयं पर मुफ्त नामांकन'}</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      ) : (
+                        <button
+                          onClick={() => handleEnroll(course.id, course.title)}
+                          className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                            isEnrolled
+                              ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold'
+                              : 'bg-blue-600 text-white hover:bg-blue-700 shadow-xs'
+                          }`}
+                        >
+                          {isEnrolled ? (
+                            <span className="flex items-center gap-1.5">
+                              <Check className="w-3.5 h-3.5" />
+                              <span>{lang === 'en' ? 'Enrolled' : 'नामांकित'}</span>
+                            </span>
+                          ) : (
+                            <span>{lang === 'en' ? 'Enroll Free' : 'मुफ़्त पंजीकरण'}</span>
+                          )}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

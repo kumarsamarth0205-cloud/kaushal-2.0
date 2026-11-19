@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Language, CollegeOpportunity } from '../../types';
+import { PM_INTERNSHIP_SCHEME_DATA, PmInternshipListing } from '../../data/pmInternshipData';
 import { 
   Trophy, 
   Sparkles, 
@@ -27,7 +28,7 @@ interface OpportunityHubPageProps {
 }
 
 export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, onNavigate }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'intra-college' | 'sih-pipeline' | 'internships'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'pm-internship' | 'intra-college' | 'sih-pipeline' | 'internships'>('all');
   const [selectedDeptFilter, setSelectedDeptFilter] = useState<string>('all');
   const [registeredIds, setRegisteredIds] = useState<Record<string, boolean>>({});
   const [alertMsg, setAlertMsg] = useState<string | null>(null);
@@ -40,6 +41,16 @@ export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, on
     'Aman Gupta (2nd Yr ECE · IoT & Hardware Sensor Lead)'
   ]);
   const [newMemberInput, setNewMemberInput] = useState<string>('');
+  
+  // PM Internship Live Eligibility State
+  const [candidateAge, setCandidateAge] = useState<number>(22);
+  const [hasAadhaarDbt, setHasAadhaarDbt] = useState<boolean>(true);
+  const [isFamilyIncomeUnder8L, setIsFamilyIncomeUnder8L] = useState<boolean>(true);
+  const [isNotFullTimeEmployed, setIsNotFullTimeEmployed] = useState<boolean>(true);
+
+  
+
+
 
   const opportunities: CollegeOpportunity[] = [
     {
@@ -119,12 +130,21 @@ export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, on
     },
   ];
 
-  const filteredOpportunities = opportunities.filter(opp => {
-    if (activeTab === 'intra-college' && opp.type !== 'Intra-College Hackathon' && opp.type !== 'Club Challenge') return false;
-    if (activeTab === 'sih-pipeline' && opp.type !== 'SIH 2026 Pipeline') return false;
-    if (activeTab === 'internships' && opp.type !== '2nd-Year Tech Internship') return false;
+  // Combined opportunities including official PM Internship Scheme listings
+  const allOpportunitiesList: CollegeOpportunity[] = [
+    ...PM_INTERNSHIP_SCHEME_DATA,
+    ...opportunities
+  ];
+
+  const filteredOpportunities = allOpportunitiesList.filter(opp => {
+    if (activeTab === 'pm-internship') return opp.type === 'PM Internship Scheme';
+    if (activeTab === 'intra-college') return opp.type === 'Intra-College Hackathon' || opp.type === 'Club Challenge';
+    if (activeTab === 'sih-pipeline') return opp.type === 'SIH 2026 Pipeline';
+    if (activeTab === 'internships') return opp.type === '2nd-Year Tech Internship';
     return true;
   });
+
+  const isPmInternshipEligible = candidateAge >= 21 && candidateAge <= 24 && hasAadhaarDbt && isFamilyIncomeUnder8L && isNotFullTimeEmployed;
 
   const handleRegister = (id: string, title: string) => {
     setRegisteredIds(prev => ({ ...prev, [id]: true }));
@@ -180,6 +200,20 @@ export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, on
       {/* Filter Tabs */}
       <div className="flex flex-wrap items-center gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200/80 w-fit text-xs font-medium">
         <button
+          onClick={() => setActiveTab('pm-internship')}
+          className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+            activeTab === 'pm-internship'
+              ? 'bg-blue-600 text-white font-bold shadow-xs'
+              : 'text-slate-700 hover:text-slate-900 bg-amber-100/60 font-semibold'
+          }`}
+        >
+          <Building2 className="w-3.5 h-3.5" />
+          <span>{lang === 'en' ? 'PM Internship Scheme (MCA)' : 'पीएम इंटर्नशिप योजना (भारत सरकार)'}</span>
+          <span className={`text-[10px] font-mono-data font-bold px-1.5 py-0.2 rounded ${activeTab === 'pm-internship' ? 'bg-white/20 text-white' : 'bg-emerald-600 text-white'}`}>
+            ₹5,000/mo DBT
+          </span>
+        </button>
+        <button
           onClick={() => setActiveTab('all')}
           className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
             activeTab === 'all' ? 'bg-white text-blue-700 font-bold shadow-xs' : 'text-slate-600 hover:text-slate-900'
@@ -212,6 +246,100 @@ export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, on
           {lang === 'en' ? 'Vetted 2nd-Year Internships' : 'सत्यापित इंटर्नशिप'}
         </button>
       </div>
+
+      {/* PM INTERNSHIP SCHEME: MCA OFFICIAL GATEWAY & LIVE ELIGIBILITY CHECKER */}
+      {(activeTab === 'pm-internship' || activeTab === 'all') && (
+        <div className="rounded-2xl border-2 border-blue-600/30 bg-gradient-to-br from-blue-50/80 via-white to-amber-50/30 p-6 sm:p-7 shadow-sm space-y-5">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-blue-100 pb-4">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold">
+                <span className="px-2.5 py-0.5 rounded-full bg-blue-700 text-white font-bold text-[10px] font-mono-data tracking-wide">
+                  GOVERNMENT OF INDIA · MCA SCHEME
+                </span>
+                <span className="text-slate-400">·</span>
+                <span className="text-emerald-700 font-mono-data font-bold flex items-center gap-1 text-[11px]">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Live API Gateway (pminternship.mca.gov.in)
+                </span>
+              </div>
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+                {lang === 'en' ? 'Prime Minister’s Internship Scheme (PMIS) — Top 500 Companies' : 'प्रधानमंत्री इंटर्नशिप योजना (शीर्ष ५०० कंपनियां)'}
+              </h2>
+              <p className="text-xs text-slate-600 max-w-2xl leading-relaxed">
+                {lang === 'en'
+                  ? 'Official national portal providing 1.25 Crore youth 12-month internships in India’s leading corporations with ₹5,000/month DBT stipend + ₹6,000 joining grant.'
+                  : 'भारत सरकार द्वारा देश की शीर्ष ५०० कंपनियों में १२ माह की इंटर्नशिप — ₹५,००० प्रति माह डीबीटी व ₹६,००० एकमुश्त सहायता।'}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <a
+                href="https://pminternship.mca.gov.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>{lang === 'en' ? 'Official Portal (MCA)' : 'सरकारी पोर्टल खोलें'}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Interactive Live Eligibility Meter */}
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-white p-4 rounded-xl border border-blue-100 text-xs">
+            <div className="space-y-1">
+              <span className="text-slate-500 text-[11px] block">Candidate Age:</span>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  min="18"
+                  max="30"
+                  value={candidateAge}
+                  onChange={e => setCandidateAge(Number(e.target.value))}
+                  className="w-16 p-1 border border-slate-300 rounded font-mono-data font-bold text-xs"
+                />
+                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${candidateAge >= 21 && candidateAge <= 24 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`}>
+                  {candidateAge >= 21 && candidateAge <= 24 ? '✓ 21-24 Yrs' : '✗ Must be 21-24'}
+                </span>
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-slate-500 text-[11px] block">Aadhaar DBT Bank Link:</span>
+              <button
+                type="button"
+                onClick={() => setHasAadhaarDbt(!hasAadhaarDbt)}
+                className={`px-2.5 py-1 rounded text-xs font-bold flex items-center gap-1 cursor-pointer ${hasAadhaarDbt ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700'}`}
+              >
+                <Check className="w-3 h-3" />
+                <span>{hasAadhaarDbt ? 'Aadhaar Linked' : 'Not Linked'}</span>
+              </button>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-slate-500 text-[11px] block">Family Income &lt; ₹8 Lakhs:</span>
+              <button
+                type="button"
+                onClick={() => setIsFamilyIncomeUnder8L(!isFamilyIncomeUnder8L)}
+                className={`px-2.5 py-1 rounded text-xs font-bold flex items-center gap-1 cursor-pointer ${isFamilyIncomeUnder8L ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700'}`}
+              >
+                <Check className="w-3 h-3" />
+                <span>{isFamilyIncomeUnder8L ? 'Under ₹8 Lakh/Yr' : 'Over ₹8 Lakh/Yr'}</span>
+              </button>
+            </div>
+
+            <div className="p-2.5 rounded-lg bg-blue-50/80 border border-blue-200 flex flex-col justify-center">
+              <span className="text-[10px] text-blue-900 font-semibold uppercase font-mono-data">PMIS Eligibility:</span>
+              <div className="flex items-center gap-1 mt-0.5">
+                <span className={`w-2 h-2 rounded-full ${isPmInternshipEligible ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                <span className="text-xs font-bold text-slate-900">
+                  {isPmInternshipEligible ? '100% Eligible (₹5K/mo)' : 'Criteria Pending'}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Grid of Opportunities */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -272,11 +400,23 @@ export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, on
                   </div>
                 </div>
 
-                {/* Skills Demanded Tags */}
-                <div className="space-y-1.5 pt-1">
-                  <span className="text-[10px] font-mono-data text-slate-400 uppercase tracking-wider block">
-                    TECH STACK & SKILLS TESTED:
-                  </span>
+                {/* Skills Demanded Tags & NPTEL Course Bridge Link */}
+                <div className="space-y-2 pt-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono-data text-slate-400 uppercase tracking-wider block">
+                      TECH STACK & SKILLS TESTED:
+                    </span>
+                    {opp.linkedNptelCourseTitle && (
+                      <button
+                        onClick={() => onNavigate('courses')}
+                        className="text-[11px] text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1 cursor-pointer"
+                        title="Bridge skill gap via NPTEL"
+                      >
+                        <Award className="w-3 h-3 text-blue-600" />
+                        <span>Bridge via NPTEL →</span>
+                      </button>
+                    )}
+                  </div>
                   <div className="flex flex-wrap gap-1.5">
                     {opp.skillsDemanded.map((skill, sIdx) => (
                       <span key={sIdx} className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-800 text-[11px] font-medium border border-blue-100">
@@ -284,6 +424,17 @@ export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, on
                       </span>
                     ))}
                   </div>
+                  {opp.linkedNptelCourseTitle && (
+                    <div className="p-2 rounded-lg bg-amber-50/70 border border-amber-200/80 text-[11px] text-amber-900 flex items-center justify-between gap-2">
+                      <span className="truncate">🎯 <strong>NPTEL Bridge:</strong> {opp.linkedNptelCourseTitle}</span>
+                      <button
+                        onClick={() => onNavigate('courses')}
+                        className="shrink-0 text-blue-700 font-bold hover:underline"
+                      >
+                        Enroll Free
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -294,20 +445,33 @@ export const OpportunityHubPage: React.FC<OpportunityHubPageProps> = ({ lang, on
                   <span>{opp.participantsCount} Registered</span>
                 </div>
 
-                {isRegistered ? (
-                  <div className="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center gap-1.5">
-                    <Check className="w-3.5 h-3.5 text-emerald-700" />
-                    <span>{lang === 'en' ? 'Registered (ID Linked)' : 'पंजीकृत (आईडी सत्यापित)'}</span>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => handleRegister(opp.id, opp.title)}
-                    className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
-                  >
-                    <span>{lang === 'en' ? '1-Click Student ID Register' : '१-क्लिक पंजीकरण'}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                )}
+                <div className="flex items-center gap-2">
+                  {opp.officialPortalUrl && (
+                    <a
+                      href={opp.officialPortalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-all flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>MCA Portal</span>
+                      <ExternalLink className="w-3 h-3 text-slate-500" />
+                    </a>
+                  )}
+                  {isRegistered ? (
+                    <div className="px-3.5 py-1.5 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-emerald-700" />
+                      <span>{lang === 'en' ? 'Registered' : 'पंजीकृत'}</span>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => handleRegister(opp.id, opp.title)}
+                      className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <span>{lang === 'en' ? 'FastTrack Apply' : 'आवेदन करें'}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           );

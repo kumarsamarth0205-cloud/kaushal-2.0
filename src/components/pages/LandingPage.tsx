@@ -98,7 +98,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
           {/* Institutional Editorial Kicker (Structured Institutional Badges) */}
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold tracking-wide">
             <span className="px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-800 border border-blue-200 font-bold uppercase tracking-wider text-[11px] font-mono-data">
-              National Skill Ecosystem
+              PM Internship Scheme & NPTEL Partnered
             </span>
             <span className="text-slate-300">·</span>
             <span className="text-slate-600 font-medium">NSQF & MSME Certified</span>
@@ -369,12 +369,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
               <Trophy className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-purple-700 transition-colors">
-              {lang === 'en' ? 'Opportunities & Hackathons' : 'अवसर व हैकाथॉन हब'}
+              {lang === 'en' ? 'PM Internship & Hackathons' : 'पीएम इंटर्नशिप व हैकाथॉन'}
             </h3>
             <p className="text-xs text-slate-600 leading-[1.6]">
               {lang === 'en'
-                ? 'Intra-college departmental sprints, Smart India Hackathon squad builder, and verified 2nd-year internships.'
-                : 'विभाग-स्तरीय हैकाथॉन, स्मार्ट इंडिया हैकाथॉन टीम निर्माण और द्वितीय वर्ष के छात्रों हेतु इंटर्नशिप।'}
+                ? 'Official PM Internship Scheme (₹5,000/mo DBT + ₹6,000 grant) across Top 500 corporations, SIH 2026, and tech sprints.'
+                : 'भारत सरकार की पीएम इंटर्नशिप योजना (₹५,०००/माह डीबीटी), स्मार्ट इंडिया हैकाथॉन व कॉलेज कोडिंग स्प्रिंट्स।'}
             </p>
             <div className="text-xs font-bold text-purple-600 inline-flex items-center gap-1 pt-1 tracking-tight">
               <span>{lang === 'en' ? 'Explore opportunities' : 'अवसर देखें'}</span>
@@ -479,12 +479,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
               <GraduationCap className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-slate-900 tracking-[-0.025em] group-hover:text-amber-700 transition-colors">
-              {lang === 'en' ? 'Free Government Modules' : 'मुफ्त प्रमाणित कोर्स'}
+              {lang === 'en' ? 'NPTEL & Govt Certifications' : 'एनपीटीईएल व सरकारी कोर्स'}
             </h3>
             <p className="text-xs text-slate-600 leading-[1.6]">
               {lang === 'en'
-                ? 'Short 12h–40h targeted practical workshops certified by MSME, NISE, and PM Surya Ghar with govt credentials.'
-                : 'एमएसएमई एवं सरकारी मान्यता प्राप्त १२ से ४० घंटे के शॉर्ट-टर्म प्रैक्टिकल वर्कशॉप्स।'}
+                ? 'Valid IIT-accredited NPTEL / SWAYAM courses with AICTE credit transfer, plus MSME & PM Surya Ghar certifications.'
+                : 'आईआईटी मद्रास, दिल्ली, कानपुर द्वारा एनपीटीईएल कोर्स (क्रेडिट ट्रांसफर), एवं एमएसएमई प्रमाणित कार्यशालाएं।'}
             </p>
             <div className="text-xs font-bold text-amber-700 inline-flex items-center gap-1 pt-1 tracking-tight">
               <span>{lang === 'en' ? 'Browse courses' : 'कोर्स देखें'}</span>
@@ -573,7 +573,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang, onNavigate }) =>
             <div className="inline-flex items-center gap-2 text-[11px] font-mono-data font-semibold text-blue-300 bg-blue-950/80 px-2.5 py-1 rounded-md border border-blue-800/60">
               <span>NSQF & MSME Certified</span>
               <span>·</span>
-              <span>National Skill Ecosystem</span>
+              <span>PM Internship Scheme & NPTEL Partnered</span>
               <span>·</span>
               <span className="text-amber-300">PayPal AI Verified Payouts</span>
             </div>
